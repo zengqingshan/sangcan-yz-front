@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>录像备份</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="24" height="24"></rect>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="切图" transform="translate(-1454.000000, -80.000000)">
+            <g id="录像备份" transform="translate(1454.000000, 80.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="蒙版" fill="#D8D8D8" opacity="0" xlink:href="#path-1"></use>
+                <g id="摄像_monitor-(1)" mask="url(#mask-2)">
+                    <rect id="矩形" fill-opacity="0.01" fill="#FFFFFF" fill-rule="nonzero" opacity="0" x="0" y="0" width="24" height="24"></rect>
+                    <g id="编组-19" transform="translate(2.500000, 5.500000)">
+                        <path d="M14.9,0 L0.5,0 C0.223857625,0 -1.15463195e-14,0.223857625 -1.15463195e-14,0.5 L-1.15463195e-14,13.5 C-1.15463195e-14,13.7761424 0.223857625,14 0.5,14 L14.9,14 C15.1761424,14 15.4,13.7761424 15.4,13.5 L15.4,0.5 C15.4,0.223857625 15.1761424,0 14.9,0 Z M14.399,1 L14.399,13 L1,13 L1,1 L14.399,1 Z" id="矩形" fill="#2C7BE5" fill-rule="nonzero"></path>
+                        <path d="M18.1717023,1.98002138 L14.5717023,5.11394995 C14.4626211,5.20890904 14.4,5.34644798 14.4,5.49107143 L14.4,8.50892857 C14.4,8.65355202 14.4626211,8.79109096 14.5717023,8.88605005 L18.1717023,12.0199786 C18.4952589,12.3016462 19,12.0718391 19,11.6428571 L19,2.35714286 C19,1.92816091 18.4952589,1.69835379 18.1717023,1.98002138 Z M18,3.455 L18,10.544 L15.399,8.28 L15.399,5.719 L18,3.455 Z" id="路径" fill="#2C7BE5" fill-rule="nonzero"></path>
+                        <g id="编组-5" transform="translate(5.700000, 4.000000)" fill="#00DEAB">
+                            <rect id="矩形" x="0" y="0" width="1" height="6" rx="0.5"></rect>
+                            <rect id="矩形备份" x="3" y="0" width="1" height="6" rx="0.5"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Li-1备份 11</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航icon" transform="translate(-22.000000, -340.000000)">
+            <g id="摄像_monitor-(3)" transform="translate(22.000000, 340.000000)">
+                <rect id="矩形" fill-opacity="0.31" fill="#FFFFFF" fill-rule="nonzero" opacity="0" x="0" y="0" width="16" height="16"></rect>
+                <g id="gray">
+                    <rect id="矩形" x="0" y="0" width="16" height="16"></rect>
+                    <path d="M4,7.5 L7.5,9.5 L7.5,13.5 L4,15.5 L0.5,13.5 L0.5,9.5 L4,7.5 Z M12,7.5 L15.5,9.5 L15.5,13.5 L12,15.5 L8.5,13.5 L8.5,9.5 L12,7.5 Z M4,9.803 L2.5,10.66 L2.5,12.339 L4,13.196 L5.5,12.338 L5.5,10.661 L4,9.803 Z M12,9.803 L10.5,10.66 L10.5,12.339 L12,13.196 L13.5,12.338 L13.5,10.661 L12,9.803 Z M8,0.5 L11.5,2.5 L11.5,6.5 L8,8.5 L4.5,6.5 L4.5,2.5 L8,0.5 Z M8,2.803 L6.5,3.66 L6.5,5.339 L8,6.196 L9.5,5.338 L9.5,3.661 L8,2.803 Z" id="形状结合" fill="#B1B8CE" fill-rule="nonzero"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 8</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="16" height="16"></rect>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航icon" transform="translate(-371.000000, -600.000000)">
+            <g id="编组-8" transform="translate(371.000000, 600.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="蒙版" fill="#D8D8D8" opacity="0" xlink:href="#path-1"></use>
+                <path d="M7,1 L9,3.001 L15,3.001 L15,15 L1,15 L1,1 L7,1 Z M13,5.001 L3,5.001 L3,13.001 L13,13.001 L13,5.001 Z M10.158,6.2 L11.36,7.402 L7.223,11.539 L4.5,8.816 L5.703,7.615 L7.223,9.134 L10.158,6.2 Z" id="形状结合" fill="#B1B8CE" fill-rule="nonzero" mask="url(#mask-2)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

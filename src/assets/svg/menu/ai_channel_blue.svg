@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>芯片_cpu</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航icon" transform="translate(-949.000000, -130.000000)">
+            <g id="芯片_cpu" transform="translate(949.000000, 130.000000)">
+                <rect id="矩形" fill-opacity="0.01" fill="#FFFFFF" fill-rule="nonzero" x="0" y="0" width="16" height="16"></rect>
+                <polygon id="路径" fill-opacity="0.01" fill="#FFFFFF" fill-rule="nonzero" points="16 0 0 0 0 16 16 16"></polygon>
+                <path d="M11,5 L5,5 L5,11 L11,11 L11,5 Z M9,7 L9,9 L7,9 L7,7 L9,7 Z" id="路径" fill="#0CD5A7" fill-rule="nonzero"></path>
+                <path d="M4.96973333,0.666666667 L4.96973333,2.66666667 L4.96973333,0.666666667 Z" id="路径"></path>
+                <polygon id="路径" fill="#2C7BE5" fill-rule="nonzero" points="5.96973333 0 5.96973333 3.66666667 3.96973333 3.66666667 3.96973333 0"></polygon>
+                <path d="M4.96973333,13.3333333 L4.96973333,15.3333333 L4.96973333,13.3333333 Z" id="路径"></path>
+                <polygon id="路径" fill="#2C7BE5" fill-rule="nonzero" points="5.99389488 12.3333333 5.99389488 16 4 16 4 12.3333333"></polygon>
+                <path d="M11.0302667,0.666666667 L11.0302667,2.66666667 L11.0302667,0.666666667 Z" id="路径"></path>
+                <polygon id="路径" fill="#2C7BE5" fill-rule="nonzero" points="12.0302667 0 12.0302667 3.66666667 10.0302667 3.66666667 10.0302667 0"></polygon>
+                <path d="M11.0302667,13.3333333 L11.0302667,15.3333333 L11.0302667,13.3333333 Z" id="路径"></path>
+                <polygon id="路径" fill="#2C7BE5" fill-rule="nonzero" points="12 12.3333333 12 16 10.0013477 16 10.0013477 12.3333333"></polygon>
+                <path d="M0.666666667,4.9697 L2.66666667,4.9697 L0.666666667,4.9697 Z" id="路径"></path>
+                <polygon id="路径" fill="#2C7BE5" fill-rule="nonzero" points="3.66666667 4.00277261 3.66666667 6.00277261 0 6.00277261 0 4.00277261"></polygon>
+                <path d="M13.3333333,4.9697 L15.3333333,4.9697 L13.3333333,4.9697 Z" id="路径"></path>
+                <polygon id="路径" fill="#2C7BE5" fill-rule="nonzero" points="16 3.9697 16 5.9697 12.3333333 5.9697 12.3333333 3.9697"></polygon>
+                <path d="M0.666666667,11.0303 L2.66666667,11.0303 L0.666666667,11.0303 Z" id="路径"></path>
+                <polygon id="路径" fill="#2C7BE5" fill-rule="nonzero" points="3.66666667 10 3.66666667 12 0 12 0 10"></polygon>
+                <path d="M13.3333333,11.0303 L15.3333333,11.0303 L13.3333333,11.0303 Z" id="路径"></path>
+                <polygon id="路径" fill="#2C7BE5" fill-rule="nonzero" points="16 10.0303 16 12.0303 12.3333333 12.0303 12.3333333 10.0303"></polygon>
+                <path d="M14,2 L14,14 L2,14 L2,2 L14,2 Z M12,4 L4,4 L4,12 L12,12 L12,4 Z" id="矩形" fill="#2C7BE5" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航icon" transform="translate(-371.000000, -566.000000)">
+            <g id="icon" transform="translate(371.000000, 566.000000)">
+                <rect id="矩形" opacity="0" x="0" y="0" width="16" height="16"></rect>
+                <path d="M16,1 L16,14 L3.37507799e-13,14 L3.37507799e-13,1 L16,1 Z M2,3 L2,12 L14,12 L14,3 L2,3 Z M13,8 L13,10 L9.5,10 L9.5,8 L13,8 Z M5.5,8 C6.50114286,8 8.5,8.56824242 8.5,9.6969697 L8.5,9.6969697 L8.5,10 L2.5,10 L2.5,9.6969697 C2.5,8.56824242 4.49885714,8 5.5,8 Z M5.5,4.5 C6.32842712,4.5 7,5.17157288 7,6 C7,6.82842712 6.32842712,7.5 5.5,7.5 C4.67157288,7.5 4,6.82842712 4,6 C4,5.17157288 4.67157288,4.5 5.5,4.5 Z M13,5 L13,7 L9.5,7 L9.5,5 L13,5 Z" id="形状结合" fill="#B1B8CE" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

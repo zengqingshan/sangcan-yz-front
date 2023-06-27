@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Li-1备份 14</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航icon" transform="translate(-22.000000, -265.000000)" fill-rule="nonzero">
+            <g id="摄像_monitor-(3)" transform="translate(22.000000, 265.000000)">
+                <rect id="矩形" fill-opacity="0.31" fill="#FFFFFF" opacity="0" x="0" y="0" width="16" height="16"></rect>
+                <path d="M7.9995,1.64163794e-10 L15,4.001 L15,12.001 L7.9995,16 L1,12.001 L1,4.001 L7.9995,1.64163794e-10 Z M8,2.303 L3,5.161 L3,10.84 L7.999,13.696 L13,10.839 L13,5.161 L8,2.303 Z" id="路径-4" fill="#B1B8CE"></path>
+                <polygon id="路径-5" fill="#B1B8CE" points="12.5062416 4.29140087 13.4937584 6.03059913 8 9.14995515 2.50624161 6.03059913 3.49375839 4.29140087 8 6.85"></polygon>
+                <polygon id="路径-6" fill="#B1B8CE" points="9 7.9995 9 13.696 7 13.696 7 7.9995"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

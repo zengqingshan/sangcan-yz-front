@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 6</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="16" height="16"></rect>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航icon" transform="translate(-339.000000, -536.000000)">
+            <g id="编组-6" transform="translate(339.000000, 536.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="蒙版" fill="#3B87FF" fill-rule="nonzero" opacity="0" xlink:href="#path-1"></use>
+                <g id="icon" mask="url(#mask-2)" fill="#B1B8CE" fill-rule="nonzero">
+                    <g transform="translate(1.000000, 0.000000)">
+                        <path d="M7.0001,9 L7.0001,11 C4.866,11 2.378,11.962 2,12.567 L2,13 L7.0001,13 L7.0001,15 L0,15 L0,12.5 C0,10.172 4.664,9 7,9 L7.0001,9 Z M7.0001,9 L7.0001,8 C4.79,8 3,6.21 3,4 C3,1.79 4.79,0 7,0 C9.21,0 11,1.79 11,4 C11,6.20996667 9.210054,7.999946 7.0001,8 L7.0001,9 Z M7,6 C8.1054305,6 9,5.1054305 9,4 C9,2.8945695 8.1054305,2 7,2 C5.8945695,2 5,2.8945695 5,4 C5,5.1054305 5.8945695,6 7,6 Z" id="形状"></path>
+                        <path d="M13,9 L15,11 L15,16 L8,16 L8,9 L13,9 Z M13.001,13 L10,13 L10,14 L13.001,14 L13.001,13 Z M13.001,11 L10,11 L10,12.001 L13.001,12.001 L13.001,11 Z" id="形状结合"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

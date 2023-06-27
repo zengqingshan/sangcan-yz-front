@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Li-1备份 8</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航icon" transform="translate(-401.000000, -85.000000)">
+            <g id="监控" transform="translate(401.000000, 85.000000)">
+                <rect id="矩形" fill="#D8D8D8" opacity="0" x="0" y="0" width="16" height="16"></rect>
+                <path d="M15,1 L15,7 L13,7 L13,3 L3,3 L3,7 L1,7 L1,1 L15,1 Z" id="形状结合" fill="#B1B8CE" fill-rule="nonzero"></path>
+                <polygon id="矩形" fill="#B1B8CE" fill-rule="nonzero" points="9 4 9 6 4 6 4 4"></polygon>
+                <polygon id="矩形备份-3" fill="#B1B8CE" fill-rule="nonzero" points="15 9 15 11 1 11 1 9"></polygon>
+                <polygon id="矩形备份-4" fill="#B1B8CE" fill-rule="nonzero" points="15 13 15 15 1 15 1 13"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

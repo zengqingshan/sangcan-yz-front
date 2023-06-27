@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 11</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="16" height="16"></rect>
+        <filter x="0.0%" y="0.0%" width="100.0%" height="100.0%" filterUnits="objectBoundingBox" id="filter-3">
+            <feGaussianBlur stdDeviation="0" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+        <filter x="0.0%" y="0.0%" width="100.0%" height="100.0%" filterUnits="objectBoundingBox" id="filter-4">
+            <feGaussianBlur stdDeviation="0" in="SourceGraphic"></feGaussianBlur>
+        </filter>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航icon" transform="translate(-670.000000, -723.000000)">
+            <g id="编组-11" transform="translate(670.000000, 723.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="蒙版" fill="#D8D8D8" opacity="0" xlink:href="#path-1"></use>
+                <polygon id="路径-7" fill="#ACB2C7" fill-rule="nonzero" filter="url(#filter-3)" mask="url(#mask-2)" points="13.488678 3.24912466 14.66029 4.87002723 7.99506771 9.68774734 1.43415246 4.86533167 2.61864849 3.25382022 8.005 7.212"></polygon>
+                <path d="M15,2 L15,14 L1,14 L1,2 L15,2 Z M13,4 L3,4 L3,12 L13,12 L13,4 Z" id="矩形" fill="#ACB2C7" fill-rule="nonzero" filter="url(#filter-4)" mask="url(#mask-2)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

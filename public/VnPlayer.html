@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="renderer" content="webkit" />
+    <title>VnPlayer</title>
+    <style>
+      * {
+        margin: 0;
+      }
+      body,
+      html {
+        height: 100%;
+      }
+      .root {
+        display: flex;
+      }
+
+      .demo-video-container {
+        flex: 1;
+      }
+      .html5-video-container {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        aspect-ratio: 16/9;
+      }
+
+      .demo-tools {
+	    display:none;
+        overflow: auto;
+        flex: 1;
+      }
+
+      .demo-tools > fieldset {
+        width: 90%;
+      }
+      fieldset {
+        display: inline;
+        margin-bottom: 10px;
+      }
+
+      #timeLineList,
+      #eventList {
+        height: 100px;
+        /* width: 45%; */
+        overflow: auto;
+      }
+      img {
+        aspect-ratio: 16/9;
+        height: 100px;
+      }
+      .label-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .label-row label {
+        white-space: nowrap;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="root">
+      <div class="demo-video-container">
+        <div class="html5-video-container" id="html5-video-container">
+          <div class="html5-video-container"></div>
+        </div>
+      </div>
+
+      <div class="demo-tools">
+        <font color="blue"><a rel="_blank" href="./docs/vnplayer.html">接入文档</a></font>
+        <br />
+        <font color="red">测试DEMO页面，请在Chrome浏览器中访问</font>
+        <br />
+
+        <fieldset class="label-row">
+          <legend>初始化参数：</legend>
+          <label>deviceId:<input id="inputDeviceId" value="" /></label>
+          <label>appid:<input id="inputAppid" value="" /></label>
+          <label>token:<input id="inputtoken" value="" /></label>
+          <label>runEnv:<input id="inputRunEnv" value="" /></label>
+          <label>apiBiz:<input id="inputApiBiz" value="" /></label>
+          <label>apiVideo:<input id="inputApiVideo" value="" /></label>
+          <label
+            >是否展示控制台:
+            <select id="openDefaultUI" value="1">
+              <option value="0">是</option>
+              <option value="1">否</option>
+            </select>
+          </label>
+
+          <!-- <label>env:<input id="inputEnv" value="pro" />stg/pro</label> -->
+          <button id="inputParamsUpdateBtn">初始化</button>
+        </fieldset>
+
+        <fieldset>
+          <legend>播放控制</legend>
+          <button id="playerLive">播放直播</button>
+          <button id="playerPause">暂停</button>
+          <button id="playerResume">恢复播放</button>
+
+          <button id="isFullScreen">是否全屏</button>
+          <button id="goFullScreen">全屏</button>
+          <button id="exitFullScreen">退出全屏</button>
+
+          <button id="playerDestroy">销毁</button>
+          <br />
+          <fieldset>
+            <legend>画面缩放</legend>
+            <input id="playerZoom" type="range" min="1" max="5" value="1" step="0.1" />
+          </fieldset>
+
+          <fieldset>
+            <legend>音量控制</legend>
+            <select id="playerVolume" value="1">
+              <option value="0">打开声音</option>
+              <option value="1">关闭声音</option>
+            </select>
+          </fieldset>
+          <br />
+          <fieldset>
+            <legend>截屏</legend>
+            <button id="isSupportScreenShot">是否支持截屏</button>
+            <button id="playerScreenShot">截屏</button>
+            <img src="" alt="" id="playerScreenShotImg" />
+          </fieldset>
+        </fieldset>
+        <br />
+        <fieldset>
+          <legend>直播场景</legend>
+          <fieldset>
+            <legend>当前播放时间<font color="red">（精确到分钟）</font></legend>
+            <input id="playerCurrentTime" readonly />
+          </fieldset>
+
+          <fieldset>
+            <legend>PTZ</legend>
+            <button id="pztSupport">是否支持</button>
+            <select id="ptzValue" value="1">
+              <option value="1">左</option>
+              <option value="2">右</option>
+              <option value="3">上</option>
+              <option value="4">下</option>
+            </select>
+            <button id="playerSetPTZ">发送</button>
+          </fieldset>
+
+          <br />
+          <fieldset>
+            <legend>语音对讲</legend>
+            <font color="red">需要https协议</font>
+            <button id="audioTalkSupport">是否支持audioTalk</button>
+            <button id="audioTalkStart">开始</button>
+            <button id="audioTalkStop">关闭</button>
+          </fieldset>
+          <fieldset>
+            <legend>设置</legend>
+            <button id="isSupportMultiStream">是否支持高标清切换</button>
+            <button id="setHD">高清</button>
+            <button id="setSD">标清</button>
+          </fieldset>
+        </fieldset>
+        <br />
+
+        <fieldset>
+          <legend>回放场景</legend>
+
+          <fieldset>
+            <legend>数据来源</legend>
+            <button id="playerIsRecord">是否是回放</button>
+            <select id="playbackType" value="1">
+              <option value="1">云存储回看</option>
+              <option value="2">SD卡回看</option>
+            </select>
+          </fieldset>
+
+          <fieldset>
+            <legend>倍速功能<font color="red">最大支持8倍速</font></legend>
+
+            <select id="playerRate" value="1">
+              <option value="1">1x</option>
+            </select>
+          </fieldset>
+
+          <br />
+          <fieldset>
+            <legend>Timeline</legend>
+            <input id="timeLineStartTime" type="datetime-local" value="2023-01-15T10:20" />
+            <input id="timeLineEndTime" type="datetime-local" value="2023-01-15T17:21" />
+            <button id="timeLineBtn">获取timeline数据</button>
+            <ul id="timeLineList"></ul>
+          </fieldset>
+          <fieldset>
+            <legend>事件列表<font color="red">仅支持云存储</font></legend>
+            <input id="eventStartTime" type="datetime-local" value="2023-01-15T10:20" />
+            <input id="eventEndTime" type="datetime-local" value="2023-01-15T17:21" />
+            <button id="eventBtn">获取Event数据</button>
+            <ul id="eventList"></ul>
+          </fieldset>
+
+          <fieldset>
+            <legend>播放回看</legend>
+            <input id="playerStartTime" type="datetime-local" value="2023-03-09T17:20" />
+            <!-- <input id="playerEndTime" type="datetime-local" value="2023-03-10T17:20" /> -->
+            <button id="playerPlayback">播放回看</button>
+          </fieldset>
+          <fieldset>
+            <legend>录制功能</legend>
+            <button id="isSupportRecoder">是否支持录制</button>
+            <button id="startRecoder">开始录制</button>
+            <button id="stopRecoder">结束录制</button>
+          </fieldset>
+
+          <br />
+          <fieldset>
+            <legend>缩略图</legend>
+            <button id="getSectionThumbnailUrl">获取缩略图</button>
+            <img id="getSectionThumbnailUrlImg" src="" alt="" srcset="" />
+          </fieldset>
+
+          <fieldset>
+            <legend>剪辑</legend>
+            <input id="clipStartTime" type="datetime-local" value="2023-01-15T17:20" />
+            <input id="clipEndTime" type="datetime-local" value="2023-01-15T17:21" />
+            <input id="clipName" type="text" value="视频剪辑" />
+            <br />
+            <button id="makeClipSupport">是否支持剪辑</button>
+            <button id="clipMake">确认</button>
+          </fieldset>
+        </fieldset>
+      </div>
+    </div>
+  </body>
+  <script src="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/vnplayer.min.js"></script>
+  <!-- <script src="https://open.videiot.cn/websdk/1.0.0/vnplayer.min.js"></script> -->
+
+  <script>
+
+    var vnplayer = null;
+	
+	var showToosFlag = true;
+	 window.addEventListener('message',function(e){
+       
+				  data = JSON.parse(e.data);
+				  if(data.type == 'startPlay'){
+						  
+						  
+
+	 document.getElementById('inputDeviceId').value = data.deviceId || '';
+      document.getElementById('inputAppid').value = data.appid || '';
+      document.getElementById('inputtoken').value = data.token;
+      document.getElementById('inputRunEnv').value = data.runEnv || '';
+      document.getElementById('inputApiBiz').value = data.apiBiz || '';
+      document.getElementById('inputApiVideo').value = data.apiVideo || '';
+	  
+              if(data.showTools == '0'){
+                showToosFlag = false;
+              }
+				    init();
+		      }else if(data.type == 'hideTools'){
+
+                    var tool = document.getElementsByClassName('tools-wrap') ;
+                    if(tool != undefined && tool != null && tool.length > 0){
+            
+                      if(data.flag == '0'){
+                        tool[0].style.display = "none";
+            
+                      }else{
+                            tool[0].style.display = "block";
+                      }
+                    }
+            }else if(data.type == 'stopPlay'){
+                if(vnplayer){
+                  vnplayer.destroy();
+                }
+
+            }
+	  
+        })  
+
+
+
+    document.getElementById('inputParamsUpdateBtn').onclick = async () => {
+      await init();
+    };
+
+    // 是否初始化
+    let isPlayerInit = false;
+    // 浏览器是否支持对讲
+    let isSupportAudioTalk = false;
+    // 是否可以对讲
+    let canTalk = false;
+
+    function handlerMessage(type, data) {
+      console.log('handlerMessage: ', type, data);
+      const {
+        PLAYER_INIT,
+        PLAYER_INIT_ERROR,
+        PLAYER_CAN_PLAY,
+        PLAYER_PLAY_LOADING, // 播放加载中
+        PLAYER_PLAY, // 正在播放
+        PLAYER_PAUSE, // 暂停中
+        PLAYER_PLAY_ERROR, // 播放异常
+        PLAYER_ENDED,
+        PLAYER_TIME_CHANGE, // 播放当前时间
+        DEVICE_ON_OFF_CHANGE, // 设备开关机
+      } = VnPlayer.MessageTypes;
+      switch (type) {
+        case PLAYER_INIT:
+          vnplayer && vnplayer.playLive();
+          isSupportAudioTalk = vnplayer.isSupportAudioTalk();
+          isPlayerInit = true;
+          let playbackRate = vnplayer.supportPlaybackRate() || [];
+          if (!playbackRate || playbackRate.length < 1) {
+            playbackRate = [1];
+          }
+          let html = '';
+          for (let i = 1; i <= playbackRate.length; i++) {
+            html += `<option value="${playbackRate[i - 1]}">${playbackRate[i - 1]}x</option>`;
+          }
+          document.getElementById('playerRate').innerHTML = html;
+          break;
+        case PLAYER_INIT_ERROR:
+          break;
+        case PLAYER_PLAY_LOADING:
+          break;
+        case PLAYER_PLAY:
+          break;
+        case PLAYER_PAUSE:
+          break;
+        case PLAYER_PLAY_ERROR:
+          break;
+        case PLAYER_ENDED:
+          break;
+        case PLAYER_TIME_CHANGE:
+          if (data) {
+            document.getElementById('playerCurrentTime').value = data;
+          }
+          break;
+        default:
+          break;
+      }
+    }
+
+    async function init() {
+      let deviceId = document.getElementById('inputDeviceId').value;
+      let appid = document.getElementById('inputAppid').value;
+      let token = document.getElementById('inputtoken').value;
+      let runEnv = document.getElementById('inputRunEnv').value;
+      let apiBiz = document.getElementById('inputApiBiz').value;
+      let apiVideo = document.getElementById('inputApiVideo').value;
+      let openDefaultUI = document.getElementById('openDefaultUI').value === '0';
+      window.localStorage.setItem(
+        'data',
+        JSON.stringify({ deviceId, appid, token, runEnv, apiBiz, apiVideo, openDefaultUI }),
+      );
+      if (!deviceId) {
+        alert('请输入deviceId && appid && token');
+        return;
+      }
+      if (vnplayer) {
+        vnplayer.destroy();
+        isPlayerInit = false;
+      }
+
+      vnplayer = await VnPlayer({
+        deviceId,
+        openDefaultUI,
+        appid,
+        token,
+        runEnv,
+        apiBiz,
+        apiVideo,
+        el: '.html5-video-container',
+        handlerMessage,
+      });
+    }
+
+    // 销毁
+    document.getElementById('playerDestroy').onclick = () => {
+      vnplayer.destroy();
+      vnplayer = null;
+    };
+
+    // 是否回放
+    document.getElementById('playerIsRecord').onclick = () => {
+      alert(vnplayer.isPlayback() ? '是' : '否');
+    };
+
+    // '播放器：暂停
+    document.getElementById('playerPause').onclick = () => {
+      console.log('播放器：暂停');
+      vnplayer.pause();
+    };
+
+    // 播放器：恢复播放
+    document.getElementById('playerResume').onclick = () => {
+      console.log('播放器：恢复播放');
+      vnplayer.resume();
+    };
+
+    // 播放直播
+    document.getElementById('playerLive').onclick = () => {
+      vnplayer.playLive();
+    };
+
+    document.getElementById('playerPlayback').onclick = () => {
+      const startTime = document.getElementById('playerStartTime').value;
+      // const endTime = document.getElementById('playerEndTime').value;
+
+      // 播放回看
+      if (vnplayer && isPlayerInit) {
+        try {
+          vnplayer.stopTalk();
+        } catch (error) {}
+        vnplayer.playAtTime(+new Date(startTime));
+      }
+    };
+
+    document.getElementById('getSectionThumbnailUrl').onclick = async () => {
+      const currentTIme = document.getElementById('playerCurrentTime').value;
+      // 播放回看
+      if (vnplayer && isPlayerInit) {
+        if (!vnplayer.isPlayback()) {
+          return alert('请将游标移动到有回看数据的位置');
+        }
+        const url = await vnplayer.getSectionThumbnailUrl(+new Date(currentTIme), '960 * 540');
+        document.getElementById('getSectionThumbnailUrlImg').setAttribute('src', url);
+      }
+    };
+
+    // 是否支持截屏
+    document.getElementById('isSupportScreenShot').onclick = () => {
+      alert(vnplayer.isSupportScreenShot() ? '支持' : '不支持');
+    };
+    // 截屏
+    document.getElementById('playerScreenShot').onclick = async () => {
+      const img = await vnplayer.screenShot();
+      document.getElementById('playerScreenShotImg').setAttribute('src', img);
+      // return img;
+    };
+
+    // 是否支持PTZ
+    document.getElementById('pztSupport').onclick = () => {
+      alert(vnplayer.isSupportPTZ() ? '支持' : '不支持');
+    };
+
+    // 发送ptz指令
+    document.getElementById('playerSetPTZ').onclick = () => {
+      if (vnplayer.isSupportPTZ()) {
+        vnplayer.setPTZ(document.getElementById('ptzValue').value);
+      }
+    };
+
+    // 设置音量
+    document.getElementById('playerVolume').onchange = (evt) => {
+      const volume = evt.currentTarget.value;
+      vnplayer.setMuted(Number(volume) === 1);
+    };
+
+    // 倍速播放
+    document.getElementById('playerRate').onchange = (evt) => {
+      const rate = evt.currentTarget.value;
+      if (!vnplayer.isPlayback()) return;
+      vnplayer.setPlaybackRate(rate);
+    };
+
+    // 是否支持对讲
+    document.getElementById('audioTalkSupport').onclick = () => {
+      if (!isPlayerInit) return;
+      alert(vnplayer.isSupportAudioTalk());
+    };
+
+    // 麦克风开始对讲
+    document.getElementById('audioTalkStart').onclick = () => {
+      if (!isPlayerInit || vnplayer.isPlayback() || !isSupportAudioTalk) return;
+      vnplayer.startTalk();
+    };
+
+    // 关闭对讲
+    document.getElementById('audioTalkStop').onclick = () => {
+      if (!isPlayerInit || vnplayer.isPlayback() || !isSupportAudioTalk) return;
+      vnplayer.stopTalk();
+    };
+
+    // 主辅码流切换
+    document.getElementById('isSupportMultiStream').onclick = () => {
+      if (!isPlayerInit) return;
+      alert(vnplayer.isSupportMultiStream());
+    };
+
+    // 设置高清
+    document.getElementById('setHD').onclick = () => {
+      if (!isPlayerInit) return;
+      vnplayer.setResolution(1);
+    };
+
+    // 设置标清
+    document.getElementById('setSD').onclick = () => {
+      if (!isPlayerInit) return;
+      vnplayer.setResolution(0);
+    };
+
+    // 是否全屏
+    document.getElementById('isFullScreen').onclick = () => {
+      alert(vnplayer.isFullScreen());
+    };
+    // 全屏
+    document.getElementById('goFullScreen').onclick = () => {
+      vnplayer.goFullScreen(document.querySelector('#html5-video-container'));
+    };
+
+    // 退出全屏
+    document.getElementById('exitFullScreen').onclick = () => {
+      vnplayer.exitFullScreen();
+    };
+
+    // 画面缩放
+    document.getElementById('playerZoom').onchange = (evt) => {
+      const value = evt.currentTarget.value;
+      console.log('vnplayer===', value);
+      vnplayer.setZoom(value);
+    };
+
+    // 是否支持
+    document.getElementById('isSupportRecoder').onclick = (evt) => {
+      if (!isPlayerInit) return;
+      alert(vnplayer.isSupportRecoder());
+    };
+
+    // 开始录制
+    document.getElementById('startRecoder').onclick = (evt) => {
+      if (!isPlayerInit) return;
+      vnplayer.startRecoder(1000 * 60 * 30);
+    };
+
+    // 结束录制
+    document.getElementById('stopRecoder').onclick = (evt) => {
+      if (!isPlayerInit) return;
+      vnplayer.stopRecoder();
+    };
+
+    // timeline
+    document.getElementById('timeLineBtn').onclick = async (evt) => {
+      const playbackType = Number(document.getElementById('playbackType').value);
+      if (playbackType !== 1 && !vnplayer.isSupportSDcard()) {
+        alert('不支持SD卡回放');
+        return;
+      }
+      if (!isPlayerInit) return;
+      const startTime = document.getElementById('timeLineStartTime').value;
+      const endTime = document.getElementById('timeLineEndTime').value;
+      console.log('startTime', startTime, +new Date(startTime));
+      const list = await vnplayer.getSectionList(+new Date(startTime), +new Date(endTime), playbackType);
+      let html = '';
+      list.map((item) => {
+        html += `<li onclick="handlerPlayAtTime(${+new Date(startTime)}, ${+new Date(endTime)})">
+        ${item.startTimeStr} --- ${item.endTimeStr}
+      </li>`;
+      });
+      console.log('timeline', list, html);
+      document.getElementById('timeLineList').innerHTML = html;
+    };
+
+    function handlerPlayAtTime(startTime, endTime) {
+      const playbackType = Number(document.getElementById('playbackType').value);
+      const time = Math.floor(Math.random() * (Number(endTime) - Number(startTime))) + Number(startTime);
+      if (!isPlayerInit) return;
+      vnplayer.playAtTime(time, playbackType);
+    }
+
+    // event
+    document.getElementById('eventBtn').onclick = async (evt) => {
+      const playbackType = Number(document.getElementById('playbackType').value);
+      if (playbackType !== 1) {
+        alert('不支持SD卡回放');
+        return;
+      }
+      if (!isPlayerInit) return;
+      const startTime = document.getElementById('eventStartTime').value;
+      const endTime = document.getElementById('eventEndTime').value;
+      console.log('startTime', startTime, +new Date(startTime));
+      const list = await vnplayer.getEventList(+new Date(startTime), +new Date(endTime));
+      let html = '';
+      list.map((item) => {
+        html += `<li onclick="handlerPlayAtTime(${+new Date(startTime)}, ${+new Date(endTime)})">
+        ${item.startTimeStr} --- ${item.endTimeStr}
+      </li>`;
+      });
+      console.log('event', list, html);
+      document.getElementById('eventList').innerHTML = html;
+    };
+
+    function handlerPlayAtTime(startTime, endTime) {
+      const playbackType = Number(document.getElementById('playbackType').value);
+      const time = Math.floor(Math.random() * (Number(endTime) - Number(startTime))) + Number(startTime);
+      if (!isPlayerInit) return;
+      vnplayer.playAtTime(time, playbackType);
+    }
+
+    // 是否支持对讲
+    document.getElementById('makeClipSupport').onclick = () => {
+      if (!isPlayerInit) return;
+      alert(vnplayer.isSupportMakeClip());
+    };
+
+    document.getElementById('clipMake').onclick = async () => {
+      if (!isPlayerInit || !vnplayer.isSupportMakeClip()) return;
+      const startTime = document.getElementById('clipStartTime').value;
+      const endTime = document.getElementById('clipEndTime').value;
+      const name = document.getElementById('clipName').value;
+      const id = await vnplayer.makeClip(+new Date(startTime), +new Date(endTime), name);
+      if (id) {
+        // 成功
+        console.log(id);
+      }
+    };
+
+    // 设置音量
+    document.getElementById('playbackType').onchange = (evt) => {
+      const volume = evt.currentTarget.value;
+      if (Number(volume) === 1 && !vnplayer.isSupportSDcard()) {
+        alert('不支持SD卡回放');
+        return;
+      }
+      document.getElementById('eventList').innerHTML = '';
+      document.getElementById('timeLineList').innerHTML = '';
+    };
+    
+  </script>
+</html>

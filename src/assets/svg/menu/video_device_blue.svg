@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Li-1备份 9</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航icon" transform="translate(-226.000000, -116.000000)">
+            <g id="网络设备" transform="translate(226.000000, 116.000000)">
+                <rect id="icon" fill="#252939" opacity="0" x="0" y="0" width="16" height="16"></rect>
+                <g id="icon" transform="translate(0.000000, 2.000000)" fill-rule="nonzero">
+                    <path d="M16,0 L16,2.001 L15,2.001 L15,12.001 L13,12.001 L13,14 L11,14 L11,12.001 L9,12.001 L9,14 L7,14 L7,12.001 L5,12.001 L5,14 L3,14 L3,12.001 L1,12.001 L1,2.001 L0,2.001 L0,0 L16,0 Z M13,2.001 L3,2.001 L3,10.001 L13,10.001 L13,2.001 Z" id="Fill-1" fill="#2C7BE5"></path>
+                    <polygon id="Fill-1-path" fill="#0CD5A7" points="5 7 10.999 7 10.999 5 5 5"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>gray</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="16" height="16"></rect>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航icon" transform="translate(-670.000000, -642.000000)">
+            <g id="gray" transform="translate(670.000000, 642.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="蒙版" fill="#D8D8D8" opacity="0" xlink:href="#path-1"></use>
+                <g mask="url(#mask-2)" fill="#B1B8CE" fill-rule="nonzero" id="形状">
+                    <g transform="translate(1.000000, 1.000000)">
+                        <path d="M4,4.982 L10,4.982 L10,2.982 L4,2.982 L4,4.982 Z M4,7.982 L8,7.982 L8,5.982 L4,5.982 L4,7.982 Z"></path>
+                        <path d="M0,0 L0,15.024 L4.994,12 L14,12 L14,0 L0,0 Z M2,10.982 L2,2 L12,2 L12,10 L4.435,10 L3.957,10.289 L2,11.474 L2,10.982 Z"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

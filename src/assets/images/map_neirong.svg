@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>tl-nr</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="20" height="20"></rect>
+        <rect id="path-3" x="0" y="0" width="9" height="20"></rect>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="切图" transform="translate(-553.000000, -170.000000)">
+            <g id="tl-nr" transform="translate(553.000000, 170.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="蒙版" fill="#D8D8D8" opacity="0" xlink:href="#path-1"></use>
+                <g id="椭圆形备份-2" mask="url(#mask-2)">
+                    <g transform="translate(5.000000, 0.000000)">
+                        <mask id="mask-4" fill="white">
+                            <use xlink:href="#path-3"></use>
+                        </mask>
+                        <use id="蒙版" stroke="none" fill="#D8D8D8" fill-rule="evenodd" opacity="0" xlink:href="#path-3"></use>
+                        <circle id="椭圆形备份-2" stroke="#FFA11C" stroke-width="2" fill="none" mask="url(#mask-4)" cx="9" cy="10" r="7"></circle>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

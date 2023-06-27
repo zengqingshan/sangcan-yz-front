@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编辑</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="切图" transform="translate(-65.000000, -1015.000000)" fill-rule="nonzero">
+            <g id="编辑" transform="translate(65.000000, 1015.000000)">
+                <rect id="矩形" fill-opacity="0.01" fill="#FFFFFF" x="0" y="0" width="12" height="12"></rect>
+                <polygon id="路径" fill="#52586D" points="10.75 10 10.75 11 1.75 11 1.75 10"></polygon>
+                <path d="M10.4569516,3.32702466 L7.92364065,0.792603918 L2.25,6.47304359 L2.25,9 L4.7864712,9 L10.4569516,3.32702466 Z M7.924,2.207 L9.043,3.326 L4.371,8 L3.25,8 L3.25,6.886 L7.924,2.207 Z" id="路径" fill="#52586D"></path>
+            </g>
+        </g>
+    </g>
+</svg>

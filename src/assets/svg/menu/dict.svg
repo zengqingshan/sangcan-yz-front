@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>形状</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="16" height="16"></rect>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航icon" transform="translate(-670.000000, -756.000000)">
+            <g id="形状" transform="translate(670.000000, 756.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="蒙版" fill="#D8D8D8" opacity="0" xlink:href="#path-1"></use>
+                <path d="M0.997350937,15 L0.997350937,1 L14.9973509,1 L14.9973509,15 L0.997350937,15 Z M2.99735094,5 L12.9973509,5 L12.9973509,3 L2.99735094,3 L2.99735094,5 Z M7.99735094,13 L12.9963509,13 L12.9963509,7 L7.99735094,7 L7.99735094,13 Z M2.99735094,13 L5.99835094,13 L5.99835094,7 L2.99735094,7 L2.99735094,13 Z" fill="#B1B8CE" fill-rule="nonzero" mask="url(#mask-2)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

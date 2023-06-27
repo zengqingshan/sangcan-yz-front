@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Li-1备份 7</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航icon" transform="translate(-401.000000, -159.000000)">
+            <g id="资源管理" transform="translate(401.000000, 159.000000)">
+                <rect id="矩形" fill="#393939" opacity="0" x="0" y="0" width="16" height="16"></rect>
+                <polygon id="矩形" fill="#B1B8CE" fill-rule="nonzero" points="3 1 3 3 1 3 1 1"></polygon>
+                <polygon id="矩形备份-8" fill="#B1B8CE" fill-rule="nonzero" points="3 13 3 15 1 15 1 13"></polygon>
+                <polygon id="矩形备份-5" fill="#B1B8CE" fill-rule="nonzero" points="7 1 7 3 5 3 5 1"></polygon>
+                <polygon id="矩形备份-9" fill="#B1B8CE" fill-rule="nonzero" points="7 13 7 15 5 15 5 13"></polygon>
+                <polygon id="矩形备份-6" fill="#B1B8CE" fill-rule="nonzero" points="11 1 11 3 9 3 9 1"></polygon>
+                <polygon id="矩形备份-10" fill="#B1B8CE" fill-rule="nonzero" points="11 13 11 15 9 15 9 13"></polygon>
+                <path d="M4,4 L4,6 L3,6 L3,10 L4,10 L4,12 L1,12 L1,4 L4,4 Z M15,4 L15,12 L12,12 L12,10 L13,10 L13,6 L12,6 L12,4 L15,4 Z" id="形状结合" fill="#B1B8CE" fill-rule="nonzero"></path>
+                <polygon id="三角形" fill="#B1B8CE" fill-rule="nonzero" transform="translate(8.500000, 8.000000) rotate(-270.000000) translate(-8.500000, -8.000000) " points="8.5 6 11.5 10 5.5 10"></polygon>
+                <polygon id="矩形备份-7" fill="#B1B8CE" fill-rule="nonzero" points="15 1 15 3 13 3 13 1"></polygon>
+                <polygon id="矩形备份-11" fill="#B1B8CE" fill-rule="nonzero" points="15 13 15 15 13 15 13 13"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

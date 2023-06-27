@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>芯片_cpu (1)</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="切图" transform="translate(-283.000000, -888.000000)">
+            <g id="芯片_cpu-(1)" transform="translate(283.000000, 888.000000)">
+                <rect id="矩形" fill-opacity="0.01" fill="#FFFFFF" fill-rule="nonzero" x="0" y="0" width="16" height="16"></rect>
+                <polygon id="路径" fill-opacity="0.01" fill="#FFFFFF" fill-rule="nonzero" points="16 0 0 0 0 16 16 16"></polygon>
+                <path d="M12.6666667,2.66666667 L3.33333333,2.66666667 C2.96514333,2.66666667 2.66666667,2.96514333 2.66666667,3.33333333 L2.66666667,12.6666667 C2.66666667,13.0348667 2.96514333,13.3333333 3.33333333,13.3333333 L12.6666667,13.3333333 C13.0348667,13.3333333 13.3333333,13.0348667 13.3333333,12.6666667 L13.3333333,3.33333333 C13.3333333,2.96514333 13.0348667,2.66666667 12.6666667,2.66666667 Z" id="路径" stroke="#2C7BE5"></path>
+                <polygon id="路径" stroke="#2C7BE5" points="10 6 6 6 6 10 10 10"></polygon>
+                <path d="M4.96973333,0.666666667 L4.96973333,2.66666667 L4.96973333,0.666666667 Z" id="路径"></path>
+                <line x1="4.96973333" y1="0.666666667" x2="4.96973333" y2="2.66666667" id="路径" stroke="#2C7BE5" stroke-linecap="round"></line>
+                <path d="M4.96973333,13.3333333 L4.96973333,15.3333333 L4.96973333,13.3333333 Z" id="路径"></path>
+                <line x1="4.96973333" y1="13.3333333" x2="4.96973333" y2="15.3333333" id="路径" stroke="#2C7BE5" stroke-linecap="round"></line>
+                <path d="M8,0.666666667 L8,2.66666667 L8,0.666666667 Z" id="路径"></path>
+                <line x1="8" y1="0.666666667" x2="8" y2="2.66666667" id="路径" stroke="#2C7BE5" stroke-linecap="round"></line>
+                <path d="M8,13.3333333 L8,15.3333333 L8,13.3333333 Z" id="路径"></path>
+                <line x1="8" y1="13.3333333" x2="8" y2="15.3333333" id="路径" stroke="#2C7BE5" stroke-linecap="round"></line>
+                <path d="M11.0302667,0.666666667 L11.0302667,2.66666667 L11.0302667,0.666666667 Z" id="路径"></path>
+                <line x1="11.0302667" y1="0.666666667" x2="11.0302667" y2="2.66666667" id="路径" stroke="#2C7BE5" stroke-linecap="round"></line>
+                <path d="M11.0302667,13.3333333 L11.0302667,15.3333333 L11.0302667,13.3333333 Z" id="路径"></path>
+                <line x1="11.0302667" y1="13.3333333" x2="11.0302667" y2="15.3333333" id="路径" stroke="#2C7BE5" stroke-linecap="round"></line>
+                <path d="M0.666666667,4.9697 L2.66666667,4.9697 L0.666666667,4.9697 Z" id="路径"></path>
+                <line x1="0.666666667" y1="4.9697" x2="2.66666667" y2="4.9697" id="路径" stroke="#2C7BE5" stroke-linecap="round"></line>
+                <path d="M13.3333333,4.9697 L15.3333333,4.9697 L13.3333333,4.9697 Z" id="路径"></path>
+                <line x1="13.3333333" y1="4.9697" x2="15.3333333" y2="4.9697" id="路径" stroke="#2C7BE5" stroke-linecap="round"></line>
+                <path d="M0.666666667,8 L2.66666667,8 L0.666666667,8 Z" id="路径"></path>
+                <line x1="0.666666667" y1="8" x2="2.66666667" y2="8" id="路径" stroke="#2C7BE5" stroke-linecap="round"></line>
+                <path d="M13.3333333,8 L15.3333333,8 L13.3333333,8 Z" id="路径"></path>
+                <line x1="13.3333333" y1="8" x2="15.3333333" y2="8" id="路径" stroke="#2C7BE5" stroke-linecap="round"></line>
+                <path d="M0.666666667,11.0303 L2.66666667,11.0303 L0.666666667,11.0303 Z" id="路径"></path>
+                <line x1="0.666666667" y1="11.0303" x2="2.66666667" y2="11.0303" id="路径" stroke="#2C7BE5" stroke-linecap="round"></line>
+                <path d="M13.3333333,11.0303 L15.3333333,11.0303 L13.3333333,11.0303 Z" id="路径"></path>
+                <line x1="13.3333333" y1="11.0303" x2="15.3333333" y2="11.0303" id="路径" stroke="#2C7BE5" stroke-linecap="round"></line>
+            </g>
+        </g>
+    </g>
+</svg>

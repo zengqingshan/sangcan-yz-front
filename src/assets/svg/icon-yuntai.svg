@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>云台</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="24" height="24"></rect>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="切图" transform="translate(-1422.000000, -55.000000)">
+            <g id="云台" transform="translate(1422.000000, 55.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="蒙版" fill="#D8D8D8" opacity="0" xlink:href="#path-1"></use>
+                <path d="M12,3 C16.9705627,3 21,7.02943725 21,12 C21,16.9705627 16.9705627,21 12,21 C7.02943725,21 3,16.9705627 3,12 C3,7.02943725 7.02943725,3 12,3 Z M12,4 C7.581722,4 4,7.581722 4,12 C4,16.418278 7.581722,20 12,20 C16.418278,20 20,16.418278 20,12 C20,7.581722 16.418278,4 12,4 Z" id="椭圆形" fill="#2C7BE5" fill-rule="nonzero" mask="url(#mask-2)"></path>
+                <path d="M8,13 L8,15.999 L10.999,15.999 L10.999,16.999 L7,17 L7,13 L8,13 Z M17,13 L17,17 L12.999,16.999 L12.999,15.999 L16,15.999 L16,13 L17,13 Z M10.999,6.999 L10.999,7.999 L8,7.999 L8,11 L7,11 L7,7 L10.999,6.999 Z M17,7 L17,11 L16,11 L16,7.999 L12.999,7.999 L12.999,6.999 L17,7 Z" id="形状结合" fill="#00DEAB" fill-rule="nonzero" mask="url(#mask-2)" transform="translate(12.000000, 11.999500) rotate(-45.000000) translate(-12.000000, -11.999500) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

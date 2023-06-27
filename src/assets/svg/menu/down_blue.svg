@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="16" height="16"></rect>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航icon" transform="translate(-528.000000, -625.000000)">
+            <g id="icon" transform="translate(528.000000, 625.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="蒙版" fill="#D8D8D8" opacity="0" xlink:href="#path-1"></use>
+                <g mask="url(#mask-2)">
+                    <g transform="translate(1.000000, 1.000000)">
+                        <polygon id="形状" fill="#2C7BE5" points="4 12 4 14 0 14 0 0 14 0 14 2 2 2 2 12"></polygon>
+                        <polygon id="路径" fill="#0CD5A7" points="11 7.00306886 13.005188 5 14.499054 6.5128479 10.0020142 11 5.51956177 6.5128479 7.01016235 5 9 6.99525689 9 3 11 3"></polygon>
+                        <polygon id="路径" fill="#0CD5A7" points="6 12 14 12 14 14 6 14"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

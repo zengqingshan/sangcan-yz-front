@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icon-6</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航icon" transform="translate(-769.000000, -209.000000)" fill-rule="nonzero">
+            <g id="报错_caution" transform="translate(769.000000, 209.000000)">
+                <rect id="矩形" fill-opacity="0.01" fill="#FFFFFF" x="0" y="0" width="16" height="16"></rect>
+                <path d="M15.9855484,15.1000633 L7.99999986,0.0942424437 L0.0144513652,15.1000633 L15.9855484,15.1000633 Z M7.99999986,3.50006333 L13.3216338,13.5000633 L2.67836597,13.5000633 L7.99999986,3.50006333 Z" id="路径" fill="#B1B8CE"></path>
+                <g id="编组-5" transform="translate(7.200000, 6.005910)" fill="#B1B8CE">
+                    <polygon id="路径" points="1.63544694 5.00731702 1.63544694 6.99415638 0.000829696732 6.99415638 0.000829696732 5.00731702"></polygon>
+                    <polygon id="路径" points="-1.90014425e-13 0.00166008243 1.63461655 -5.59552404e-14 1.6390433 3.98826707 0.0044267491 3.98992715"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

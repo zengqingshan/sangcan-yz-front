@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>编组 24</title>
+    <defs>
+        <polygon id="path-1" points="11.44873 13.7545438 11.44873 4.66666667 8.33333333 4.66666667 8.33333333 1.33266667 1.33333333 1.33266667 1.33333333 13.7545438"></polygon>
+        <filter x="-14.8%" y="-12.1%" width="129.7%" height="124.2%" filterUnits="objectBoundingBox" id="filter-2">
+            <feGaussianBlur stdDeviation="1.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.5 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="切图" transform="translate(-66.000000, -1602.000000)">
+            <g id="编组-24" transform="translate(66.000000, 1602.000000)">
+                <circle id="椭圆形" fill="#FFF3CC" cx="16" cy="16" r="16"></circle>
+                <g id="文件保护_file-protection" transform="translate(10.333333, 9.333333)">
+                    <g id="路径-8">
+                        <use fill="#F7E1CC" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    </g>
+                    <path d="M12,3.744176 L8.6302416,0 L1.33333333,0 C0.5969535,0 0,0.5969535 0,1.33333333 L0,13.3333333 C0,14.0697213 0.596951593,14.6666667 1.33333333,14.6666667 L10.6666667,14.6666667 C11.4030565,14.6666667 12,14.0697232 12,13.3333333 L12,3.744176 Z M8.03666667,1.33266667 L10.6666667,4.25566667 L10.6666667,13.3333333 L1.33333333,13.3333333 L1.33333333,1.33333333 L8.03666667,1.33266667 Z" id="路径" fill="#FFA000" fill-rule="nonzero"></path>
+                    <path d="M3.66666667,7.06666667 C3.66666667,6.7111 6,6 6,6 C6,6 8.33333333,6.7111 8.33333333,7.06666667 C8.33333333,9.9111 6,11.3333333 6,11.3333333 C6,11.3333333 3.66666667,9.9111 3.66666667,7.06666667 Z" id="路径" stroke="#FFFFFF" stroke-width="1.33333333" stroke-linecap="round"></path>
+                    <path d="M8,0 C8.33471803,0 8.61182201,0.246675069 8.65943829,0.568151553 L8.66666667,0.666666667 L8.66666667,3.33266667 L11.3333333,3.33333333 C11.6680514,3.33333333 11.9451553,3.5800084 11.9927716,3.90148489 L12,4 C12,4.33471803 11.7533249,4.61182201 11.4318484,4.65943829 L11.3333333,4.66666667 L7.33333333,4.66666667 L7.33333333,0.666666667 C7.33333333,0.298476833 7.63181017,0 8,0 Z" id="路径" fill="#FFA000" fill-rule="nonzero"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

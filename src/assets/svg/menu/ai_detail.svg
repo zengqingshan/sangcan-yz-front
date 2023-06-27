@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="17px" height="16px" viewBox="0 0 17 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Li-1备份 6</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="16" height="16"></rect>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航icon" transform="translate(-769.000000, -249.000000)">
+            <g id="Combined-Shape" transform="translate(769.600000, 249.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="蒙版" fill="#D8D8D8" opacity="0" xlink:href="#path-1"></use>
+                <path d="M12.8,9.5 L15.4,12.9 L13.7,14 L12.3,12.2 L8.7,14.8 L6.5,11.8 L8.2,10.5 L9.2,12 L12.1,10 L12.8,9.5 Z M5.4,11 L5.4,13 L0.4,13 L0.4,11 L5.4,11 Z M13.4,6 L13.4,8 L0.4,8 L0.4,6 L13.4,6 Z M13.5,1 L13.5,3 L0.5,3 L0.5,1 L13.5,1 Z" fill="#B1B8CE" fill-rule="nonzero" mask="url(#mask-2)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

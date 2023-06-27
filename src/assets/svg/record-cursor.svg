@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="7px" height="13px" viewBox="0 0 7 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>形状结合</title>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#09D6B3" offset="0%"></stop>
+            <stop stop-color="#04BA7A" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="切图" transform="translate(-1611.000000, -115.000000)" fill="url(#linearGradient-1)">
+            <path d="M1615,115 L1615.00124,119.657163 C1615.05553,119.688685 1615.10763,119.7258 1615.15673,119.768563 C1615.1914,119.798749 1615.22394,119.831289 1615.25412,119.865951 L1617.75412,122.736677 C1617.91267,122.918732 1618,123.151997 1618,123.393411 L1618,127 C1618,127.552285 1617.55228,128 1617,128 L1612,128 C1611.44772,128 1611,127.552285 1611,127 L1611,123.393411 C1611,123.151997 1611.08733,122.918732 1611.24588,122.736677 L1613.74588,119.865951 C1613.82046,119.780312 1613.90641,119.710438 1613.99952,119.656621 L1614,115 L1615,115 Z" id="形状结合"></path>
+        </g>
+    </g>
+</svg>

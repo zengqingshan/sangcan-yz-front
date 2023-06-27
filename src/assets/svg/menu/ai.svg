@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>分析_analysis</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航icon" transform="translate(-742.000000, -24.000000)" fill-rule="nonzero">
+            <g id="分析_analysis" transform="translate(742.000000, 24.000000)">
+                <rect id="矩形" fill-opacity="0.41" fill="#FFFFFF" opacity="0" x="0" y="0" width="16" height="16"></rect>
+                <path d="M15,1 L15,7 L1,7 L1,1 L15,1 Z M13,3 L3,3 L3,5 L13,5 L13,3 Z" id="矩形" fill="#B1B8CE"></path>
+                <path d="M15,5 L15,15 L11,15 L11,13 L13,13 L13,7 L3,7 L3,9 L1,9 L1,5 L15,5 Z" id="形状结合" fill="#B1B8CE"></path>
+                <polygon id="路径-2" fill="#B1B8CE" points="1.2984935 13.3507369 6.1470777 8.49469439 8.013 10.1580048 9.92012405 8.52903302 12.8146638 11.3071875 11.4297567 12.7501125 10.216 11.585 7.98619416 13.6767 5.852 11.619 2.71379351 14.7638631"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

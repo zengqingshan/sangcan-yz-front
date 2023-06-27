@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Li-1备份 6</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航icon" transform="translate(-244.000000, -369.000000)">
+            <g id="联网汇聚备份-5" transform="translate(215.000000, 340.000000)">
+                <g id="摄像_monitor-(3)" transform="translate(29.000000, 29.000000)">
+                    <rect id="矩形" fill-opacity="0.31" fill="#FFFFFF" fill-rule="nonzero" opacity="0" x="0" y="0" width="16" height="16"></rect>
+                    <g id="编组" transform="translate(0.000000, 2.500000)">
+                        <path d="M12,0 L0,0 L0,11 L12,11 L12,0 Z M10,2 L10,9 L2,9 L2,2 L10,2 Z" id="矩形" fill="#2C7BE5" fill-rule="nonzero"></path>
+                        <rect id="矩形" fill="#0CD5A7" x="3" y="3" width="4" height="2"></rect>
+                        <path d="M16,10.9473945 L16,0.054023443 L10,3.56882448 L10,7.71497597 L16,10.9473945 Z M14,3.54352098 L14,7.59814973 L12,6.52067688 L12,4.71512132 L14,3.54352098 Z" id="路径" fill="#2C7BE5" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

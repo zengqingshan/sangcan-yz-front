@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="17px" height="16px" viewBox="0 0 17 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Li-1备份</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="16" height="16"></rect>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="导航icon" transform="translate(-768.000000, -49.000000)">
+            <g id="gray" transform="translate(768.272239, 49.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="蒙版" fill-opacity="0" fill="#D8D8D8" xlink:href="#path-1"></use>
+                <g mask="url(#mask-2)" fill-rule="nonzero">
+                    <g transform="translate(1.000000, 1.000000)">
+                        <path d="M2,2 L2,12 L12,12 L12,2 L2,2 Z M0,0 L14,0 L14,14 L0,14 L0,0 Z" id="形状" stroke="none" fill="#B1B8CE"></path>
+                        <polygon id="路径" stroke="#979797" stroke-width="1" fill="#D8D8D8" points="4.5 4.5 5.5 4.5 5.5 5.5 4.5 5.5"></polygon>
+                        <path d="M4,4 L6,4 L6,6 L4,6 L4,4 Z M4,8 L6,8 L6,10 L4,10 L4,8 Z M8,4 L10,4 L10,6 L8,6 L8,4 Z M8,8 L10,8 L10,10 L8,10 L8,8 Z" id="形状" stroke="none" fill="#B1B8CE"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

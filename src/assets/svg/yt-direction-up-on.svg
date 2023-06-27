@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="17px" height="16px" viewBox="0 0 17 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>上-选中</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="16" height="16"></rect>
+        <path d="M9.29437661,3.84987628 L14.5791216,12.1544756 C14.8583084,12.5931977 14.7289795,13.1751778 14.2902574,13.4543646 C14.1391797,13.550505 13.9638189,13.6015702 13.784745,13.6015702 L3.21525497,13.6015702 C2.6952335,13.6015702 2.2736728,13.1800095 2.2736728,12.659988 C2.2736728,12.4809141 2.32473798,12.3055534 2.42087836,12.1544756 L7.70562339,3.84987628 C7.98481017,3.41115419 8.5667903,3.28182527 9.00551239,3.56101206 C9.12177971,3.63500035 9.22038832,3.73360896 9.29437661,3.84987628 Z" id="path-3"></path>
+        <filter x="-12.3%" y="-15.3%" width="124.7%" height="138.1%" filterUnits="objectBoundingBox" id="filter-4">
+            <feGaussianBlur stdDeviation="2" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.725304878   0 0 0 0 1   0 0 0 0 0.93713445  0 0 0 1 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="切图" transform="translate(-1802.000000, -400.000000)">
+            <g id="上-选中" transform="translate(1802.101570, 400.000000)">
+                <g id="三角形备份" transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000) translate(-0.000000, -0.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="蒙版" fill="#D8D8D8" opacity="0" xlink:href="#path-1"></use>
+                    <g mask="url(#mask-2)" transform="translate(8.500000, 8.101570) scale(-1, 1) rotate(-270.000000) translate(-8.500000, -8.101570) ">
+                        <use fill="#0CD5A7" fill-rule="evenodd" xlink:href="#path-3"></use>
+                        <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

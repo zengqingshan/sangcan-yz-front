@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<!-- saved from url=(0071)https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>视频网播放器VnPlayer</title>
+    <link rel="stylesheet" href="./视频网播放器VnPlayer_files/marked.min.css">
+    <link rel="stylesheet" href="./视频网播放器VnPlayer_files/github.min.css">
+    <style>
+      body {
+        margin: 0;
+      }
+      .markdown-body {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        padding: 8px;
+      }
+      .container {
+        display: flex;
+        flex: 1;
+        overflow: hidden;
+      }
+      .menu {
+        overflow-y: auto;
+        border-right: 1px solid #eaecef;
+        padding-right: 20px;
+        margin-right: 20px;
+      }
+      .content {
+        overflow-y: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="markdown-body">
+      <div class="title"><!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<h1 id="视频网播放器-vnplayer-100">视频网播放器 vnplayer 1.0.0</h1>
+</div>
+      <div class="container">
+        <div class="menu"><ul>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E4%BB%8B%E7%BB%8D">介绍</a><ul>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#vnplayer">vnplayer</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E5%90%8D%E7%A7%B0%E8%A7%A3%E9%87%8A">名称解释</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D">功能介绍</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E6%B5%8F%E8%A7%88%E5%99%A8%E6%94%AF%E6%8C%81">浏览器支持</a></li>
+</ul>
+</li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8">如何使用</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E6%92%AD%E6%94%BE%E5%99%A8">播放器</a><ul>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E6%92%AD%E6%94%BE%E5%99%A8%E4%BA%8B%E4%BB%B6">播放器事件</a><ul>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E4%BA%8B%E4%BB%B6%E5%AF%B9%E8%B1%A1">事件对象</a></li>
+</ul>
+</li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E5%88%9D%E5%A7%8B%E5%8C%96">初始化</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E7%9B%B4%E6%92%AD">直播</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E5%9B%9E%E6%94%BE">回放</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E6%92%AD%E6%94%BE%E6%9A%82%E5%81%9C">播放暂停</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E6%81%A2%E5%A4%8D%E6%92%AD%E6%94%BE">恢复播放</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E9%94%80%E6%AF%81%E6%92%AD%E6%94%BE%E5%99%A8">销毁播放器</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E5%BD%93%E5%89%8D%E6%98%AF%E5%90%A6%E5%9C%A8%E5%9B%9E%E7%9C%8B">当前是否在回看</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E8%AE%BE%E7%BD%AE%E9%9D%99%E9%9F%B3">设置静音</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E7%BC%A9%E6%94%BE%E7%94%BB%E9%9D%A2">缩放画面</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E8%BF%9B%E5%85%A5%E5%85%A8%E5%B1%8F">进入全屏</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E9%80%80%E5%87%BA%E5%85%A8%E5%B1%8F">退出全屏</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E6%98%AF%E5%90%A6%E5%85%A8%E5%B1%8F">是否全屏</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E6%98%AF%E5%90%A6%E6%94%AF%E6%8C%81%E6%88%AA%E5%9B%BE">是否支持截图</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E8%A7%86%E9%A2%91%E6%88%AA%E5%9B%BE">视频截图</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E8%8E%B7%E5%8F%96%E5%80%8D%E9%80%9F%E6%92%AD%E6%94%BE%E6%94%AF%E6%8C%81%E9%80%9F%E7%8E%87">获取倍速播放支持速率</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E5%80%8D%E9%80%9F%E6%92%AD%E6%94%BE">倍速播放</a></li>
+</ul>
+</li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#timeline">TimeLine</a><ul>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E8%8E%B7%E5%8F%96-section-%E5%88%97%E8%A1%A8">获取 Section 列表</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E8%8E%B7%E5%8F%96-event-%E5%88%97%E8%A1%A8">获取 Event 列表</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E6%98%AF%E5%90%A6%E6%94%AF%E6%8C%81-sd-%E5%8D%A1">是否支持 sd 卡</a></li>
+</ul>
+</li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E8%AF%AD%E9%9F%B3%E5%AF%B9%E8%AE%B2">语音对讲</a><ul>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E6%98%AF%E5%90%A6%E6%94%AF%E6%8C%81%E8%AF%AD%E9%9F%B3%E5%AF%B9%E8%AE%B2">是否支持语音对讲</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E5%BC%80%E5%A7%8B%E5%AF%B9%E8%AE%B2">开始对讲</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E7%BB%93%E6%9D%9F%E5%AF%B9%E8%AE%B2">结束对讲</a></li>
+</ul>
+</li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E6%9C%AC%E5%9C%B0%E8%A7%86%E9%A2%91%E5%BD%95%E5%88%B6">本地视频录制</a><ul>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E6%98%AF%E5%90%A6%E8%A7%86%E9%A2%91%E5%BD%95%E5%88%B6">是否视频录制</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E5%BC%80%E5%A7%8B%E5%BD%95%E5%88%B6">开始录制</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E7%BB%93%E6%9D%9F%E5%BD%95%E5%88%B6">结束录制</a></li>
+</ul>
+</li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E8%AE%BE%E5%A4%87%E6%8E%A7%E5%88%B6">设备控制</a><ul>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E6%98%AF%E5%90%A6%E6%94%AF%E6%8C%81%E9%AB%98%E6%A0%87%E6%B8%85%E5%88%87%E6%8D%A2">是否支持高标清切换</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E8%AE%BE%E7%BD%AE%E9%AB%98%E6%A0%87%E6%B8%85">设置高标清</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E6%98%AF%E5%90%A6%E6%94%AF%E6%8C%81-ptz">是否支持 PTZ</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E4%BA%91%E5%8F%B0%E6%8E%A7%E5%88%B6">云台控制</a></li>
+</ul>
+</li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E5%89%AA%E8%BE%91">剪辑</a><ul>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E6%98%AF%E5%90%A6%E6%94%AF%E6%8C%81%E5%89%AA%E8%BE%91">是否支持剪辑</a></li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#%E8%A7%86%E9%A2%91%E5%89%AA%E8%BE%91">视频剪辑</a></li>
+</ul>
+</li>
+<li><a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#faq">FAQ</a></li>
+</ul>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+</div>
+        <div class="content"><h1 id="介绍">介绍</h1>
+<h2 id="vnplayer">vnplayer</h2>
+<p>基于 html5 的特性，使用 Media Source Extensions（MSE）+ fmp4 技术的 h5 播放器。</p>
+<h2 id="名称解释">名称解释</h2>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>解释说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>deviceId</td>
+<td>设备唯一标识</td>
+</tr>
+<tr>
+<td>appid</td>
+<td>申请的 appid</td>
+</tr>
+<tr>
+<td>token</td>
+<td>设备令牌</td>
+</tr>
+</tbody></table>
+<h2 id="功能介绍">功能介绍</h2>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>解释说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>播放器</td>
+<td>实时视频、回放、播放暂停、声音控制……</td>
+</tr>
+<tr>
+<td>Timeline</td>
+<td>录制 Section 列表、事件列表</td>
+</tr>
+<tr>
+<td>语音对讲</td>
+<td>与设备对话</td>
+</tr>
+<tr>
+<td>设备控制</td>
+<td>PTZ 控制、高标清切换</td>
+</tr>
+</tbody></table>
+<h2 id="浏览器支持">浏览器支持</h2>
+<p>视频播放：chrome、firefox、edge、safari、其它 chrome 系浏览器</p>
+<p>语音对讲：chrome、firefox、edge、safari、其它 chrome 系浏览器</p>
+<p>截图：safari 不支持</p>
+<p>建议浏览器：Chrome</p>
+<h1 id="如何使用">如何使用</h1>
+<p>vnplayer.min.js 运行时将会加载对应版本的其他资源，强烈建议通过 script 标签远程引用 vnplayer.min.js。引用时必须指定版本号，格式如下：
+<code>https://open.videiot.cn/websdk/[版本号]/vnplayer.min.js</code></p>
+<pre><code class="language-html hljs language-xml"><span class="hljs-comment">&lt;!-- 示例 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://open.videiot.cn/websdk/1.0.0/vnplayer.min.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+  <span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+  <span class="hljs-comment">// ...</span>
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<h1 id="播放器">播放器</h1>
+<p>播放器相关接口与事件</p>
+<h2 id="播放器事件">播放器事件</h2>
+<h3 id="事件对象">事件对象</h3>
+<ul>
+<li><p>属性名</p>
+<p><code>MessageTypes</code></p>
+</li>
+<li><p>属性功能</p>
+<p><code>播放器事件</code></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+<th>参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PLAYER_INIT</td>
+<td>播放器初始化完成 <br> 在这之后可以开始播放</td>
+<td></td>
+</tr>
+<tr>
+<td>PLAYER_INIT_ERROR</td>
+<td>播放器初始化失败 <br> 失败原因见回调参数 <br>监听报错？<a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#faq-2">FAQ</a></td>
+<td>{ code: Integer, message: String }</td>
+</tr>
+<tr>
+<td>PLAYER_PLAY_LOADING</td>
+<td>视频加载中</td>
+<td></td>
+</tr>
+<tr>
+<td>PLAYER_PLAY</td>
+<td>开始播放，播放器出现视频画面</td>
+<td></td>
+</tr>
+<tr>
+<td>PLAYER_PAUSE</td>
+<td>暂停</td>
+<td></td>
+</tr>
+<tr>
+<td>PLAYER_PLAY_ERROR</td>
+<td>播放异常，网络中断，设备电源断开都会导致播放异常</td>
+<td></td>
+</tr>
+<tr>
+<td>PLAYER_DESTROY</td>
+<td>播放器销毁事件</td>
+<td></td>
+</tr>
+<tr>
+<td>PLAYER_TIME_CHANGE</td>
+<td>播放当前时间</td>
+<td>YY-MM-DD HH:mm:ss</td>
+</tr>
+<tr>
+<td>PLAYER_FULL_SCREEN_CHANGE</td>
+<td>全屏状态变化</td>
+<td>Boolean</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>示例
+<a id="event-way"></a></p>
+<p><code>有两种方式处理相关事件</code></p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({
+  handlerMessage,
+});
+
+<span class="hljs-comment">// 方式一</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">handlerMessage</span>(<span class="hljs-params">type, data</span>) {
+  <span class="hljs-keyword">if</span> (type === <span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>) {
+    <span class="hljs-comment">//初始化成功</span>
+  }
+}
+
+<span class="hljs-comment">// 方式二</span>
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-comment">//初始化成功</span>
+});
+</code></pre>
+</li>
+</ul>
+<h2 id="初始化">初始化</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>await VnPlayer({...})</code></p>
+</li>
+<li><p>接口功能</p>
+<p>初始化 Html5Player 对象实例</p>
+<p>初始化成功后会触发事件 ：MessageTypes.PLAYER_INIT</p>
+<p>初始化失败后触发事件：MessageTypes.PLAYER_INIT_ERROR</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">let</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({
+  <span class="hljs-attr">deviceId</span>: <span class="hljs-string">'deviceId'</span>,
+  <span class="hljs-attr">appid</span>: <span class="hljs-string">'appid'</span>,
+  <span class="hljs-attr">token</span>: <span class="hljs-string">'token'</span>,
+  <span class="hljs-attr">handlerMessage</span>: <span class="hljs-function">(<span class="hljs-params">type, data</span>) =&gt;</span> {
+    <span class="hljs-keyword">switch</span> (type) {
+      <span class="hljs-keyword">case</span> <span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>:
+        <span class="hljs-comment">// 初始化成功</span>
+        <span class="hljs-keyword">break</span>;
+      <span class="hljs-keyword">case</span> <span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT_ERROR</span>:
+        <span class="hljs-comment">// 初始化失败</span>
+        <span class="hljs-keyword">break</span>;
+      <span class="hljs-attr">default</span>:
+        <span class="hljs-keyword">break</span>;
+    }
+  },
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>是否必选</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>el</td>
+<td>String</td>
+<td>播放器占位</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>deviceId</td>
+<td>String</td>
+<td>设备唯一标识</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>appid</td>
+<td>String</td>
+<td>申请的 appid</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>token</td>
+<td>String</td>
+<td>设备令牌</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>handlerMessage</td>
+<td>Function</td>
+<td>可以收集播放器内部事件</td>
+<td>N</td>
+</tr>
+<tr>
+<td>openDefaultUI</td>
+<td>Boolean</td>
+<td>是否展示 UI</td>
+<td>N</td>
+</tr>
+<tr>
+<td>runEnv</td>
+<td>String</td>
+<td>登虹设备运行环境<br> pro:线网，stg:测试，stgys:演示</td>
+<td>N</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>返回数据</p>
+<p><code>vnPlayer播放器实例</code></p>
+</li>
+</ul>
+<h2 id="直播">直播</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.playLive()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>播放直播</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-comment">//初始化成功</span>
+  vnPlayer.<span class="hljs-title function_">playLive</span>()
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+<p><code>无</code></p>
+</li>
+</ul>
+<h2 id="回放">回放</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.playAtTime(startTime, sourceType)</code></p>
+</li>
+<li><p>接口功能</p>
+<p>根据时间和录像来源播放回看视频</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+<span class="hljs-keyword">const</span> startTime = <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>() - <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>;
+<span class="hljs-keyword">const</span> sourceType = <span class="hljs-number">1</span>; <span class="hljs-comment">//录像来源 1 云存储； 2 设备本地（SD卡）；</span>
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-comment">//初始化成功</span>
+  vnPlayer.<span class="hljs-title function_">playAtTime</span>(startTime, sourceType);
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>是否必选</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>startTime</td>
+<td>String, Number</td>
+<td>播放选中回看开始时间（13 位时间戳）</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>sourceType</td>
+<td>Number</td>
+<td>录像来源 默认为 1 <br> 1：云存储； 2：设备本地（<a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#isSupportSDcard">isSupportSDcard()为 true 时生效</a>）</td>
+<td>N</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>返回数据</p>
+<p><code>无</code></p>
+</li>
+</ul>
+<h2 id="播放暂停">播放暂停</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.pause()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>播放器播放时，暂停播放</p>
+<p>监听到 MessageTypes.PLAYER_PLAY 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-comment">//初始化成功</span>
+  vnPlayer.<span class="hljs-title function_">playLive</span>();
+});
+<span class="hljs-keyword">let</span> isPlaying = <span class="hljs-literal">false</span>;
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_PLAY</span>, <span class="hljs-function">() =&gt;</span> {
+  isPlaying = <span class="hljs-literal">true</span>;
+});
+<span class="hljs-comment">//点击暂停按钮</span>
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#playerPauseButton'</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-function">()=&gt;</span>{
+  <span class="hljs-keyword">if</span>(!isPlaying) <span class="hljs-keyword">return</span>;
+  vnPlayer.<span class="hljs-title function_">pause</span>();
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+<p><code>无</code></p>
+</li>
+<li><p>触发事件</p>
+<p><code>VnPlayer.MessageTypes.PLAYER_PAUSE</code></p>
+</li>
+</ul>
+<h2 id="恢复播放">恢复播放</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.resume()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>播放器暂停时，恢复播放</p>
+<p>监听到 MessageTypes.PLAYER_PLAY 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-comment">//初始化成功</span>
+  vnPlayer.<span class="hljs-title function_">playLive</span>();
+});
+<span class="hljs-keyword">let</span> isPlaying = <span class="hljs-literal">false</span>;
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_PLAY</span>, <span class="hljs-function">() =&gt;</span> {
+  isPlaying = <span class="hljs-literal">true</span>;
+});
+<span class="hljs-comment">//点击暂停按钮</span>
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#playerPauseButton'</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-function">()=&gt;</span>{
+  <span class="hljs-keyword">if</span>(!isPlaying) <span class="hljs-keyword">return</span>;
+  vnPlayer.<span class="hljs-title function_">pause</span>();
+});
+<span class="hljs-comment">//点击恢复播放按钮</span>
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#playerResumeButton'</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-function">()=&gt;</span>{
+  <span class="hljs-keyword">if</span>(!isPlaying) <span class="hljs-keyword">return</span>;
+  vnPlayer.<span class="hljs-title function_">resume</span>();
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+<p><code>无</code></p>
+</li>
+</ul>
+<h2 id="销毁播放器">销毁播放器</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.destroy()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>销毁播放器</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+<span class="hljs-keyword">let</span> isPlayInit = <span class="hljs-literal">false</span>;
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>, <span class="hljs-function">() =&gt;</span> {
+  inPlayInit = <span class="hljs-literal">true</span>;
+});
+<span class="hljs-comment">//点击销毁按钮</span>
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#playerDestroyButton'</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-function">()=&gt;</span>{
+  <span class="hljs-keyword">if</span>(!inPlayInit) <span class="hljs-keyword">return</span>;
+  vnPlayer.<span class="hljs-title function_">destroy</span>();
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+<p><code>无</code></p>
+</li>
+<li><p>触发事件</p>
+<p><code>VnPlayer.MessageTypes.PLAYER_DESTROY</code></p>
+</li>
+</ul>
+<h2 id="当前是否在回看">当前是否在回看</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.isPlayback()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>当前播放的视频是否是回看</p>
+<p>监听到 MessageTypes.PLAYER_PLAY 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+<span class="hljs-keyword">let</span> isPlaying = <span class="hljs-literal">false</span>;
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_PLAY</span>, <span class="hljs-function">() =&gt;</span> {
+  isPlaying = <span class="hljs-literal">true</span>;
+});
+<span class="hljs-comment">//当前播放的是否是回看</span>
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#playerIsRecode'</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-function">()=&gt;</span>{
+  <span class="hljs-keyword">if</span>(!isPlaying) <span class="hljs-keyword">return</span>;
+  <span class="hljs-keyword">const</span> isPlayback = vnPlayer.<span class="hljs-title function_">isPlayback</span>();
+  <span class="hljs-title function_">alert</span>(isPlayback);
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>isPlayback</td>
+<td>Boolean</td>
+<td>当前播放的是否是回看</td>
+<td>true</td>
+</tr>
+</tbody></table>
+<h2 id="设置静音">设置静音</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.setMuted(isMuted)</code></p>
+</li>
+<li><p>接口功能</p>
+<p>设置播放器静音播放</p>
+<p>监听到 MessageTypes.PLAYER_PLAY 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+<span class="hljs-keyword">let</span> isPlaying = <span class="hljs-literal">false</span>;
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_PLAY</span>, <span class="hljs-function">() =&gt;</span> {
+  isPlaying = <span class="hljs-literal">true</span>;
+});
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#playerSetMutedButton'</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-function">()=&gt;</span>{
+  <span class="hljs-keyword">if</span>(!isPlaying) <span class="hljs-keyword">return</span>;
+  vnPlayer.<span class="hljs-title function_">setMuted</span>(<span class="hljs-literal">true</span>);
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>是否必选</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>isMuted</td>
+<td>Boolean</td>
+<td>是否关闭声音</td>
+<td>Y</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>返回数据</p>
+<p><code>无</code></p>
+</li>
+</ul>
+<h2 id="缩放画面">缩放画面</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.setZoom(rate)</code></p>
+</li>
+<li><p>接口功能</p>
+<p>设置播放器画面缩放</p>
+<p>监听到 MessageTypes.PLAYER_PLAY 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+<span class="hljs-keyword">let</span> isPlaying = <span class="hljs-literal">false</span>;
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_PLAY</span>, <span class="hljs-function">() =&gt;</span> {
+  isPlaying = <span class="hljs-literal">true</span>;
+});
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#playerSetZoomButton'</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-function">()=&gt;</span>{
+  <span class="hljs-keyword">if</span>(!isPlaying) <span class="hljs-keyword">return</span>;
+  <span class="hljs-keyword">const</span> value = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#playerZoomRate'</span>).<span class="hljs-property">value</span>; <span class="hljs-comment">// 取值[1-5]</span>
+  vnPlayer.<span class="hljs-title function_">setZoom</span>(value);
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>是否必选</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rate</td>
+<td>Float</td>
+<td>缩放倍率，取值：[1-5]</td>
+<td>Y</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>返回数据</p>
+<p><code>无</code></p>
+</li>
+</ul>
+<h2 id="进入全屏">进入全屏</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.goFullScreen()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>设置播放器全屏</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+<span class="hljs-keyword">let</span> isPlayInit = <span class="hljs-literal">false</span>;
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>, <span class="hljs-function">() =&gt;</span> {
+  isPlayInit = <span class="hljs-literal">true</span>;
+});
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#playerGoFullScreenButton'</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-function">()=&gt;</span>{
+  <span class="hljs-keyword">if</span>(!isPlayInit) <span class="hljs-keyword">return</span>;
+  vnPlayer.<span class="hljs-title function_">goFullScreen</span>();
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+<p><code>无</code></p>
+</li>
+<li><p>触发事件</p>
+<p><code>VnPlayer.MessageTypes.PLAYER_FULL_SCREEN_CHANGE</code></p>
+</li>
+</ul>
+<h2 id="退出全屏">退出全屏</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.exitFullScreen()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>退出全屏</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+<span class="hljs-keyword">let</span> isPlayInit = <span class="hljs-literal">false</span>;
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>, <span class="hljs-function">() =&gt;</span> {
+  isPlayInit = <span class="hljs-literal">true</span>;
+});
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#playerExitFullScreenButton'</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-function">()=&gt;</span>{
+  <span class="hljs-keyword">if</span>(!isPlayInit) <span class="hljs-keyword">return</span>;
+  vnPlayer.<span class="hljs-title function_">exitFullScreen</span>();
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+<p><code>无</code></p>
+</li>
+<li><p>触发事件</p>
+<p><code>VnPlayer.MessageTypes.PLAYER_FULL_SCREEN_CHANGE</code></p>
+</li>
+</ul>
+<h2 id="是否全屏">是否全屏</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.isFullScreen()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>当前是否全屏</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">const</span> isFullScreen = vnPlayer.<span class="hljs-title function_">isFullScreen</span>();
+  <span class="hljs-title function_">alert</span>(isFullScreen);
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>isFullScreen</td>
+<td>Boolean</td>
+<td>是否全屏</td>
+<td>true</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="是否支持截图">是否支持截图</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.isSupportScreenShot()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>是否支持截图</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>, <span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">const</span> isSupportScreenShot = vnPlayer.<span class="hljs-title function_">isSupportScreenShot</span>();
+  <span class="hljs-title function_">alert</span>(isSupportScreenShot);
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>isSupportScreenShot</td>
+<td>Boolean</td>
+<td>是否支持截图</td>
+<td>true</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="视频截图">视频截图</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.screenShot()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>当前是否视频区域截图，返回图片 base64 编辑字符串，需要用户另存为保存到本地</p>
+<p>监听到 MessageTypes.PLAYER_PLAY 消息后才可以调用</p>
+<p>调用此 API 前应使用<code>isSupportScreenShot()</code>检测是否支持</p>
+<p>不受屏幕缩放影响。 safari 浏览器不支持该功能</p>
+<p>ios 系统不能在全屏模式下执行</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+<span class="hljs-keyword">let</span> isFullScreen = <span class="hljs-literal">false</span>;
+<span class="hljs-keyword">let</span> isPlaying = <span class="hljs-literal">false</span>;
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_PLAY</span>, <span class="hljs-function">() =&gt;</span> {
+  isPlaying = <span class="hljs-literal">true</span>;
+  isFullScreen = vnPlayer.<span class="hljs-title function_">isFullScreen</span>()
+});
+<span class="hljs-comment">// 截屏</span>
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#playerScreenShot'</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-function">()=&gt;</span>{
+  <span class="hljs-keyword">if</span>(!isPlaying || isFullScreen) <span class="hljs-keyword">return</span>;
+  <span class="hljs-keyword">const</span> base64Image = html5Player.<span class="hljs-title function_">screenShot</span>(); <span class="hljs-comment">// base64</span>
+
+  <span class="hljs-keyword">if</span>(base64Image){
+    <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#screenShotImage'</span>).<span class="hljs-property">src</span> = base64Image;
+  }
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>base64Image</td>
+<td>String</td>
+<td>base64 编码字符串</td>
+<td>"data:image/png;base64,iVBO..."</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="获取倍速播放支持速率">获取倍速播放支持速率</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>qlyPlayer.supportPlaybackRate()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>获取倍速播放支持速率</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> qlyPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">QlyPlayer</span>({...});
+qlyPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">QlyPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>,<span class="hljs-function">()=&gt;</span>{
+  <span class="hljs-keyword">const</span> rates = qlyPlayer.<span class="hljs-title function_">supportPlaybackRate</span>();
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rates</td>
+<td>Array<float></float></td>
+<td>支持的速率集合</td>
+<td>[0.5, 1, 2, 4]</td>
+</tr>
+</tbody></table>
+<h2 id="倍速播放">倍速播放</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.setPlaybackRate(rate)</code></p>
+</li>
+<li><p>接口功能</p>
+<p>倍速播放</p>
+<p>监听到 MessageTypes.PLAYER_PLAY 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+<span class="hljs-keyword">const</span> rate = <span class="hljs-number">2</span>;
+<span class="hljs-keyword">let</span> isPlaying = <span class="hljs-literal">false</span>;
+qlyPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">QlyPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_PLAY</span>,<span class="hljs-function">()=&gt;</span>{
+  isPlaying = <span class="hljs-literal">true</span>;
+});
+ <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#playerSetPlaybackRateButton'</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-function">()=&gt;</span>{
+  <span class="hljs-keyword">if</span>(!isPlaying) <span class="hljs-keyword">return</span>;
+  vnPlayer.<span class="hljs-title function_">setPlaybackRate</span>(rate);
+ });
+</code></pre>
+</li>
+<li><p>参数</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>是否必选</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rate</td>
+<td>Integer</td>
+<td>速率 通过<code>supportPlaybackRate</code>接口获取可选值</td>
+<td>Y</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>返回数据</p>
+<p><code>无</code></p>
+</li>
+</ul>
+<h1 id="timeline">TimeLine</h1>
+<h2 id="获取-section-列表">获取 Section 列表</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>await vnPlayer.getSectionList(startTime, endTime, sourceType)</code></p>
+</li>
+<li><p>接口功能</p>
+<p>获取设备录制 section 列表，按照开始时间和结束时间查询回放视频数据，按照时间降序排列。</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+<span class="hljs-keyword">const</span> endTime = <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>();
+<span class="hljs-keyword">const</span> startTime = <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>() - <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>;
+<span class="hljs-keyword">const</span> sourceType = <span class="hljs-number">1</span>; <span class="hljs-comment">//录像来源 1 云存储； 2 设备本地（SD卡）；</span>
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>, <span class="hljs-keyword">async</span> ()=&gt;{
+  <span class="hljs-keyword">const</span> list = <span class="hljs-keyword">await</span> vnPlayer.<span class="hljs-title function_">getSectionList</span>(startTime, endTime, sourceType);
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>示例值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>startTime</td>
+<td>Long</td>
+<td>开始时间戳 （13 位时间戳）</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>Long</td>
+<td>结束时间戳 （13 位时间戳）</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>sourceType</td>
+<td>Integer</td>
+<td>录像来源 默认为 1 <br> 1 云存储； 2 设备本地（（<a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#isSupportSDcard">isSupportSDcard()为 true 时生效</a>））；</td>
+<td>N</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>返回数据</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>startTime</td>
+<td>Long</td>
+<td>开始时间戳 （10 位时间戳）</td>
+<td>1547177305</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>Long</td>
+<td>结束时间戳 （10 位时间戳）</td>
+<td>1547177305</td>
+</tr>
+<tr>
+<td>startTimeStr</td>
+<td>String</td>
+<td>开始时间</td>
+<td>2019-01-11 11:28:25</td>
+</tr>
+<tr>
+<td>endTimeStr</td>
+<td>String</td>
+<td>开始时间</td>
+<td>2019-01-11 11:28:25</td>
+</tr>
+<tr>
+<td>id</td>
+<td>String</td>
+<td>唯一标识</td>
+<td>1547177305</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="获取-event-列表">获取 Event 列表</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.getEventList(startTime, endTime, sourceType)</code></p>
+</li>
+<li><p>接口功能</p>
+<p>获取设备录制 event 列表，按照开始时间和结束时间查询回放视频数据，按照时间降序排列</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript">
+
+<span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+<span class="hljs-keyword">const</span> endTime = <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>();
+<span class="hljs-keyword">const</span> startTime = <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>() - <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>;
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>,<span class="hljs-keyword">async</span> ()=&gt;{
+  <span class="hljs-keyword">const</span> list = <span class="hljs-keyword">await</span> vnPlayer.<span class="hljs-title function_">getEventList</span>(startTime, endTime);
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>示例值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>startTime</td>
+<td>Long</td>
+<td>开始时间戳 （13 位时间戳）</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>Long</td>
+<td>结束时间戳 （13 位时间戳）</td>
+<td>Y</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>返回数据</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>startTime</td>
+<td>Long</td>
+<td>开始时间戳 （10 位时间戳）</td>
+<td>1547177305</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>Long</td>
+<td>结束时间戳 （10 位时间戳）</td>
+<td>1547177305</td>
+</tr>
+<tr>
+<td>startTimeStr</td>
+<td>String</td>
+<td>开始时间</td>
+<td>2019-01-11 11:28:25</td>
+</tr>
+<tr>
+<td>endTimeStr</td>
+<td>String</td>
+<td>开始时间</td>
+<td>2019-01-11 11:28:25</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>事件类型： 0 回放 1 动作 2 声音 3 人脸 4 人形 5 国标视频</td>
+<td>0</td>
+</tr>
+<tr>
+<td>id</td>
+<td>String</td>
+<td>唯一标识</td>
+<td>1547177305</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<!-- ## 获取缩略图
+
+- 接口名
+
+  `await vnPlayer.getSectionThumbnailUrl(timestamp, size)`
+
+- 接口功能
+
+  根据时间戳获取缩略图
+
+  监听到 MessageTypes.PLAYER_INIT 消息后才可以调用
+
+- 示例
+
+  ```js
+  const vnPlayer = await VnPlayer({...});
+  vnPlayer.on(VnPlayer.MessageTypes.PLAYER_INIT, async ()=>{
+    const timestamp = Date.now() - 1 * 60 * 60 * 1000;// 1小时前
+    const size = '160x90'; // 支持x｜X｜*连接
+    vnPlayer.getSectionThumbnailUrl({timestamp, size}).then(url=>{
+      console.info('getSectionThumbnailUrl', url);
+      document.querySelector('#screenShotImage').src = url;
+    });
+  });
+  ```
+
+- 参数
+
+  | 名称      | 类型   | 说明                                    | 是否必传 |
+  | --------- | ------ | --------------------------------------- | -------- |
+  | timestamp | Long   | 开始时间戳 （13 位时间戳）              | Y        |
+  | size      | String | 宽高, 默认：200x100，支持[x\|X\|\*]连接 | N        |
+
+- 返回数据
+
+| 名称 | 类型   | 说明       | 示例          |
+| ---- | ------ | ---------- | ------------- |
+| url  | String | 缩略图地址 | "https://..." | -->
+
+<p><a id="isSupportSDcard"></a></p>
+<h2 id="是否支持-sd-卡">是否支持 sd 卡</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>qlyPlayer.isSupportSDcard()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>检测设备是否支持 sd 卡回放</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> qlyPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">QlyPlayer</span>({...});
+qlyPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">QlyPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>,<span class="hljs-keyword">async</span> ()=&gt;{
+  <span class="hljs-keyword">const</span> isSupportSDcard = qlyPlayer.<span class="hljs-title function_">isSupportSDcard</span>();
+  <span class="hljs-title function_">alert</span>(isSupportSDcard);
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>isSupportSDcard</td>
+<td>Boolean</td>
+<td>是否支持 sd 卡</td>
+<td>true</td>
+</tr>
+</tbody></table>
+<h1 id="语音对讲">语音对讲</h1>
+<h2 id="是否支持语音对讲">是否支持语音对讲</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.isSupportAudioTalk()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>检测设备是否支持语音对讲</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>,<span class="hljs-keyword">async</span> ()=&gt;{
+  <span class="hljs-keyword">const</span> isSupportAudioTalk = vnPlayer.<span class="hljs-title function_">isSupportAudioTalk</span>();
+  <span class="hljs-title function_">alert</span>(isSupportAudioTalk);
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>isSupportAudioTalk</td>
+<td>Boolean</td>
+<td>是否支持语音对讲</td>
+<td>true</td>
+</tr>
+</tbody></table>
+<h2 id="开始对讲">开始对讲</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.startTalk(callback)</code></p>
+</li>
+<li><p>接口功能</p>
+<p>开始语音对讲</p>
+<p>调用此 API 前应使用<code>isSupportAudioTalk()</code>检测是否支持</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+<p>当前播放的是直播才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+<span class="hljs-keyword">let</span> isPlaying = <span class="hljs-literal">false</span>;
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>,<span class="hljs-keyword">async</span> ()=&gt;{
+  isPlaying = <span class="hljs-literal">true</span>;
+});
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#audioTalkStart'</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) {
+  <span class="hljs-keyword">if</span>(!isPlaying || !vnPlayer.<span class="hljs-title function_">isSupportAudioTalk</span>() || vnPlayer.<span class="hljs-title function_">isPlayback</span>()) <span class="hljs-keyword">return</span>;
+   vnPlayer.<span class="hljs-title function_">startTalk</span>(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(e)
+   });
+}, <span class="hljs-literal">false</span>);
+</code></pre>
+</li>
+<li><p>参数</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>是否必传</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>callback</td>
+<td>Function</td>
+<td>回调函数，通常发生错误时触发</td>
+<td>N</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>返回数据</p>
+<p><code>无</code></p>
+</li>
+</ul>
+<h2 id="结束对讲">结束对讲</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.stopTalk()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>结束语音对讲</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+<p>当前播放的是直播才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+<span class="hljs-keyword">let</span> isPlaying = <span class="hljs-literal">false</span>;
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>,<span class="hljs-keyword">async</span> ()=&gt;{
+  isPlaying = <span class="hljs-literal">true</span>;
+});
+<span class="hljs-keyword">const</span> canAudioTalk = <span class="hljs-literal">false</span>;
+<span class="hljs-comment">//开始对讲</span>
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#audioTalkStart'</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) {
+  <span class="hljs-keyword">if</span>(!isPlaying || !vnPlayer.<span class="hljs-title function_">isSupportAudioTalk</span>() || vnPlayer.<span class="hljs-title function_">isPlayback</span>()) <span class="hljs-keyword">return</span>;
+   vnPlayer.<span class="hljs-title function_">startTalk</span>(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(e)
+   });
+}, <span class="hljs-literal">false</span>);
+
+<span class="hljs-comment">//结束对讲</span>
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#audioTalkStop'</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span>{
+  canAudioTalk &amp;&amp; html5Player.<span class="hljs-title function_">stopTalk</span>()
+}, <span class="hljs-literal">false</span>);
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+<p><code>无</code></p>
+</li>
+</ul>
+<h1 id="本地视频录制">本地视频录制</h1>
+<h2 id="是否视频录制">是否视频录制</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.isSupportRecoder()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>检测浏览器是否支持视频录制</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>,<span class="hljs-keyword">async</span> ()=&gt;{
+  <span class="hljs-keyword">const</span> isSupportRecoder = vnPlayer.<span class="hljs-title function_">isSupportRecoder</span>();
+  <span class="hljs-title function_">alert</span>(isSupportRecoder);
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>isSupportRecoder</td>
+<td>Boolean</td>
+<td>是否支持本地录制</td>
+<td>true</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="开始录制">开始录制</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.startRecoder()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>开始录制</p>
+<p>调用此 API 前应使用<code>isSupportRecoder()</code>检测是否支持</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+<span class="hljs-keyword">let</span> isPlaying = <span class="hljs-literal">false</span>;
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>,<span class="hljs-keyword">async</span> ()=&gt;{
+  isPlaying = <span class="hljs-literal">true</span>;
+});
+<span class="hljs-keyword">const</span> canAudioTalk = <span class="hljs-literal">false</span>;
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#startRecoder'</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) {
+  <span class="hljs-keyword">if</span>(!isPlaying || !vnPlayer.<span class="hljs-title function_">isSupportRecoder</span>()) <span class="hljs-keyword">return</span>;
+  vnPlayer.<span class="hljs-title function_">startRecoder</span>(<span class="hljs-number">1000</span> * <span class="hljs-number">60</span> * <span class="hljs-number">10</span>, <span class="hljs-string">'filename'</span>)
+}, <span class="hljs-literal">false</span>);
+</code></pre>
+</li>
+<li><p>参数</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>是否必传</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>duration</td>
+<td>Long</td>
+<td>录制时长单位毫秒，最长 10 分钟 调用 stopRecoder 或到达 10 分钟自动走浏览器下载</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>fileName</td>
+<td>String</td>
+<td>文件名称 视频的封装格式为 webm 格式</td>
+<td>N</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>返回数据</p>
+<p><code>无</code></p>
+</li>
+</ul>
+<h2 id="结束录制">结束录制</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.stopRecoder()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>结束录制</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript">
+
+<span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+<span class="hljs-keyword">let</span> isPlaying = <span class="hljs-literal">false</span>;
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>,<span class="hljs-keyword">async</span> ()=&gt;{
+  isPlaying = <span class="hljs-literal">true</span>;
+});
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">'#stopRecoder'</span>).<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) {
+  <span class="hljs-keyword">if</span>(!isPlaying) <span class="hljs-keyword">return</span>;
+  vnPlayer.<span class="hljs-title function_">stopRecoder</span>();
+}, <span class="hljs-literal">false</span>);
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+<p><code>无</code></p>
+</li>
+</ul>
+<h1 id="设备控制">设备控制</h1>
+<h2 id="是否支持高标清切换">是否支持高标清切换</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>qlyPlayer.isSupportMultiStream()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>检测当前设备是否支持高标清切换</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+<span class="hljs-keyword">let</span> isPlaying = <span class="hljs-literal">false</span>;
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>,<span class="hljs-keyword">async</span> ()=&gt;{
+  <span class="hljs-keyword">const</span> isSupportMultiStream = vnPlayer.<span class="hljs-title function_">isSupportMultiStream</span>();
+  <span class="hljs-title function_">alert</span>(isSupportMultiStream);
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>isSupportMultiStream</td>
+<td>Boolean</td>
+<td>是否支持高标清切换</td>
+<td>true</td>
+</tr>
+</tbody></table>
+<h2 id="设置高标清">设置高标清</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.setResolution(value, callback)</code></p>
+</li>
+<li><p>接口功能</p>
+<p>设置摄像头高标清</p>
+<p>调用此 API 前应使用<code>isSupportMultiStream()</code>检测是否支持</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript">
+
+<span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>,<span class="hljs-keyword">async</span> ()=&gt;{
+  <span class="hljs-keyword">const</span> status = <span class="hljs-number">1</span>; <span class="hljs-comment">//0:SD; 1:HD</span>
+  vnPlayer.<span class="hljs-title function_">setResolution</span>(status);
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>是否必传</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>value</td>
+<td>Integer</td>
+<td>设置高标清，0:标清；1：高清</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>callback</td>
+<td>Function</td>
+<td>成功回调函数</td>
+<td>N</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>返回数据</p>
+<p><code>无</code></p>
+</li>
+</ul>
+<h2 id="是否支持-ptz">是否支持 PTZ</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>qlyPlayer.isSupportPTZ()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>当前设备是否支持 PTZ 能力</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+<span class="hljs-keyword">let</span> isPlaying = <span class="hljs-literal">false</span>;
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>,<span class="hljs-keyword">async</span> ()=&gt;{
+  <span class="hljs-keyword">const</span> isSupportPTZ = vnPlayer.<span class="hljs-title function_">isSupportPTZ</span>();
+  <span class="hljs-title function_">alert</span>(isSupportPTZ);
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>isSupportPTZ</td>
+<td>Boolean</td>
+<td>是否支持云台</td>
+<td>true</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="云台控制">云台控制</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.setPTZ(value)</code></p>
+</li>
+<li><p>接口功能</p>
+<p>设置摄像头方向，单步操作</p>
+<p>调用此 API 前应使用 <code>isSupportPTZ()</code>检测是否支持</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript">
+
+<span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>,<span class="hljs-keyword">async</span> ()=&gt;{
+  <span class="hljs-keyword">const</span> value = <span class="hljs-number">1</span>;
+  vnPlayer.<span class="hljs-title function_">setPTZ</span>(value);
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>是否必传</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>value</td>
+<td>Integer</td>
+<td>设置转向，1：左；2：右；3：上；4：下</td>
+<td>Y</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>返回数据</p>
+<p><code>无</code></p>
+</li>
+</ul>
+<h1 id="剪辑">剪辑</h1>
+<h2 id="是否支持剪辑">是否支持剪辑</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>qlyPlayer.isSupportMakeClip()</code></p>
+</li>
+<li><p>接口功能</p>
+<p>当前设备是否支持视频剪辑</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+<span class="hljs-keyword">let</span> isPlaying = <span class="hljs-literal">false</span>;
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>,<span class="hljs-keyword">async</span> ()=&gt;{
+  <span class="hljs-keyword">const</span> isSupportMakeClip = vnPlayer.<span class="hljs-title function_">isSupportMakeClip</span>();
+  <span class="hljs-title function_">alert</span>(isSupportMakeClip);
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<p><code>无</code></p>
+</li>
+<li><p>返回数据</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>isSupportMakeClip</td>
+<td>Boolean</td>
+<td>是否支持剪辑</td>
+<td>true</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h2 id="视频剪辑">视频剪辑</h2>
+<ul>
+<li><p>接口名</p>
+<p><code>vnPlayer.makeClip(startTime, endTime, name)</code></p>
+</li>
+<li><p>接口功能</p>
+<p>视频剪辑，最长剪辑 20 分钟，最短剪辑 10 秒</p>
+<p>调用此 API 前应使用 <code>isSupportMakeClip()</code>检测是否支持</p>
+<p>监听到 MessageTypes.PLAYER_INIT 消息后才可以调用其它操作。</p>
+</li>
+<li><p>示例</p>
+<pre><code class="language-js hljs language-javascript"><span class="hljs-keyword">const</span> vnPlayer = <span class="hljs-keyword">await</span> <span class="hljs-title class_">VnPlayer</span>({...});
+vnPlayer.<span class="hljs-title function_">on</span>(<span class="hljs-title class_">VnPlayer</span>.<span class="hljs-property">MessageTypes</span>.<span class="hljs-property">PLAYER_INIT</span>,<span class="hljs-keyword">async</span> ()=&gt;{
+  <span class="hljs-keyword">const</span> nowTime = <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>();
+  <span class="hljs-keyword">const</span> startTime = nowTime - <span class="hljs-number">1</span> * <span class="hljs-number">24</span> * <span class="hljs-number">3600</span> * <span class="hljs-number">1000</span>;<span class="hljs-comment">//1天前</span>
+  <span class="hljs-keyword">const</span> endTime = startTime + <span class="hljs-number">10</span>*<span class="hljs-number">60</span>*<span class="hljs-number">1000</span>; <span class="hljs-comment">//剪辑10分钟</span>
+  <span class="hljs-keyword">const</span> name = <span class="hljs-string">'剪辑视频.mp4'</span>;
+  <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> vnPlayer.<span class="hljs-title function_">makeClip</span>(startTime, endTime, name);
+  <span class="hljs-keyword">if</span>(res.<span class="hljs-property">id</span>){
+    <span class="hljs-comment">// 剪辑成功</span>
+  }
+});
+</code></pre>
+</li>
+<li><p>参数</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>是否必传</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>startTime</td>
+<td>Long</td>
+<td>开始时间戳</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>endTime</td>
+<td>Long</td>
+<td>结束时间戳</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>文件名</td>
+<td>Y</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>返回数据</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>id</td>
+<td>String</td>
+<td>剪辑文件 id</td>
+<td>27950410</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<!-- # 设备信息
+
+## 获取设备设置参数(仅支持登虹和融合设备)
+
+- 接口名
+
+  `await vnPlayer.getDeviceSetting()`
+
+- 接口功能
+
+  通过接口获取设备设置参数信息
+
+  监听到 MessageTypes.PLAYER_INIT 消息后才可以调用
+
+- 示例
+
+  ```js
+
+
+  const vnPlayer = await VnPlayer({...});
+  vnPlayer.on(VnPlayer.MessageTypes.PLAYER_INIT,async ()=>{
+    const deviceSetting = await vnPlayer.getDeviceSetting();
+  });
+
+  ```
+
+- 参数
+
+- 返回数据
+
+  | 名称         | 类型    | 说明               | 可选值                               |
+  | ------------ | ------- | ------------------ | ------------------------------------ |
+  | hdVideo      | Boolean  | 当前是否是高清视频 | true/false                           |
+  | sdcardStatus | Integer | SD 卡状态          | 1-无 SD 卡 2- SD 卡异常 3- SD 卡正常 | -->
+
+<h1 id="faq">FAQ</h1>
+<p>1.为什么有时首次拉起直播时不能自动播放？</p>
+<p>见<a href="https://developer.chrome.com/blog/autoplay/#iframe-delegation">Chrome 中的自动播放政策</a></p>
+<p><a id="faq-2"></a></p>
+<p>2.为什么监听事件 <code>vnplayer.on('PLAYER_INIT_ERROR', ()=&gt;{})</code>报错：<code>Cannot read properties of undefined (reading 'vnplayer')</code>?</p>
+<p>初始化失败的原因可能是 vnplayer 实例创建失败，此时 await new Vnplayer()将返回 undefined。建议使用<a href="https://stageandmu.reservehemu.com:8165/websdk/1.0.0/docs/vnplayer.html#event-way">方式一</a>监听 PLAYER_INIT_ERROR 事件。</p>
+</div>
+      </div>
+    </div>
+  
+  <script src="./视频网播放器VnPlayer_files/marked.min.js.下载"></script>
+  <script src="./视频网播放器VnPlayer_files/highlight.min.js.下载"></script>
+  <script src="./视频网播放器VnPlayer_files/javascript.min.js.下载"></script>
+  <script>
+    fetch('./vnplayer.md').then(async (res) => {
+      const r = await res.text();
+      const [title, menu, content] = r.split('<!-- split -->');
+      document.querySelector('.markdown-body .title').innerHTML = marked.parse(title);
+      document.querySelector('.markdown-body .menu').innerHTML = marked.parse(menu);
+      document.querySelector('.markdown-body .content').innerHTML = marked.parse(content);
+      hljs.highlightAll();
+    });
+  </script>
+  <script></script>
+
+</body></html>
