@@ -7,35 +7,35 @@
         placeholder="输入关键字进行过滤"
       />
 
-      <div class="pptv">
-        <el-tree
-          id="dev-tree"
-          ref="devTree"
-          class="treesds"
-          node-key="id"
-          :props="treeProps"
-          :load="treeLoad"
-          lazy
-          :filter-node-method="filterNode"
-          :highlight-current="false"
-          :expand-on-click-node="false"
-          :empty-text="treeEmptyText"
-          :default-expanded-keys="defExpandDevs"
-          @node-click="storeNodeClick"
-        >
-          <span slot-scope="{node, data}" class="custom-tree-node">
-            <span>
-              <i
-                :class="['fa','fa-folder']"
-              />
-              <span class="ellipsis" style="user-select:none;margin-left:4px;" :title="node.label">{{ node.label
-              }}</span>
+<div class="pptv">
+  <el-tree
+        id="dev-tree"
+        ref="devTree"
+        class="treesds"
+        node-key="id"
+        :props="treeProps"
+        :load="treeLoad"
+        lazy
+        :filter-node-method="filterNode"
+        :highlight-current="false"
+        :expand-on-click-node="false"
+        :empty-text="treeEmptyText"
+        :default-expanded-keys="defExpandDevs"
+        @node-click="storeNodeClick"
+      >
+        <span slot-scope="{node, data}" class="custom-tree-node">
+          <span>
+            <i
+              :class="['fa','fa-folder']"
+            />
+            <span class="ellipsis" style="user-select:none;margin-left:4px;" :title="node.label">{{ node.label
+            }}</span>
 
             <!-- </el-popover> -->
-            </span>
           </span>
-        </el-tree>
-      </div>
+        </span>
+      </el-tree>
+</div>
     </div>
 
   </div>
@@ -62,9 +62,9 @@ export default {
       conntextMenuNode: null,
       treeProps: {
         label: (data, node) => {
-          var label = data.name
+          var label = data.name 
 
-          if (data.onelineNum != null && data.deviceNum != null) {
+          if ( data.onelineNum != null && data.deviceNum != null) {
             label += ` [${data.onelineNum}/${data.deviceNum}]`
           }
           return label
@@ -104,13 +104,14 @@ export default {
     treeLoad(node, resolve) {
       const nodeLevel = node.level
 
-	  let orgId
-      if (node.data) {
-        orgId = node.data.id
-      }
-      orginfoAndSubOrgInfo({ orgId: orgId }).then((ret) => {
+	  
+	  let orgId = undefined;
+		if(node.data){
+			orgId = node.data.id
+		}
+      orginfoAndSubOrgInfo({orgId:orgId}).then((ret) => {
         let orgList = []
-
+       
         if (node.level == 0) {
 		  this.defExpandDevs.push(ret.id)
           orgList.push(ret)
@@ -124,6 +125,7 @@ export default {
           this.treeLoading = false
         })
     },
+  
 
     treeNodeRefresh(node) {
       if (!node || !node.level) {
@@ -140,7 +142,7 @@ export default {
     },
 
     treeLeaf(data) {
-      if (data.children != undefined && data.children != null && data.children.length == 0) { return true } else {
+      if ( data.children != undefined && data.children != null && data.children.length == 0) { return true } else {
         return false
       }
     }
@@ -164,7 +166,7 @@ export default {
 
       }
     }
-
+    
 }
 //  .dialogdiv .el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content{
 //   background-color: #cde3f8;
@@ -178,10 +180,12 @@ export default {
 .el-tree-node:focus>.el-tree-node__content{
   background-color: #fff !important
 }
-.custom-tree-node:hover {
-  background-color: rgb(104, 137, 173);
+.custom-tree-node:hover { 
+  background-color: rgb(104, 137, 173); 
 }
 
 }
+
+
 
 </style>

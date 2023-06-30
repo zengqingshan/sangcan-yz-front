@@ -68,7 +68,6 @@
       :visible.sync="showdialog"
       width="70%"
       center
-      top="2%"
     >
       <el-input v-model.trim="value" class="inputs" placeholder="请输入分组名称" />
       <div class="dialogdiv">
@@ -210,7 +209,6 @@ export default {
       this.setCheckFlag()
     })
     this.$bus.$on('flushedlist', (id) => {
-      this.choosechecked = 'chooselist'
       this.orgId = id
       this.deviceListPageNum = 1
       this.LoadDeviceByOrgId()
@@ -333,11 +331,11 @@ export default {
         if (deviceList.length == 0 || ret.finish == true) {
           this.btninner = '没有更多'
           this.disbtn = true
-        } else {
-          this.btninner = '加载更多'
-          this.disbtn = false
         }
         deviceList.forEach(obj => {
+          //     if (!obj.coverUrl) {
+          //       obj.coverUrl = '../assets/images/bgo.jpg'
+		  //  }
           if (this.checked == true) {
             obj.activeborder = true
             this.choosearr.push(obj)
@@ -346,16 +344,8 @@ export default {
             obj.activeborder = false
           }
         })
-        this.DeviceImagelist = this.DeviceImagelist.concat(deviceList)
-        // 与右侧数据做对比
-        this.$refs.pollright.deviceifarr.forEach(itemid => {
-          this.DeviceImagelist.forEach(item1 => {
-            if (item1.id == itemid) {
-              item1.activeborder = true
-            }
-          })
-        })
 
+        this.DeviceImagelist = this.DeviceImagelist.concat(deviceList)
         console.log(555, this.DeviceImagelist)
         this.setCheckFlag()
       }).catch(() => {

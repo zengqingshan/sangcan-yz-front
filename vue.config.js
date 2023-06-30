@@ -49,7 +49,7 @@ module.exports = {
       [`${process.env.VUE_APP_BASE_API}`]: {
         //target: `http://10.180.155.164:8081`,
         target: `https://36.133.152.103:31012/drowningprevention-api/prod-api`,
-         //target: `http://127.0.0.1:19001`,
+        // target: `http://127.0.0.1:19001`,
         changeOrigin: true,
         pathRewrite: {
           ["^" + process.env.VUE_APP_BASE_API]: "",
