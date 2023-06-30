@@ -5,8 +5,17 @@
         <div class="dev-top">
           <span>{{ deviceobj.name }}</span>
           <div>
-            <el-tooltip class="item" effect="dark" content="点击关注" placement="top">
-              <i style="font-size: 18px;margin-right: 15px;" :class="{'el-icon-star-on':true,'concerndev':isconcern}" @click="concerndevice" />
+            <el-tooltip
+              class="item"
+              effect="dark"
+              content="点击关注"
+              placement="top"
+            >
+              <i
+                style="font-size: 18px; margin-right: 15px"
+                :class="{ 'el-icon-star-on': true, concerndev: isconcern }"
+                @click="concerndevice"
+              />
             </el-tooltip>
             <!-- <el-tooltip class="item" effect="dark" content="点击标注地址" placement="top">
               <i class="el-icon-location" style="color: #1a94ff;margin-left: 10px;" />
@@ -14,18 +23,36 @@
           </div>
         </div>
         <div class="dev-img">
-          <img style="width: 100%;height: 100%;" src="../../views/videomonitor/playback/assets/images/bgo.jpg" alt="">
+          <img
+            v-if="deviceobj.status"
+            style="width: 100%; height: 100%"
+            :src="deviceobj.coverUrl"
+            alt=""
+          />
+          <img
+            v-else
+            style="width: 100%; height: 100%"
+            src="../../assets/images//device_offline.png"
+          />
         </div>
         <div class="dev-info">
           <p class="p-one">
             <span class="tops">状态：</span>
-            <span class="value">{{ lodigstatus }}<span :class="{'point':true,'openpoint':deviceobj.status,'closepoint':!deviceobj.status}" /></span>
+            <span class="value"
+              >{{ lodigstatus
+              }}<span
+                :class="{
+                  point: true,
+                  openpoint: deviceobj.status,
+                  closepoint: !deviceobj.status,
+                }"
+            /></span>
           </p>
-          <p style="font-size: 13px;margin-bottom: 5px;">
+          <p style="font-size: 13px; margin-bottom: 5px">
             <span>组织:</span>
             <span>{{ deviceobj.orgName }}</span>
           </p>
-          <p style="font-size: 13px;margin-bottom: 5px;">
+          <p style="font-size: 13px; margin-bottom: 5px">
             <span>地址:</span>
             <span>{{ deviceobj.address }}</span>
           </p>
@@ -37,7 +64,9 @@
         </div>
         <div class="dev-gn">
           <div @click="playvdeio"><i class="el-icon-caret-right" /> 预览</div>
-          <div @click="showsetting = true"> <i class="el-icon-setting" /> 设置</div>
+          <div @click="showsetting = true">
+            <i class="el-icon-setting" /> 设置
+          </div>
         </div>
       </div>
     </div>
@@ -51,10 +80,13 @@
       center
       append-to-body
     >
-      <div style="height: 450px;">
-        <VideoPlayers id="videoPlayers" ref="hlsVideoPlayer" style="width: 100%; height: 100%" />
+      <div style="height: 58vh">
+        <VideoPlayers
+          id="videoPlayers"
+          ref="hlsVideoPlayer"
+          style="width: 100%; height: 100%"
+        />
       </div>
-
     </el-dialog>
 
     <!-- 设置弹窗 -->
@@ -70,7 +102,7 @@
           <div class="normalset">
             <div class="nor-top">
               <span>国标设备接入：</span>
-              <span style="margin-left: 16%;">{{ deviceobj.name }}</span>
+              <span style="margin-left: 16%">{{ deviceobj.name }}</span>
             </div>
             <div class="nor-cen">
               <span>接入许可：</span>
@@ -105,8 +137,10 @@
             <div class="dia-right">
               <el-input v-model="devicelat" />
             </div>
-            <el-input v-model="deviceaddress" style="width: 37%;" />
-            <el-button type="primary" size="mini" @click="updatadispose">保存</el-button>
+            <el-input v-model="deviceaddress" style="width: 37%" />
+            <el-button type="primary" size="mini" @click="updatadispose"
+              >保存</el-button
+            >
           </div>
           <Map
             ref="maps"
@@ -117,10 +151,8 @@
             :type="type1"
             @click-marker-coor="clickMarkerCoor"
           />
-
         </el-tab-pane>
       </el-tabs>
-
     </el-dialog>
   </div>
 </template>
@@ -128,201 +160,217 @@
 import {
   orginfoAndSubOrgInfo,
   orgStarDelete,
-  orgStarAdd
-} from '@/api/system/org'
-import {
-  listLocaLevelOrgDevice,
-  listDevice
-
-} from '@/api/system/device'
-import {
-  updateTenant
-} from '@/api/system/tenant'
-import VideoPlayers from '@/views/videomonitor/playback/components/videosAllVideos.vue'
-import Map from '@/components/Map/index'
+  orgStarAdd,
+} from "@/api/system/org";
+import { listLocaLevelOrgDevice, listDevice } from "@/api/system/device";
+import { updateTenant } from "@/api/system/tenant";
+import VideoPlayers from "@/views/videomonitor/playback/components/videosAllVideos.vue";
+import Map from "@/components/Map/index";
 
 // import VedioModal from "@/components/videocomponent/VedioModal";
 
 export default {
   components: {
-    Map, VideoPlayers
+    Map,
+    VideoPlayers,
     // VedioModal,
   },
   props: {
     deviceobj: {
       type: Object,
-      default: function() {
-        return { name: '', status: false, longitude: '', address: '', latitude: '' }
-      }
+      default: function () {
+        return {
+          name: "",
+          status: false,
+          longitude: "",
+          address: "",
+          latitude: "",
+        };
+      },
     },
     latitude: String,
     longitude: String,
     address: String,
-    orgname: String
+    orgname: String,
   },
   data() {
     return {
-      input2: '',
-      zimulist: ['A', 'B', 'C', 'D', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N'],
+      input2: "",
+      zimulist: [
+        "A",
+        "B",
+        "C",
+        "D",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+      ],
 
       infoData: {},
       showmessage: true, // 信息窗口
       showvedioplay: false, // 预览弹窗
       showsetting: false, // 设置弹窗
-      activeName: 'first',
-      radio: '2', // 国际视频告警
+      activeName: "first",
+      radio: "2", // 国际视频告警
       newStyle: {
-        height: '450px',
-        width: '100%'
+        height: "100%",
+        width: "100%",
       },
       coor: [],
-      type1: ['cluster', 'geocoder'], // 显示地图类型
+      type1: ["cluster", "geocoder"], // 显示地图类型
       devicearr: null,
-      type: ['cluster', 'tool', 'info'], // 显示地图类型
+      type: ["cluster", "tool", "info"], // 显示地图类型
       deviceList: [], // 图例设备列表
       drawer: false, // 抽屉
       deviceDetail: {}, // 设备详情
       legendList: [], // 所有设备列表
-      devicelon: '', // 设备经度
-      devicelat: '', // 设备纬度
-      deviceaddress: '', // 设备位置
-      isconcern: false // 是否关注设备
-    }
+      devicelon: "", // 设备经度
+      devicelat: "", // 设备纬度
+      deviceaddress: "", // 设备位置
+      isconcern: false, // 是否关注设备
+    };
   },
   computed: {
-
     lodigstatus() {
       if (this.deviceobj.status) {
-        return '在线'
+        return "在线";
       } else {
-        return '离线'
+        return "离线";
       }
-    }
+    },
   },
   watch: {
     input2(newval) {
-      if (newval == '') {
-        this.showres = true
+      if (newval == "") {
+        this.showres = true;
       }
     },
     showvedioplay(newval) {
       if (!newval) {
         // 关闭监控
-        this.$refs.hlsVideoPlayer.closePlayer(0)
+        this.$refs.hlsVideoPlayer.closePlayer(0);
       }
-    }
-
+    },
   },
 
   mounted() {
-    this.devicelon = this.longitude
-    this.devicelat = this.latitude
-    this.deviceaddress = this.address
-    this.isconcern = this.deviceobj.starFlag
+    this.devicelon = this.longitude;
+    this.devicelat = this.latitude;
+    this.deviceaddress = this.address;
+    this.isconcern = this.deviceobj.starFlag;
   },
   methods: {
     // 保存坐标
     async updatadispose() {
-      await updateTenant({ longitude: this.devicelon, latitude: this.devicelat, address: this.deviceaddress })
+      await updateTenant({
+        longitude: this.devicelon,
+        latitude: this.devicelat,
+        address: this.deviceaddress,
+      });
       this.$message({
-        type: 'success',
-        message: '修改成功'
-      })
+        type: "success",
+        message: "修改成功",
+      });
     },
     // 关注设备
     async concerndevice() {
-      const param = { orgId: this.deviceobj.orgId }
+      const param = { orgId: this.deviceobj.orgId };
       if (!this.isconcern) {
         orgStarAdd(param).then(() => {
-          this.isconcern = true
-        })
+          this.isconcern = true;
+        });
       } else {
         orgStarDelete(param).then(() => {
-          this.isconcern = false
-        })
+          this.isconcern = false;
+        });
       }
     },
     // tab切换
-    handleClick(tab) {
-
-    },
+    handleClick(tab) {},
     clickMarkerCoor(e) {
-      this.devicelon = e[0]
-      this.devicelat = e[1]
-      this.deviceaddress = e[2]
+      this.devicelon = e[0];
+      this.devicelat = e[1];
+      this.deviceaddress = e[2];
     },
     // 预览
     playvdeio() {
-      this.showvedioplay = true
-      const deviceId = this.deviceobj.serviceId
-      const vname = this.deviceobj.name || '' // 视频名称
+      this.showvedioplay = true;
+      const deviceId = this.deviceobj.serviceId;
+      const vname = this.deviceobj.name || ""; // 视频名称
       setTimeout(() => {
         this.$nextTick(() => {
-          this.$refs.hlsVideoPlayer.requestPlay(deviceId, vname)
-        })
-      }, 1000)
-    }
-
-  }
-}
+          this.$refs.hlsVideoPlayer.requestPlay(deviceId, vname);
+          this.$bus.$emit("changehide", true);
+        });
+      }, 1000);
+    },
+  },
+};
 </script>
 <style scoped lang="scss">
-.el-tab-pane{
+.el-tab-pane {
   .dia1 {
-  display: flex;
-  justify-content: space-around;
-  padding: 0 15px;
-  position: absolute;
-  bottom: 1%;
-  z-index: 9999;
-  width: 100%;
-  .dia-left {
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
+    padding: 0 15px;
+    position: absolute;
+    bottom: 1%;
+    z-index: 9999;
+    width: 100%;
+    .dia-left {
+      display: flex;
+      flex-direction: column;
 
-    .el-input__inner {
-      width: 150px;
+      .el-input__inner {
+        width: 150px;
+      }
     }
-  }
 
-  .dia-right {
-    display: flex;
-    flex-direction: column;
+    .dia-right {
+      margin: 0 2%;
+      display: flex;
+      flex-direction: column;
 
-    .el-input__inner {
-      width: 150px;
+      .el-input__inner {
+        width: 150px;
+      }
     }
   }
 }
-}
-.tabsetting{
+.tabsetting {
   height: 30vw;
- ::v-deep .el-tabs__content{
+  ::v-deep .el-tabs__content {
     height: 85%;
-    .el-tab-pane{
+    .el-tab-pane {
       height: 100%;
     }
   }
- ::v-deep .el-tabs__nav-wrap::after{
+  ::v-deep .el-tabs__nav-wrap::after {
     height: 0;
   }
 }
-.normalset{
+.normalset {
   height: 100%;
-    display: flex;
-    flex-direction: column;
-  .nor-top{
+  display: flex;
+  flex-direction: column;
+  .nor-top {
     display: flex;
     align-items: center;
     height: 20%;
     border-bottom: 1px #e3e3e3 solid;
     margin-bottom: 10px;
   }
-  .nor-cen{
+  .nor-cen {
     display: flex;
     height: 30%;
     border-bottom: 1px #e3e3e3 solid;
-    div{
+    div {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -331,12 +379,12 @@ export default {
       line-height: 30px;
     }
   }
-  .nor-bom{
+  .nor-bom {
     display: flex;
     height: 30%;
     border-bottom: 1px #e3e3e3 solid;
     padding-top: 8px;
-    div{
+    div {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -347,49 +395,52 @@ export default {
   }
 }
 
-.dev-gn{
-        display: flex;
-        padding: 0 13%;
-        line-height: 29px;
-        height: 9%;
-        justify-content: space-between;
-        div{
-          cursor: pointer;
-          &:hover{
-            color: rgb(22, 120, 255);;
-          }
-        }
-      }
-      .dev-top{
-        .concerndev{
-          color: #c9c943 !important;
-        }
-        display: flex;
-        padding: 6px 0;
-        text-align: center;
-        align-items: center;
-        span{
-          font-size: 13px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          flex: 1;
-          text-align: left;
-        }
-        div{
-          display: flex;
-          justify-content: space-around;
-          i{
-            cursor: pointer;
-            color: rgb(75, 74, 74);
-          }
-        }
-      }
+.dev-gn {
+  display: flex;
+  padding: 0 13%;
+  line-height: 29px;
+  height: 9%;
+  justify-content: space-between;
+  div {
+    cursor: pointer;
+    &:hover {
+      color: rgb(22, 120, 255);
+    }
+  }
+}
+.dev-img {
+  min-width: 250px;
+  min-height: 140px;
+}
+.dev-top {
+  .concerndev {
+    color: #c9c943 !important;
+  }
+  display: flex;
+  padding: 6px 0;
+  text-align: center;
+  align-items: center;
+  span {
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    text-align: left;
+  }
+  div {
+    display: flex;
+    justify-content: space-around;
+    i {
+      cursor: pointer;
+      color: rgb(75, 74, 74);
+    }
+  }
+}
 .selectinput {
   position: absolute;
   z-index: 11;
   right: 26px;
   top: 122px;
 }
-
 </style>

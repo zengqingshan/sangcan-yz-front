@@ -30,8 +30,8 @@
         >
           <div :ref="'divs' + index" :class="{ 'activevlass': activeclass == index }">
 
-            <img v-if="item.status" width="210px" height="116px" :src="item.coverUrl" @click="deviceNodeClick(item, index)">
-            <img v-else width="210px" height="116px" src="@/assets/images/device_offline.png">
+            <img v-if="item.status" style=" width:210px; height:116px;" :src="item.coverUrl" @click="deviceNodeClick(item, index)">
+            <img v-else style=" width:210px; height:116px;" src="@/assets/images/device_offline.png">
             <i class="el-icon-upload" />
             <i :class="{ 'el-icon-star-off': !item.starFlag, 'el-icon-star-on': item.starFlag }" @click="starDevice(item, index)" />
             <span>{{ item.name }}</span>
@@ -115,7 +115,8 @@ export default {
       showmessage: true,
       switcharr: [],
       dropdownlist: [{ name: '全部', com: 'a' }, { name: '在线状态', com: 'b', type: true }, { name: '在线', com: 'c' }, { name: '离线', com: 'd' }, { name: '云储存', com: 'e', type: true }, { name: '已开通', com: 'f' }, { name: '未开通', com: 'g' }],
-      iconindex: -1 // 图标索引
+      iconindex: -1, // 图标索引
+      devicestatus: null // 设备状态(在线/离线)
     }
   },
   computed: {
@@ -167,17 +168,18 @@ export default {
   methods: {
     filtertype(command) {
       if (command == 'a') {
-        console.log(this.DeviceImagelistcopy)
-        this.DeviceImagelist = this.DeviceImagelistcopy
+        this.deviceListPageNum = 1
+        this.devicestatus = null
+        this.LoadDeviceByOrgId()
       } else if (command == 'c') { // 在线
         // 重新拉取
         this.deviceListPageNum = 1
         this.LoadDeviceByOrgId({ type: true })
-        console.log(this.DeviceImagelist)
+        this.devicestatus = 'true'
       } else if (command == 'd') { // 离线
         this.deviceListPageNum = 1
         this.LoadDeviceByOrgId({ type: false })
-        console.log(this.DeviceImagelist)
+        this.devicestatus = 'false'
       }
     },
     dragstart(ev, item) {
@@ -232,8 +234,13 @@ export default {
     },
     loadMoreDevice() {
       this.loadings = true
-
-      this.LoadDeviceByOrgId()
+      if (this.devicestatus == 'true') {
+        this.LoadDeviceByOrgId({ type: true })
+      } else if (this.devicestatus == 'false') {
+        this.LoadDeviceByOrgId({ type: false })
+      } else {
+        this.LoadDeviceByOrgId()
+      }
     },
 
     // 滚动到顶部
@@ -262,24 +269,21 @@ export default {
       }
       if (this.deviceListPageNum == 1) {
         this.DeviceImagelist = []
-        this.DeviceImagelistcopy = []
       }
 
       listPageDevice(param).then((ret) => {
         this.loadings = false
         this.deviceListPageNum++ // 成功，加1
-        // console.log(ret)
         this.deviceListFinished = ret.finish
         const deviceList = (ret.records || [])
         if (deviceList.length == 0 || ret.finish == true) {
           this.btninner = '没有更多'
           this.disbtn = true
+        } else {
+          this.btninner = '加载更多'
+          this.disbtn = false
         }
-        deviceList.forEach(obj => {
-          obj.coverUrl = './assets/images/bgo.jpg'
-        })
         this.DeviceImagelist = this.DeviceImagelist.concat(deviceList)
-        this.DeviceImagelistcopy = this.DeviceImagelistcopy.concat(deviceList)
       }).catch(() => {
       })
         .then(() => {
@@ -427,7 +431,7 @@ export default {
 }
 
 /* 整个滚动条 */
-::-webkit-scrollbar {
+.infinite-list-wrapper ::-webkit-scrollbar {
   /* 对应纵向滚动条的宽度 */
   width: 4px;
   /* 对应横向滚动条的宽度 */
@@ -435,13 +439,13 @@ export default {
 }
 
 /* 滚动条上的滚动滑块 */
-::-webkit-scrollbar-thumb {
+.infinite-list-wrapper ::-webkit-scrollbar-thumb {
   background-color: #666768;
   border-radius: 32px;
 }
 
 /* 滚动条轨道 */
-::-webkit-scrollbar-track {
+.infinite-list-wrapper ::-webkit-scrollbar-track {
   background-color: #2d2d2e;
   border-radius: 32px;
   // margin-right: 10px;

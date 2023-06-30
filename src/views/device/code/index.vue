@@ -219,7 +219,16 @@
                 placeholder="请输入设备名称"
               />
             </div>
-
+            <div style="margin-top: 20px; font-size: 17px; margin-left: 20%">
+              *设备型号
+              <el-input
+                v-model="form.model"
+                style="width: 60%; marginright: 10px"
+                clearable
+                size="small"
+                placeholder="请输入设备型号"
+              />
+            </div>
             <div
               style="
                 margin-top: 20px;
@@ -761,13 +770,12 @@
       width="50%"
     >
       <div class="importdevice">
-        <div class="title">1. 下载导入模板</div>
+        <div class="title" @click="downtemplate">1. 下载导入模板</div>
         <div class="imp-info">按照要求完善表格内容</div>
         <el-button
           type="primary"
           icon="el-icon-download"
-          @click="btn(data)"
-        >下载模板表格</el-button>
+        ><a href="https://36.133.152.103:31012/deviceTemplate.xlsx" download>下载导入模板</a></el-button>
       </div>
 
       <div
@@ -784,13 +792,12 @@
           drag
           :action="uploadurl()"
           :multiple="false"
-          :on-success="uploadsuccess"
           style="margin-left: 22%"
           :show-file-list="false"
-          :on-change="handleExcel"
-          accept="'.xlsx','.xls'"
+          accept=".xls,.xlsx,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
           :auto-upload="true"
           :headers="headers"
+          :before-upload="conversionfile"
         >
           <i class="el-icon-upload" />
           <div class="el-upload__text" style="font-weight: 900">
@@ -834,25 +841,19 @@ import { listPageDevice, getInfoParameter, getInfo } from '@/api/system/device'
 
 import {
   listOrg,
-  getOrg,
-  delOrg,
-  addOrg,
-  updateOrg,
   deldevice,
   treeselect,
   orginfoAndSubOrgInfo,
-  getIndex,
   getInfos
 } from '@/api/system/org'
 import Map from '@/components/Map/index'
 import {
-  getInfoserve,
+
   editdevicename,
-  deletedevicename
+  exportDevice
 } from '@/api/system/device'
 import { getToken } from '@/utils/auth'
 import { equipmentInformationEditing } from '@/api/device/device.js'
-import { listRole } from '@/api/system/role'
 import { dealTree } from '@/utils/deal-tree'
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
@@ -1094,7 +1095,8 @@ export default {
           !this.form.connetType ||
           !this.form.deviceSource ||
           !this.formaddress ||
-          !this.form.division
+          !this.form.division ||
+          !this.form.model
         )
       }
     },
@@ -1134,19 +1136,30 @@ export default {
   },
   methods: {
     uploadurl() {
-      return process.env.VUE_APP_BASE_API + '/jxict-project-sso/org/import'
+      return process.env.VUE_APP_BASE_API + '/jxict-project-sso/device/import'
     },
-    // 文件导入成功的回调
-    uploadsuccess(response, file, fileList) {
-      console.log(response, file, fileList)
+    conversionfile(file) {
+      console.log(file)
+      if (file.size / 1024 / 1024 > 2) {
+        this.$message({
+          type: 'warning',
+          message: '文件不能大于2M'
+        })
+        return false
+      }
+      const isXls = file.type === 'application/vnd.ms-excel'
+      const isXlsx =
+        file.type ===
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      if (!isXls && !isXlsx) {
+        this.$message.error('只支持.xls,.xlsx文件')
+      }
+      return isXls || isXlsx
     },
-
-    // 导入表格
-    async handleExcel(file) {},
 
     // 导出文件
     async exporttableinfo() {
-      const res = await getInfos(this.currentSelectedOrgId)
+      const res = await exportDevice()
 
       const name = this.currentSelectedOrgName
       // 支持IE浏览器
@@ -1232,11 +1245,18 @@ export default {
 
       this.mapDialog = true
       this.$nextTick(() => {
-        var point = new BMap.Point(longitude, latitude) // 创建点坐标
-        this.$refs.map.map.centerAndZoom(point, 15)
-        var point1 = new BMap.Point(longitude, latitude)
-        var marker = new BMap.Marker(point1) // 创建标注
-        this.$refs.map.map.addOverlay(marker) // 将标注添加到地图中
+        if (!longitude || !latitude) {
+          longitude = 115.858093
+          latitude = 28.697996
+          var point = new BMap.Point(longitude, latitude) // 创建点坐标
+          this.$refs.map.map.centerAndZoom(point, 15)
+        } else {
+          var point = new BMap.Point(longitude, latitude) // 创建点坐标
+          this.$refs.map.map.centerAndZoom(point, 15)
+          var point1 = new BMap.Point(longitude, latitude)
+          var marker = new BMap.Marker(point1) // 创建标注
+          this.$refs.map.map.addOverlay(marker) // 将标注添加到地图中
+        }
       })
     },
     async updataAddressAndLlongLat(param) {

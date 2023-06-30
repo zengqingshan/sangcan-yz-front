@@ -6,9 +6,10 @@
         <span>机构人员管理</span>
         <el-popover placement="bottom-end" width="140" trigger="hover">
           <div class="unloadup">
-            <span style="margin-bottom: 18px" @click="dialogVisible = true"
-              >机构人员批量导入</span
-            >
+            <span
+              style="margin-bottom: 18px"
+              @click="dialogVisible = true"
+            >机构人员批量导入</span>
             <span @click="exportlist">机构人员列表导出</span>
           </div>
           <span slot="reference" class="left-right">导入/导出</span>
@@ -68,8 +69,7 @@
                     class="ellipsis"
                     style="user-select: none; margin-left: 4px"
                     :title="node.label"
-                    >{{ node.label }}</span
-                  >
+                  >{{ node.label }}</span>
                 </el-tooltip>
                 <el-popover
                   placement="right"
@@ -79,14 +79,11 @@
                 >
                   <div class="prover">
                     <el-button @click="handleAddOrg">
-                      <i class="el-icon-plus" /> 修改组织名称</el-button
-                    >
+                      <i class="el-icon-plus" />添加下级组织 </el-button>
                     <el-button @click="handleEditOrg(data)">
-                      <i class="el-icon-edit" /> 添加下级组织</el-button
-                    >
+                      <i class="el-icon-edit" /> 修改组织名称 </el-button>
                     <el-button @click="handleDeleteOrg(data)">
-                      <i class="el-icon-delete-solid" />移动到</el-button
-                    >
+                      <i class="el-icon-delete-solid" />删除</el-button>
                   </div>
                   <!-- 1 -->
                   <i slot="reference" class="el-icon-more" />
@@ -124,9 +121,11 @@
         <div style="margin-bottom: 10px; color: black">
           按照要求完善表格内容
         </div>
-        <el-button type="primary" icon="el-icon-download" @click="btn(data)"
-          >下载模板表格</el-button
-        >
+        <el-button
+          type="primary"
+          icon="el-icon-download"
+          @click="downtemplate(data)"
+        >下载模板表格</el-button>
       </div>
 
       <div
@@ -145,11 +144,12 @@
           multiple
           style="margin-left: 22%"
           :show-file-list="false"
-          accept="'.xlsx','.xls'"
+          accept=".xls,.xlsx,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
           :auto-upload="true"
           :headers="headers"
-          :on-success="importsuccess"
+          :before-upload="conversionfile"
         >
+
           <!-- <el-button size="mini" type="primary">导入</el-button> -->
           <i class="el-icon-upload" />
           <div class="el-upload__text" style="font-weight: 900">
@@ -230,11 +230,12 @@
             size="mini"
             style="margin-top: 0.4%"
             @click="handleQuery"
-            >搜索</el-button
-          >
-          <el-button icon="el-icon-refresh" size="mini" @click="resetQuery"
-            >重置</el-button
-          >
+          >搜索</el-button>
+          <el-button
+            icon="el-icon-refresh"
+            size="mini"
+            @click="resetQuery"
+          >重置</el-button>
 
           <el-form-item style="float: right; margin-top: 0.4%">
             <!-- <el-button type="primary" plain icon="el-icon-plus" size="small" @click="handleAddOrg">添加监控节点</el-button>
@@ -245,8 +246,7 @@
               icon="el-icon-plus"
               size="mini"
               @click="handleAddUser"
-              >新增人员</el-button
-            >
+            >新增人员</el-button>
           </el-form-item>
         </el-form>
 
@@ -319,16 +319,14 @@
                   type="text"
                   icon="iconfont icon-pen"
                   @click="handleUpdateUser(scope.row)"
-                  ><span class="text">编辑</span></el-button
-                >
+                ><span class="text">编辑</span></el-button>
                 <el-button
                   v-hasPermi="['system:user:remove']"
                   size="small"
                   type="text"
                   icon="iconfont icon-delete"
                   @click="handleDeleteUser(scope.row)"
-                  ><span class="text">删除</span></el-button
-                >
+                ><span class="text">删除</span></el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -458,7 +456,7 @@
 </template>
 
 <script>
-import "font-awesome/css/font-awesome.css";
+import 'font-awesome/css/font-awesome.css'
 import {
   listUser,
   getUser,
@@ -466,9 +464,9 @@ import {
   addUser,
   updateUser,
   resetUserPwd,
-  batchDelUser,
-} from "@/api/system/user";
-import $ from "jquery";
+  batchDelUser
+} from '@/api/system/user'
+import $ from 'jquery'
 import {
   listOrg,
   getOrg,
@@ -479,53 +477,53 @@ import {
   treeselect,
   orginfoAndSubOrgInfo,
   getIndex,
-  ppt,
-} from "@/api/system/org";
-import { getToken } from "@/utils/auth";
-import { listRole } from "@/api/system/role";
-import { dealTree } from "@/utils/deal-tree";
-import Treeselect from "@riophae/vue-treeselect";
-import "@riophae/vue-treeselect/dist/vue-treeselect.css";
-import Searchjigou from "./searchjigou.vue";
+  ppt
+} from '@/api/system/org'
+import { getToken } from '@/utils/auth'
+import { listRole } from '@/api/system/role'
+import { dealTree } from '@/utils/deal-tree'
+import Treeselect from '@riophae/vue-treeselect'
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+import Searchjigou from './searchjigou.vue'
 export default {
-  name: "User",
+  name: 'User',
   components: { Treeselect, Searchjigou },
   data() {
     return {
-      headers: { Authorization: "Bearer " + getToken() }, // 导入文件头
+      headers: { Authorization: 'Bearer ' + getToken() }, // 导入文件头
       showmore: false,
-      value: "", // 下拉框的值
+      value: '', // 下拉框的值
       options: [
         {
-          value: "选项1",
-          label: "全部人员角色",
-        },
+          value: '选项1',
+          label: '全部人员角色'
+        }
       ],
       showSearchRes: false,
       orgDlgOpen: false,
       orgDlgEditFlag: false,
-      currentSelectedOrgName: "",
+      currentSelectedOrgName: '',
       currentTotalNum: undefined,
       treeProps: {
         label: (data, node) => {
-          var label = data.name;
+          var label = data.name
 
-          return label;
+          return label
         },
         isLeaf: (data, node) => {
-          return this.treeLeaf(data);
+          return this.treeLeaf(data)
         },
         disabled: (data, node) => {
-          return this.treeLeaf(data);
-        },
+          return this.treeLeaf(data)
+        }
       },
 
-      q: "", // 左侧搜索框的值
-      activeTab: "dev",
+      q: '', // 左侧搜索框的值
+      activeTab: 'dev',
       queryDevTreeDataList: [], // 树形组件的数据
       queryDevTreeLoading: false, // 树形组件loading
       defExpandDevs: [], // 默认展开
-      activeName1: "first",
+      activeName1: 'first',
       showTree: true,
       devLevelFilter: false,
       treeLoading: false,
@@ -542,13 +540,13 @@ export default {
       dialogFormVisible: false,
       dialogVisible: false,
       form: {
-        name: "",
-        date1: "",
-        date2: "",
+        name: '',
+        date1: '',
+        date2: '',
         delivery: false,
         type: [],
-        resource: "",
-        desc: "",
+        resource: '',
+        desc: ''
       },
       // 显示搜索条件
       showSearch: true,
@@ -558,30 +556,30 @@ export default {
       userList: null,
       userList1: [],
       // 弹出层标题
-      title: "",
-      orgTitle: "",
+      title: '',
+      orgTitle: '',
       // 机构树选项
       orgOptions: undefined,
       // 是否显示弹出层
       open: false,
-      pptvs: "",
+      pptvs: '',
       // 机构名称
       orgName: undefined,
       // 角色选项
       roleOptions: [],
       // 表单参数
       form1: {
-        phone: "", // 导出弹窗的电话
-        codes: "", // 导出弹窗验证码
+        phone: '', // 导出弹窗的电话
+        codes: '' // 导出弹窗验证码
       },
       orgForm: {
         id: undefined,
         parentId: undefined,
-        name: undefined,
+        name: undefined
       },
       defaultProps: {
-        children: "children",
-        label: "label",
+        children: 'children',
+        label: 'label'
       },
       // 查询参数
       queryParams: {
@@ -590,7 +588,7 @@ export default {
         userName: undefined,
         status: undefined,
         orgId: undefined,
-        roleId: undefined,
+        roleId: undefined
       },
       // 列信息
       columns: [
@@ -599,159 +597,156 @@ export default {
         { key: 2, label: `用户姓名`, visible: true },
         { key: 3, label: `机构`, visible: true },
         { key: 4, label: `手机号码`, visible: true },
-        { key: 5, label: `创建时间`, visible: true },
+        { key: 5, label: `创建时间`, visible: true }
       ],
       orgRules: {
         parentId: [
           {
             required: true,
-            message: "上级机构不能为空",
-            trigger: "blur",
-          },
+            message: '上级机构不能为空',
+            trigger: 'blur'
+          }
         ],
         name: [
           {
             required: true,
-            message: "机构名称不能为空",
-            trigger: "blur",
-          },
-        ],
+            message: '机构名称不能为空',
+            trigger: 'blur'
+          }
+        ]
       },
       // 表单校验
       rules: {
         userName: [
           {
             required: true,
-            message: "用户名称不能为空",
-            trigger: "blur",
+            message: '用户名称不能为空',
+            trigger: 'blur'
           },
           {
-            pattern: /[a-zA-Z0-9\u4e00-\u9fa5_-]{4,16}$/,
-            message: "请输入正确的用户名",
-            trigger: "blur",
-          },
+            pattern: /^(?:(?:\+|00)86)?1[3-9]\d{9}$/,
+            message: '请输入正确的用户名',
+            trigger: 'blur'
+          }
         ],
         cnName: [
           {
             required: true,
-            message: "用户姓名不能为空",
-            trigger: "blur",
-          },
-        ],
-      },
-    };
+            message: '用户姓名不能为空',
+            trigger: 'blur'
+          }
+        ]
+      }
+    }
   },
   computed: {
     showQueryDevTree() {
-      if (this.q.length == 0) return true;
-      if (this.activeTab == "dev" && this.devLevelFilter) {
+      if (this.q.length == 0) return true
+      if (this.activeTab == 'dev' && this.devLevelFilter) {
         // this.queryDevTreeLoading = true
-        return true;
+        return true
       }
       if (this.showSearchRes) {
-        return false;
+        return false
       }
-      return true;
+      return true
     },
     queryDevTreeEmptyText() {
-      return this.queryDevTreeLoading ? "搜索中..." : " ";
+      return this.queryDevTreeLoading ? '搜索中...' : ' '
     },
     treeEmptyText() {
-      return this.treeLoading ? "加载中..." : "未查询到组织机构";
-    },
+      return this.treeLoading ? '加载中...' : '未查询到组织机构'
+    }
   },
   watch: {
     // 根据名称筛选机构树
     orgName(val) {
-      this.$refs.tree.filter(val);
-    },
+      this.$refs.tree.filter(val)
+    }
   },
   created() {
-    this.getRoleList();
-    this.currentSelectedOrgName = sessionStorage.getItem("tenantName");
+    this.getRoleList()
+    this.currentSelectedOrgName = sessionStorage.getItem('tenantName')
 
-    this.queryParams.orgId = undefined;
-    this.getTreeselect();
+    //
+    this.getTreeselect()
 
-    this.getRoleList();
+    // this.getRoleList();
   },
   methods: {
-    uploadurl() {
-      return process.env.VUE_APP_BASE_API + "/jxict-project-sso/org/import";
-    },
-    importsuccess(response, file, filelist) {
-      // 导入成功的回调
-    },
-    // 导入表格
-    handleExcel(file) {
-      const formData = new FormData(); // 声明一个FormDate对象
-      formData.append("file", file.raw); // 把文件信息放入对象中
+    // 下载模板表格
+    downtemplate() {
 
-      // 调用后台导入的接口
-      getIndex(formData)
-        .then((res) => {
-          if (res.Status && res.Data) {
-            this.$message.success("导入成功");
-            this.getList(); // 导入表格之后可以获取导入的数据渲染到页面，此处的方法是获取导入的数据
-          } else {
-            this.$message.error(res.Message);
-          }
+    },
+    uploadurl() {
+      return process.env.VUE_APP_BASE_API + '/jxict-project-sso/org/import'
+    },
+    conversionfile(file) {
+      console.log(file)
+      if (file.size / 1024 / 1024 > 2) {
+        this.$message({
+          type: 'warning',
+          message: '文件不能大于2M'
         })
-        .catch((err) => {
-          that.$message({
-            type: "error",
-            message: "导入失败",
-          });
-        });
+        return false
+      }
+      const isXls = file.type === 'application/vnd.ms-excel'
+      const isXlsx =
+        file.type ===
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      if (!isXls && !isXlsx) {
+        this.$message.error('只支持.xls,.xlsx文件')
+      }
+      return isXls || isXlsx
     },
 
     // 人员导出
     exportlist() {
-      var that = this;
+      var that = this
       getInfos(this.queryParams.orgId).then((res) => {
         setTimeout(() => {
-          that.download0(res, "人员列表导出表.xlsx");
-        }, 300);
-      });
+          that.download0(res, '人员列表导出表.xlsx')
+        }, 300)
+      })
     },
     download0(data, fileName) {
       // 创建 blob
-      const blob = new Blob([data], { type: "application/vnd.ms-excel" });
+      const blob = new Blob([data], { type: 'application/vnd.ms-excel' })
 
       // 创建 href 超链接，点击进行下载
-      window.URL = window.URL || window.webkitURL;
-      const href = URL.createObjectURL(blob);
-      const downA = document.createElement("a");
-      downA.href = href;
-      downA.download = fileName;
-      downA.click();
+      window.URL = window.URL || window.webkitURL
+      const href = URL.createObjectURL(blob)
+      const downA = document.createElement('a')
+      downA.href = href
+      downA.download = fileName
+      downA.click()
       // 销毁超连接
-      window.URL.revokeObjectURL(href);
+      window.URL.revokeObjectURL(href)
     },
 
     searchedOrgClick(orgId, orgName) {
-      this.queryParams.current = 1;
-      this.queryParams.orgId = orgId;
-      this.getList();
+      this.queryParams.current = 1
+      this.queryParams.orgId = orgId
+      this.getList()
     },
     searchOrg() {
-      const queryParams = { name: this.q };
+      const queryParams = { name: this.q }
       listOrg(queryParams).then((res) => {
-        this.$refs.searchJigou.heightLight(res, this.q);
-        this.$refs.searchJigou.orgList = res;
+        this.$refs.searchJigou.heightLight(res, this.q)
+        this.$refs.searchJigou.orgList = res
         this.$nextTick(() => {
-          this.showSearchRes = true;
-        });
-      });
+          this.showSearchRes = true
+        })
+      })
     },
     clearSearch() {
       this.$nextTick(() => {
-        this.showSearchRes = false;
-      });
+        this.showSearchRes = false
+      })
     },
     orgRefresh() {},
     cancelOrgInfoDlg() {
-      this.orgDlgOpen = false;
+      this.orgDlgOpen = false
     },
 
     treeLeaf(data) {
@@ -760,110 +755,112 @@ export default {
         data.children != null &&
         data.children.length == 0
       ) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
     },
 
     // tree
     treeLoad(node, resolve) {
-      let orgId;
+      let orgId
       if (node.data) {
-        orgId = node.data.id;
+        orgId = node.data.id
       }
       orginfoAndSubOrgInfo({ orgId: orgId })
         .then((ret) => {
           if (node.level == 0) {
-            this.defExpandDevs.push(ret.id);
-            this.getList();
+            this.defExpandDevs.push(ret.id)
+            this.getList()
           }
-          let orgList = [];
+          let orgList = []
           if (node.level == 0) {
-            orgList.push(ret);
+            orgList.push(ret)
           } else {
-            orgList = ret.children || [];
+            orgList = ret.children || []
           }
 
           if (!node.level && !this.devLevelFilter) {
             if (orgList.length > 100) {
-              this.devLevelFilter = true;
+              this.devLevelFilter = true
             } else if (orgList.length > 1000) {
-              this.devLevelFilter = true;
+              this.devLevelFilter = true
             }
           }
 
-          resolve(orgList);
+          resolve(orgList)
           if (this.q && !node.matched) {
-            this.$refs["devTree"].filter(this.q);
+            this.$refs['devTree'].filter(this.q)
           }
         })
         .catch(() => {})
         .then(() => {
           if (
             this.q &&
-            !this.q.endsWith(" ") &&
+            !this.q.endsWith(' ') &&
             this.q.split(/\s+/).length === node.level &&
             this.devLevelFilter
           ) {
-            this.q += " ";
-            this.$refs["q"].focus();
+            this.q += ' '
+            this.$refs['q'].focus()
           }
-        });
+        })
     },
 
     switchTab(tab) {
       if (this.activeTab != tab) {
-        this.q = "";
+        this.q = ''
         this.$nextTick(() => {
-          this.activeTab = tab;
-        });
+          this.activeTab = tab
+        })
       }
     },
 
     /** 查询用户列表 */
     getList() {
-      this.loading = true;
+      this.loading = true
       listUser(this.queryParams).then((response) => {
-        this.userList = response.records;
-        this.total = response.total;
-        this.loading = false;
+        this.userList = response.records
+        this.total = response.total
+        this.loading = false
         // this.userList1 = response.records
         // this.userList1.forEach(row => {
 
         // })
-      });
+      })
     },
     /** 查询机构下拉树结构 */
     getTreeselect() {
       treeselect().then((response) => {
-        dealTree(response);
-        this.orgOptions = response;
-      });
+        dealTree(response)
+        this.orgOptions = response
+        this.queryParams.orgId = response[0].id
+        console.log(111, response)
+      })
     },
     /** 查询角色列表 */
     getRoleList() {
       listRole({}).then((response) => {
-        this.roleOptions = response;
-      });
+        this.roleOptions = response
+      })
     },
     // 筛选节点
     filterNode(value, data) {
-      if (!value) return true;
-      return data.label.indexOf(value) !== -1;
+      if (!value) return true
+      return data.label.indexOf(value) !== -1
     },
     // 节点单击事件
     handleNodeClick(data, node, c) {
-      this.queryParams.orgId = data.id;
+      this.queryParams.orgId = data.id
 
-      this.currentSelectedOrgName = data.orgName;
+      this.currentSelectedOrgName = data.orgName
 
-      this.getList();
+      this.getList()
     },
     // 取消按钮
     cancel() {
-      this.open = false;
-      this.reset();
+      this.open = false
+      this.reset()
     },
     // 表单重置
     reset() {
@@ -872,189 +869,189 @@ export default {
         orgId: undefined,
         userName: undefined,
         cnName: undefined,
-        roleId: undefined,
-      };
-      this.resetForm("form");
+        roleId: undefined
+      }
+      this.resetForm('form')
     },
     /** 搜索按钮操作 */
     handleQuery() {
-      this.queryParams.current = 1;
-      this.getList();
+      this.queryParams.current = 1
+      this.getList()
     },
     /** 重置按钮操作 */
     resetQuery() {
-      this.resetForm("queryForm");
-      this.handleQuery();
+      this.resetForm('queryForm')
+      this.handleQuery()
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map((item) => item.id);
-      this.single = selection.length != 1;
-      this.multiple = !selection.length;
+      this.ids = selection.map((item) => item.id)
+      this.single = selection.length != 1
+      this.multiple = !selection.length
     },
     resetOrgFrom() {
       this.orgForm = {
         parentId: undefined,
-        name: undefined,
-      };
+        name: undefined
+      }
     },
 
     handleAddOrg() {
-      this.orgDlgEditFlag = false;
-      this.orgDlgOpen = true;
-      this.orgTitle = "添加机构";
+      this.orgDlgEditFlag = false
+      this.orgDlgOpen = true
+      this.orgTitle = '添加机构'
 
-      this.resetOrgFrom();
+      this.resetOrgFrom()
     },
     handleEditOrg(data) {
       // 将当前点击的id传入节点里面
-      this.queryParams.orgId = data.id;
+      this.queryParams.orgId = data.id
       if (
         this.queryParams.orgId == undefined ||
         this.queryParams.orgId == null
       ) {
-        alert("请选择需要编辑的监控节点");
-        return;
+        alert('请选择需要编辑的监控节点')
+        return
       }
-      this.orgDlgEditFlag = true;
-      this.orgDlgOpen = true;
-      this.orgTitle = "编辑机构";
+      this.orgDlgEditFlag = true
+      this.orgDlgOpen = true
+      this.orgTitle = '编辑机构'
       /** 编辑按钮操作 */
-      this.resetOrgFrom();
+      this.resetOrgFrom()
       getOrg({ orgId: this.queryParams.orgId }).then((response) => {
-        this.orgForm = response;
-        this.title = "编辑机构";
-      });
+        this.orgForm = response
+        this.title = '编辑机构'
+      })
     },
     /** 新增人员按钮操作 */
     handleAddUser() {
-      this.reset();
-      this.open = true;
-      this.title = "添加用户";
+      this.reset()
+      this.open = true
+      this.title = '添加用户'
     },
     /** 编辑按钮操作 */
     handleUpdateUser(row) {
-      this.reset();
+      this.reset()
       getUser(row.id).then((response) => {
-        this.form = response;
-        dealTree(response.tenantOrgList);
-        this.orgOptions = response.tenantOrgList;
-        this.roleOptions = response.tenantRoleList;
+        this.form = response
+        dealTree(response.tenantOrgList)
+        this.orgOptions = response.tenantOrgList
+        this.roleOptions = response.tenantRoleList
 
-        this.open = true;
-        this.title = "编辑用户";
-      });
+        this.open = true
+        this.title = '编辑用户'
+      })
     },
     handleDeleteUser(row) {
-      this.$confirm("是否确认删除所选的数据项?", "警告", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
+      this.$confirm('是否确认删除所选的数据项?', '警告', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       })
         .then(() => {
           if (row && row.id) {
-            return delUser(row.id);
+            return delUser(row.id)
           } else {
-            return batchDelUser(this.ids);
+            return batchDelUser(this.ids)
           }
         })
         .then(() => {
-          this.getList();
-          this.msgSuccess("删除成功");
+          this.getList()
+          this.msgSuccess('删除成功')
         })
-        .catch(() => {});
+        .catch(() => {})
     },
 
     cancelOrgForm() {
-      this.resetOrgFrom();
-      this.orgDlgOpen = false;
+      this.resetOrgFrom()
+      this.orgDlgOpen = false
     },
     /** 提交按钮 */
-    submitOrgForm: function () {
-      this.$refs["orgForm"].validate((valid) => {
+    submitOrgForm: function() {
+      this.$refs['orgForm'].validate((valid) => {
         if (valid) {
           if (this.orgForm.id != undefined) {
             updateOrg(this.orgForm).then((response) => {
-              this.msgSuccess("编辑监控节点成功");
-              this.showTree = false;
+              this.msgSuccess('编辑监控节点成功')
+              this.showTree = false
               this.$nextTick(() => {
-                this.showTree = true;
-              });
-              this.getTreeselect();
-              this.getList();
-              this.orgDlgOpen = false;
-            });
+                this.showTree = true
+              })
+              this.getTreeselect()
+              this.getList()
+              this.orgDlgOpen = false
+            })
           } else {
             addOrg(this.orgForm).then((response) => {
-              this.msgSuccess("新增监控节点成功");
-              this.showTree = false;
+              this.msgSuccess('新增监控节点成功')
+              this.showTree = false
               this.$nextTick(() => {
-                this.showTree = true;
-              });
-              this.getTreeselect();
-              this.getList();
-              this.orgDlgOpen = false;
-            });
+                this.showTree = true
+              })
+              this.getTreeselect()
+              this.getList()
+              this.orgDlgOpen = false
+            })
           }
         }
-      });
+      })
     },
     /** 提交按钮 */
-    submitForm: function () {
-      this.$refs["form"].validate((valid) => {
+    submitForm: function() {
+      this.$refs['form'].validate((valid) => {
         if (valid) {
           if (this.form.id != undefined) {
             updateUser(this.form).then((response) => {
-              this.msgSuccess("用户信息编辑成功");
-              this.open = false;
-              this.getList();
-            });
+              this.msgSuccess('用户信息编辑成功')
+              this.open = false
+              this.getList()
+            })
           } else {
             addUser(this.form).then((response) => {
-              this.msgSuccess("新增用户信息成功");
-              this.open = false;
-              this.getList();
-            });
+              this.msgSuccess('新增用户信息成功')
+              this.open = false
+              this.getList()
+            })
           }
         }
-      });
+      })
     },
     /** 删除按钮操作 */
     handleDeleteOrg(row) {
-      this.$confirm("是否确认删除所选的数据项?", "警告", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
+      this.$confirm('是否确认删除所选的数据项?', '警告', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
       })
         .then(() => {
           // debugger
           if (row && row.orgId) {
-            const param = { orgId: row.orgId };
-            return delOrg(param);
+            const param = { orgId: row.orgId }
+            return delOrg(param)
           }
         })
         .then(() => {
-          this.showTree = false;
+          this.showTree = false
           this.$nextTick(() => {
-            this.showTree = true;
+            this.showTree = true
 
-            this.currentSelectedOrgName = sessionStorage.getItem("tenantName");
-            this.getTreeselect();
-            this.queryParams.current = 1;
-            this.queryParams.orgId = undefined;
+            this.currentSelectedOrgName = sessionStorage.getItem('tenantName')
+            this.getTreeselect()
+            this.queryParams.current = 1
+            this.queryParams.orgId = undefined
 
-            this.getList();
-            this.msgSuccess("删除成功");
-          });
+            this.getList()
+            this.msgSuccess('删除成功')
+          })
         })
-        .catch(() => {});
+        .catch(() => {})
     },
     /** 表格勾选判断 */
     selectEnable(row) {
-      return row.id !== 1;
-    },
-  },
-};
+      return row.id !== 1
+    }
+  }
+}
 </script>
 <style lang="scss" scoped>
 .el-tree > .el-tree-node {

@@ -41,8 +41,10 @@
     <div v-for="(item, index) in orgStarlist" :key="index" class="treelist">
       <treecomp :treeobj="item" @orgStarDeleteEvent="refreshOrgStarList" />
     </div>
-
-    <div v-if="orgStarFinish" class="nomore">没有更多了</div>
+    <div v-if="orgStarFinish" class="nomore">
+      <span v-if="orgStarlist.length > 0">没有更多了</span>
+      <span v-else>没有关注的机构</span>
+    </div>
     <el-button v-else type="primary" @click="loadingmoreOrgStarList">加载更多</el-button>
   </div>
 </template>

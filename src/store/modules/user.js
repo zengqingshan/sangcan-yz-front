@@ -124,23 +124,11 @@ const user = {
           localStorage.setItem('userId', user.userInfo.user.id)
           localStorage.setItem('userName', user.userName)
           setToken(res.ssoSessionId)
-		  var region = user.userInfo.tenant.region;
 	
 		  var tenantName = user.userInfo.tenant.name;
-	
-	
-		  
-		  
-		   //debugger;
-		  let preTenantName = sessionStorage.getItem("tenantName")
-		  let preRegion = sessionStorage.getItem("region")
-		  if(preTenantName == null){
-			  sessionStorage.setItem("tenantName", tenantName);
-			  sessionStorage.setItem("region", region);
-			  commit('SET_TENANT_NAME',tenantName)
-		  }else{
-			  commit('SET_TENANT_NAME',preTenantName)
-		  }
+		  sessionStorage.setItem("tenantName", tenantName);
+		  commit('SET_TENANT_NAME',tenantName)
+		
 		  
 		  sessionStorage.setItem("currentTenantUserId", user.userInfo.user.userId);
 		  sessionStorage.setItem("currentTenantId", user.userInfo.user.tenantId);

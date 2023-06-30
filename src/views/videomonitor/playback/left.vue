@@ -1,5 +1,5 @@
 <template>
-  <div class="contron-left" style="height: 100%;">
+  <div class="contron-left " style="height: 100%;">
 
     <!-- 左侧tab标签页 -->
 
@@ -391,7 +391,6 @@ export default {
       })
     },
     async editjigouinfo(data, node) {
-
       this.nodeId = node.id
       this.deviceObj = await getInfo(data.id)
 
@@ -420,7 +419,6 @@ export default {
           this.showeditvedioinfo = false
           this.numberValidateForm.name = ''
         } else {
-
           return false
         }
       })
@@ -451,6 +449,7 @@ export default {
         this.$refs.Polling.activeicon = -1
         // 投递事件，通知中间组件隐藏样式
         this.$bus.$emit('hideicon', true)
+        // this.$bus.$emit('showedit', true)
         // 投递事件，确保只在轮巡状态下分屏播放
         this.$bus.$emit('pollcontrol', true)
         // 通知middle组件播放监控
@@ -525,6 +524,7 @@ export default {
     },
     // tree
     treeLoad(node, resolve) {
+      
       if (node.level === 0) {
 		 this.treeLoadOrg(node, resolve)
       } else {
@@ -534,6 +534,8 @@ export default {
           } else {
             if (node.data.deviceNum > 0) {
               this.treeLoadDevice(node, resolve)
+            }else{
+              resolve([])
             }
           }
         }
@@ -542,7 +544,6 @@ export default {
 
     // 刷新节点
     treeNodeRefresh(node) {
-
       if (!node || !node.level) {
         this.treeRefresh()
         return
@@ -927,7 +928,7 @@ a {
 
 /* 整个滚动条 */
 
-::-webkit-scrollbar {
+.contron-left ::-webkit-scrollbar {
   /* 对应纵向滚动条的宽度 */
   width: 5px;
   /* 对应横向滚动条的宽度 */
@@ -935,7 +936,7 @@ a {
 }
 
 /* 滚动条上的滚动滑块 */
-::-webkit-scrollbar-thumb {
+.contron-left ::-webkit-scrollbar-thumb {
   background-color: #666768;
   border-radius: 32px;
   width: 3px;

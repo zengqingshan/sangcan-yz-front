@@ -133,7 +133,11 @@
         </el-row>
       </el-form>
       <div>
-        <el-button type="success" plain @click="openNodeManagement"
+        <el-button
+          type="success"
+          icon="el-icon-chat-dot-square"
+          plain
+          @click="openNodeManagement"
           >短信内容管理</el-button
         >
       </div>

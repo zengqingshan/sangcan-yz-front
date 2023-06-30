@@ -168,6 +168,7 @@
       :visible.sync="dialogVisible"
       width="70%"
       append-to-body
+      top="2%"
     >
       <div class="dia">
         <div class="dia-left">
@@ -180,21 +181,11 @@
         </div>
       </div>
 
-      <div class="selectinput">
-        <el-select v-model="values" placeholder="请选择">
-          <el-option
-            v-for="(item, index) in disivions"
-            :key="index"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
-      </div>
       <Map
         ref="map"
         mapid="settingDlgMap"
         :type="type"
-        :newStyle="newStyle"
+        :new-style="newStyle"
         @click-marker-coor="clickMarkerCoor"
       />
       <span slot="footer" class="dialog-footer">
@@ -291,34 +282,6 @@ export default {
       },
       coor: [],
       type: ["cluster", "geocoder"], // 显示地图类型
-
-      values: "",
-      disivions: [
-        {
-          label: "北京市",
-          value: "北京市",
-        },
-        {
-          label: "天津市",
-          value: "天津市",
-        },
-        {
-          label: "河北省",
-          value: "河北省",
-        },
-        {
-          label: "山西省",
-          value: "山西省",
-        },
-        {
-          label: "内蒙古自治区",
-          value: "内蒙古自治区",
-        },
-        {
-          label: "辽宁省",
-          value: "辽宁省",
-        },
-      ],
       valueright: null,
       valueleft: null,
       oldvalueleft: null,
@@ -522,5 +485,9 @@ export default {
   z-index: 11;
   right: 26px;
   top: 122px;
+}
+::v-deep .el-dialog {
+  overflow: auto;
+  max-height: 90vh;
 }
 </style>

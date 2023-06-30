@@ -7,6 +7,7 @@
         label-width="100px"
         class="demo-ruleForm"
       >
+
         <el-form-item label="告警时间" class="times">
           <el-form-item style="margin-right: 5px">
             <el-date-picker
@@ -44,16 +45,19 @@
             <el-option label="否" :value="false" />
           </el-select>
         </el-form-item>
-        <el-button
-          icon="el-icon-search"
-          type="primary"
-          style="margin-left: 5px"
-          @click="searchlist"
-          >确定</el-button
-        >
-        <el-button icon="el-icon-refresh-right" @click="restform"
-          >重置</el-button
-        >
+        <el-form-item>
+          <el-button
+            icon="el-icon-search"
+            type="primary"
+            style="margin-left: 5px"
+            @click="searchlist"
+          >确定</el-button>
+          <el-button
+            icon="el-icon-refresh-right"
+            @click="restform"
+          >重置</el-button>
+        </el-form-item>
+
       </el-form>
     </div>
     <div class="right-bom">
@@ -63,18 +67,16 @@
           :disabled="disposeing"
           type="success"
           plain
-          icon="el-icon-s-promotion"
+          icon="el-icon-document-checked"
           @click="disposerow"
-          >标记为已处理</el-button
-        >
+        >标记为已处理</el-button>
         <el-button
           class="importclass"
           type="warning"
           plain
           icon="el-icon-upload2"
           @click="exportlist"
-          >导出</el-button
-        >
+        >导出</el-button>
       </div>
       <div class="bom-b" />
     </div>
@@ -86,11 +88,11 @@
         style="width: 100%"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55" />
-        <el-table-column label="告警时间" width="180">
+        <el-table-column type="selection" />
+        <el-table-column label="告警时间" min-width="120px">
           <template slot-scope="scope">{{ scope.row.warnTime }}</template>
         </el-table-column>
-        <el-table-column label="所在区域" width="260">
+        <el-table-column label="所在区域" min-width="200px">
           <template slot-scope="scope">
             <el-tooltip
               class="item"
@@ -104,12 +106,12 @@
             </el-tooltip>
           </template>
         </el-table-column>
-        <el-table-column label="事件类型" show-overflow-tooltip width="80">
+        <el-table-column label="事件类型" show-overflow-tooltip>
           <template slot-scope="scope">{{
             warntype(scope.row.warnType)
           }}</template>
         </el-table-column>
-        <el-table-column label="是否触发短信" show-overflow-tooltip width="120">
+        <el-table-column label="是否触发短信" show-overflow-tooltip>
           <template slot-scope="scope">{{
             inorsms(scope.row.isSendSms)
           }}</template>
@@ -118,28 +120,26 @@
           prop="status"
           label="事件处理状态"
           show-overflow-tooltip
-          width="120"
         >
-          <template slot-scope="scope"
-            ><span :class="{ thingtype: scope.row.status == 0 }">{{
-              statutype(scope.row.status)
-            }}</span></template
-          >
+          <template
+            slot-scope="scope"
+          ><span :class="{ thingtype: scope.row.status == 0 }">{{
+            statutype(scope.row.status)
+          }}</span></template>
         </el-table-column>
         <el-table-column
           prop="handleInfo"
           label="处理意见"
           show-overflow-tooltip
-          width="200"
         />
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
               :disabled="scope.row.warnType == 1"
               type="text"
+              icon="el-icon-tickets"
               @click="handleEdit(scope.row)"
-              >详情</el-button
-            >
+            >详情</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -149,18 +149,9 @@
       :total="listtotal"
       :page.sync="ruleForm.current"
       :limit.sync="ruleForm.pageSize"
-      @pagination="getwarninglist"
       :hide-on-single-page="false"
+      @pagination="getwarninglist"
     />
-    <!-- <el-pagination
-      background
-      :page-sizes="[15, 20, 25, 30]"
-      :page-size="100"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="listtotal"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-    /> -->
     <!-- 详情弹窗 -->
     <el-dialog title="事件详情" :visible.sync="showinfo" width="50%">
       <div class="info">
@@ -169,36 +160,55 @@
             <span>识别信息</span>
             <div class="leftinfo">
               <div class="info-img">
-                <img :src="imgurl" style="width: 150px; height: 210px" alt="" />
-                <img
-                  src="../../../assets//images/ball.png"
-                  style="width: 150px; height: 210px"
+                <el-image
+                  :src="captureBigImage"
+                  style="width: 50%; height: 210px"
+                >
+                  <div slot="error" class="image-slot">
+                    <img
+                      src="../../../assets/images/300.jpg"
+                      style="width: 100%; height: 210px"
+                    >
+                  </div>
+                </el-image>
+                <el-image
+                  :src="imgurl"
+                  style="width: 50%; height: 210px"
                   alt=""
-                />
+                >
+                  <div slot="error" class="image-slot">
+                    <img
+                      src="../../../assets/images/300.jpg"
+                      style="width: 100%; height: 210px"
+                    >
+                  </div>
+                </el-image>
                 <div class="vocers">
                   <div>
                     <span>相似度</span>
-                    <h4>{{ listinfo.recognitionRate * 100 || 0 }}%</h4>
+                    <h4>
+                      {{ (listinfo.recognitionRate * 100).toFixed(2) || 0 }}%
+                    </h4>
                   </div>
                 </div>
               </div>
               <div class="info-msg">
                 <p>识别结果</p>
-                <div v-if="listinfo.recognitionRate" class="result">
+                <div v-if="listinfo.student" class="result">
                   <div>
-                    <span style="margin-right: 5px">姓名:</span
-                    ><span>{{ listinfo.student.studentName || "" }}</span>
+                    <span style="margin-right: 5px">姓名:</span>
+                    <span>{{ listinfo.student.studentName || "" }}</span>
                   </div>
                   <div>
-                    <span style="margin-right: 5px">姓别:</span
-                    ><span>{{ listinfo.student.sex || "" }}</span>
+                    <span style="margin-right: 5px">姓别:</span><span>{{
+                      listinfo.student.sex == 0 ? "男" : "女" || ""
+                    }}</span>
                   </div>
                   <div>
-                    <span style="margin-right: 5px">学校:</span
-                    ><span
-                      >{{ listinfo.student.studentOrg.orgName }} /
-                      {{ listinfo.student.studentClass || "" }}</span
-                    >
+                    <span style="margin-right: 5px">学校:</span><span
+                      v-if="listinfo.student.studentOrg"
+                    >{{ listinfo.student.studentOrg.orgName }} /
+                      {{ listinfo.student.studentClass || "" }}</span>
                   </div>
                 </div>
                 <p v-else style="margin: 0">未识别到相似度较高的学生</p>
@@ -223,7 +233,9 @@
                 </p>
                 <p v-if="listinfo.recognitionRate">
                   <span>短信内容:</span>
-                  <span>{{ listinfo.smsLog.sendContent || "" }}</span>
+                  <span v-if="listinfo.smsLog">{{
+                    listinfo.smsLog.sendContent || ""
+                  }}</span>
                 </p>
               </div>
               <div class="device">
@@ -234,8 +246,12 @@
                   content="点击全屏"
                   placement="top-start"
                 >
-                  <span class="span" style="" @click="windowfullscreen"
-                    ><i class="el-icon-full-screen"
+                  <span
+                    class="span"
+                    style=""
+                    @click="windowfullscreen"
+                  ><i
+                    class="el-icon-full-screen"
                   /></span>
                 </el-tooltip>
               </div>
@@ -256,6 +272,7 @@
               <el-select
                 v-model="numberValidateForm.thingactive"
                 placeholder="请选择事件处理状态"
+                disabled
               >
                 <el-option label="已处理" value="1" />
                 <el-option label="未处理" value="0" />
@@ -265,6 +282,7 @@
               <el-input
                 v-model.number="numberValidateForm.msg"
                 autocomplete="off"
+                disabled
               />
             </el-form-item>
           </el-form>
@@ -272,233 +290,250 @@
       </div>
       <span slot="footer" class="dialog-footer">
         <el-button @click="showinfo = false">取 消</el-button>
-        <el-button type="primary">确 定</el-button>
+        <el-button type="primary" @click="showinfo = false">确 定</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import FileSaver from "file-saver";
-import { previewPhotos } from "@/api/studentManagement";
+import FileSaver from 'file-saver'
+import { previewPhotos } from '@/api/studentManagement'
 import {
+  previewImage,
   studentmessage,
   handlerwarn,
   msginfo,
-  exportStudentInfo,
-} from "@/api/linkage/warning";
-import VideoPlayers from "../../../views/videomonitor/playback/components/videosAllVideos.vue";
+  exportStudentInfo
+} from '@/api/linkage/warning'
+import VideoPlayers from '../../../views/videomonitor/playback/components/videosAllVideos.vue'
 export default {
   components: {
-    VideoPlayers,
+    VideoPlayers
   },
   data() {
     return {
       disposeing: false,
       ruleForm: {
-        startTime: "",
-        endTime: "", // 时间
-        address: "", // 地区
-        warnType: "", // 处理状态
-        isSendSms: "", // 短信
+        startTime: '',
+        endTime: '', // 时间
+        address: '', // 地区
+        warnType: '', // 处理状态
+        isSendSms: '', // 短信
         pageSize: 10,
         current: 1,
-        status: "",
+        status: ''
       },
       tableData: [],
       multipleSelection: [], // 表格选中项
       showinfo: false, // 详情弹窗
       numberValidateForm: {
-        thingactive: "",
-        msg: "",
+        thingactive: '',
+        msg: ''
       },
       listtotal: 0, // 信息总数
       listinfo: {
         student: {},
-        smsLog: {},
+        smsLog: {}
       }, // 弹窗信息对象
-      imgurl: "", // 图片路径
-    };
+      imgurl: '', // 图片路径
+      captureBigImage: '',
+      testscroll: false
+    }
   },
-  watch: {},
+  watch: {
+    showinfo(newval) {
+      if (!newval) {
+        this.$refs.hlsVideoPlayer.closePlayer(0)
+      }
+    }
+  },
   created() {
-    this.getwarninglist();
+    this.getwarninglist()
   },
   methods: {
     // 导出
     async exportlist() {
-      const res = await exportStudentInfo();
-      FileSaver.saveAs(res, "学生信息表.xlsx");
+      const res = await exportStudentInfo()
+      FileSaver.saveAs(res, '学生信息表.xlsx')
     },
     // 监控框全屏
     windowfullscreen() {
-      console.log(this.isFullScreen());
-      if (this.isFullScreen()) {
+      if (this.testscroll) {
         // 判断是否全屏
-        this.exitFullscreen();
+        this.exitFullscreen()
+        this.testscroll = false
       } else {
-        const ele = document.querySelector(".device");
-        console.log(ele);
+        const ele = document.querySelector('.device')
         if (ele.requestFullscreen) {
-          ele.requestFullscreen();
+          ele.requestFullscreen()
+          console.log(11)
         } else if (ele.mozRequestFullScreen) {
-          ele.mozRequestFullScreen();
+          ele.mozRequestFullScreen()
         } else if (ele.webkitRequestFullscreen) {
-          ele.webkitRequestFullscreen();
+          ele.webkitRequestFullscreen()
         } else if (ele.msRequestFullscreen) {
-          ele.msRequestFullscreen();
+          ele.msRequestFullscreen()
         }
+        this.testscroll = true
       }
     },
     isFullScreen() {
-      const ele = document.querySelector(".device");
+      const ele = document.querySelector('.device')
       return !!(
         ele.fullscreen ||
         ele.mozFullScreen ||
         ele.webkitIsFullScreen ||
         ele.webkitFullScreen ||
         ele.msFullScreen
-      );
+      )
     },
     exitFullscreen() {
       // 退出全屏
-      const ele = document.querySelector(".device");
+      const ele = document.querySelector('.device')
       if (ele.exitFullScreen) {
-        ele.exitFullScreen();
+        ele.exitFullScreen()
       } else if (ele.mozCancelFullScreen) {
-        ele.mozCancelFullScreen();
+        ele.mozCancelFullScreen()
       } else if (ele.webkitExitFullscreen) {
-        ele.webkitExitFullscreen();
+        ele.webkitExitFullscreen()
       } else if (ele.msExitFullscreen) {
-        ele.msExitFullscreen();
+        ele.msExitFullscreen()
+        console.log(4)
+        ele.msExitFullscreen()
       }
     },
-    // handleSizeChange(val) {
-    //   this.ruleForm.pageSize = val;
-    //   this.searchlist();
-    // },
-    // handleCurrentChange(val) {
-    //   this.ruleForm.current = val;
-    //   this.searchlist();
-    // },
     // 获取告警信息
     async getwarninglist() {
-      const res = await studentmessage(this.ruleForm);
+      const res = await studentmessage(this.ruleForm)
       // this.tableData.push(...res.records);
-      this.tableData = res.records;
-      this.listtotal = res.total;
+      this.tableData = res.records
+      this.listtotal = res.total
     },
     // 处理图片
-    async chuimg(img) {
-      const res = await previewPhotos(img);
-      this.imgurl = res;
+    async chuimg(img, type) {
+      if (type === 1) {
+        const res = await previewPhotos(img)
+        this.imgurl = res
+        console.log(res)
+      } else {
+        const res = await previewImage(img)
+        this.captureBigImage = res
+      }
     },
 
     // 重置按钮
     restform() {
-      this.ruleForm.status = "";
-      this.ruleForm.startTime = "";
-      this.ruleForm.endTime = "";
-      this.ruleForm.address = "";
-      this.ruleForm.isSendSms = "";
-      this.getwarninglist();
+      this.ruleForm.status = ''
+      this.ruleForm.startTime = ''
+      this.ruleForm.endTime = ''
+      this.ruleForm.address = ''
+      this.ruleForm.isSendSms = ''
+      this.getwarninglist()
     },
     resetState() {
-      this.ruleForm.status = "";
-      this.ruleForm.startTime = "";
-      this.ruleForm.endTime = "";
-      this.ruleForm.address = "";
-      this.ruleForm.isSendSms = "";
+      this.ruleForm.status = ''
+      this.ruleForm.startTime = ''
+      this.ruleForm.endTime = ''
+      this.ruleForm.address = ''
+      this.ruleForm.isSendSms = ''
     },
     // 条件搜索
     async searchlist() {
-      const res = await studentmessage(this.ruleForm);
-      this.tableData = res.records;
-      this.listtotal = res.total;
+      const res = await studentmessage(this.ruleForm)
+      this.tableData = res.records
+      this.listtotal = res.total
     },
     // 标记为已处理
     async disposerow() {
-      const arr = [];
+      const arr = []
       this.multipleSelection.forEach((item) => {
-        arr.push(item.id);
-      });
-      await handlerwarn({ warnIds: arr, handleInfo: "已喊话处理" });
+        arr.push(item.id)
+      })
+      await handlerwarn({ warnIds: arr, handleInfo: '已喊话处理' })
       this.$message({
-        type: "success",
-        message: "已标记为已处理",
-      });
-      this.getwarninglist();
+        type: 'success',
+        message: '已标记为已处理'
+      })
+      this.getwarninglist()
     },
     toggleSelection(rows) {
       if (rows) {
         rows.forEach((row) => {
-          this.$refs.multipleTable.toggleRowSelection(row);
-        });
+          this.$refs.multipleTable.toggleRowSelection(row)
+        })
       } else {
-        this.$refs.multipleTable.clearSelection();
+        this.$refs.multipleTable.clearSelection()
       }
     },
     // 选中事件
     handleSelectionChange(val) {
-      this.disposeing = false;
+      this.disposeing = false
       val.forEach((item) => {
         if (item.status == 1) {
           this.$message({
-            type: "warning",
-            message: "存在已处理事件，请勿重复操作",
-          });
-          this.disposeing = true;
+            type: 'warning',
+            message: '存在已处理事件，请勿重复操作'
+          })
+          this.disposeing = true
         }
-      });
-      this.multipleSelection = val;
+      })
+      this.multipleSelection = val
     },
     // 表单详情
     async handleEdit(row) {
-      const res = await msginfo(row.id);
-      console.log(res);
-      this.listinfo = res;
-      this.numberValidateForm.thingactive = res.status;
-      this.numberValidateForm.msg = res.handleInfo;
-      this.chuimg(res.student.avatar);
-      this.showinfo = true;
+      const res = await msginfo(row.id)
+      console.log(res)
+      this.listinfo = res
+      this.numberValidateForm.thingactive = res.status
+      this.numberValidateForm.msg = res.handleInfo
+      this.chuimg(res?.student?.avatar, 1)
+      this.chuimg(res?.captureBigImage, 2)
+      this.showinfo = true
       this.$nextTick(() => {
+        this.$bus.$emit('changehide', true)
         // this.$bus.$emit('changehide', true)
-        this.$refs.hlsVideoPlayer.requestPlay(res.deviceInfo.serviceId, "");
-      });
+        this.$refs.hlsVideoPlayer.requestPlay(res.deviceInfo.serviceId, '')
+      })
     },
     // 事件状态
     warntype(type) {
       if (type == 1) {
-        return "入侵告警";
+        return '入侵告警'
       }
       if (type == 2) {
-        return "人脸告警";
+        return '人脸告警'
       }
     },
     // 是否触发短信
     inorsms(type) {
       if (type) {
-        return "是";
+        return '是'
       } else {
-        return "无";
+        return '无'
       }
     },
     // 事件处理状态
     statutype(type) {
       if (type == 1) {
-        return "已处理";
+        return '已处理'
       }
       if (type == 0) {
-        return "未处理";
+        return '未处理'
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
 ::v-deep .el-dialog__wrapper .el-dialog {
   margin-top: 3vw !important;
+  overflow: auto;
+  max-height: 90vh;
+}
+.info {
+  padding: 20px;
 }
 .el-pagination {
   text-align: right;
@@ -508,15 +543,18 @@ export default {
   color: red;
 }
 .info-top {
+  min-height: 20vw;
   display: flex;
   margin-left: 25px;
   .top-lef {
+    width: 50%;
     .leftinfo {
+      height: 96%;
       padding: 10px 13px;
       background: #f5f5f5;
       border-radius: 4px;
       border: 1px solid #dddfe6;
-      width: 330px;
+      width: 95%;
       // height: 361px;
       margin-right: 24px;
       position: relative;
@@ -526,7 +564,7 @@ export default {
         .vocers {
           position: absolute;
           top: 84px;
-          left: 132px;
+          left: 43%;
           width: 60px;
           height: 60px;
           border-radius: 50%;
@@ -540,7 +578,7 @@ export default {
             }
             h4 {
               margin: 0;
-              font-size: 20px;
+              font-size: 15px;
               color: #fff;
               line-height: 25px;
             }
@@ -557,9 +595,10 @@ export default {
     }
   }
   .top-rig {
+    width: 50%;
     .riginfo {
       margin-bottom: 10px;
-      width: 300px;
+      width: 100%;
       // height: 174px;
       flex: 1;
       min-height: 120px;
@@ -576,8 +615,6 @@ export default {
         span:nth-child(1) {
           margin-right: 5px;
         }
-        span:nth-child(2) {
-        }
       }
     }
     .listinfo {
@@ -586,10 +623,11 @@ export default {
       height: calc(99% - 16px);
     }
     .device {
-      width: 300px;
+      width: 100%;
       height: 174px;
       position: relative;
       #videoPlayers {
+        width: 100%;
         height: 100% !important;
       }
       .span {
@@ -621,6 +659,7 @@ export default {
   margin-top: 15px;
   .demo-ruleForm {
     display: flex;
+    flex-wrap: wrap;
     ::v-deep .el-input__inner {
       padding-right: 0;
       &::placeholder {
@@ -642,7 +681,7 @@ export default {
     }
     .times {
       .el-input {
-        width: 150px;
+        width: 100%;
         font-size: 12px;
 
         ::v-deep .el-input__inner {
@@ -650,6 +689,7 @@ export default {
         }
       }
     }
+
     .smscodes {
       ::v-deep .el-input__inner {
         padding-right: 0;

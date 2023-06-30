@@ -161,8 +161,16 @@
               <template slot-scope="scope">
                 <div>
                   <img
+                    v-if="scope.row.status"
                     class="img"
                     :src="scope.row.coverUrl"
+                    alt=""
+                    style="width: 100%; height: 80px; object-fit: contain"
+                  >
+                  <img
+                    v-else
+                    class="img"
+                    src="../../../assets/images/device_offline.png"
                     alt=""
                     style="width: 100%; height: 80px; object-fit: contain"
                   >
@@ -206,10 +214,7 @@
               :show-overflow-tooltip="true"
             >
               <template slot-scope="scope">
-                <span
-                  v-if="scope.row.status"
-                  style="background: #67c23a"
-                />
+                <span v-if="scope.row.status" style="background: #67c23a" />
                 <span v-else style="background: #606266" />
                 <span> {{ scope.row.status ? "在线" : "离线" }} </span>
               </template>
@@ -288,6 +293,12 @@
                   </span>
                   播放
                 </el-button>
+                <el-button
+                  size="small"
+                  type="text"
+                  icon="el-icon-share"
+                  @click="abilitysync(scope.row)"
+                ><span class="text">能力同步</span></el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -307,10 +318,7 @@
     <!-- 添加或编辑参数配置对话框 -->
 
     <!-- 位置+设置的弹窗 -->
-    <settingDialog
-      ref="settingDialogRef"
-      @refreshData="refreshData"
-    />
+    <settingDialog ref="settingDialogRef" @refreshData="refreshData" />
 
     <el-dialog
       :title="playTitle"
@@ -332,7 +340,7 @@ import 'font-awesome/css/font-awesome.css'
 import settingDialog from '@/views/videomonitor/playback/components/settingDialog'
 import packageDialog from '@/views/device/code/components/packageDialog'
 import VideoPlayers from '../../videomonitor/playback/components/videosAllVideos.vue'
-import { listPageDevice } from '@/api/system/device'
+import { listPageDevice, Devicesynchronization } from '@/api/system/device'
 
 import {
   listUser,
@@ -525,6 +533,13 @@ export default {
     this.getRoleList()
   },
   methods: {
+    // 能力同步
+    async abilitysync(row) {
+      await Devicesynchronization({ ids: [row.id] }).catch(err => {
+        this.$message.error('同步失败')
+      })
+      this.$message.success('同步成功')
+    },
     // 打开套餐弹窗
     openPackageDialog() {
       this.$refs.packageDialogRef.packageDialog = true
@@ -824,9 +839,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.tab-content{
-  .tab-pane{
-    .el-tree{
+.tab-content {
+  .tab-pane {
+    .el-tree {
       font-size: 13px;
     }
   }

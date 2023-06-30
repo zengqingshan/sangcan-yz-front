@@ -103,8 +103,8 @@
         <div v-show="!showres" class="searchresult">
           <p>共{{ devtotal }}条记录</p>
           <div class="ct">
-            <div v-for="(item,index) in searchlist" :key="index" class="devlist">
-              <div class="top">
+            <div v-for="(item,index) in searchlist" :key="index" class="devlist" @click="showdevice(item)">
+              <div class="top1">
                 <div class="top-top">{{ zimulist[index] }}</div>
                 <div class="top-bom" />
               </div>
@@ -113,7 +113,7 @@
                 <p />
               </div>
             </div>
-            <el-pagination small layout="prev, pager, next" :total="devtotal" />
+            <el-pagination small layout="prev, pager, next" :total="devtotal" :current-page.sync="current" />
           </div>
         </div>
       </div>
@@ -126,60 +126,6 @@
       :valueaddress="valueaddress"
       :deviceobj="deviceobj"
     />
-    <!--搜索框-->
-    <div v-if="false" class="search-wrap">
-      <div class="search">
-        <el-input
-          v-model="searchKey"
-          placeholder="请输入搜索"
-          class="input"
-          clearable
-          @focus="focusInput"
-        />
-        <el-button
-          :disabled="searchBtn"
-          type="primary"
-          @click="searchMap"
-        >名称检索<i
-          class="el-icon-search el-icon--right"
-        /></el-button>
-      </div>
-      <!--搜索内容-->
-      <div v-if="searchContentVisible" class="search-content">
-        <div
-          v-for="item in $store.getters.dict['dev_category']"
-          :key="item.dictKey"
-          class="legend-item"
-          @click="searchMap(item.dictKey)"
-        >
-          <img :src="legendIcon[item.dictKey].open" class="poi-image">
-          <div class="poi-label">
-            {{ item.dictValue }}
-            <span>({{ getDeviceType(item.dictKey) }})</span>
-          </div>
-        </div>
-      </div>
-      <!--搜索结果-->
-      <div v-if="searchResultVisible" class="search-result">
-        <div
-          v-for="(item, index) in searchData[deviceType]"
-          :key="index"
-          class="search-result-list"
-          :value="item.serviceId"
-          @click="changeLiData(item)"
-        >
-          <img
-            v-if="item.devCategory"
-            :src="
-              item.status
-                ? legendIcon[item.devCategory].open
-                : legendIcon[item.devCategory].close
-            "
-          >
-          <div class="label">{{ item.name }}</div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 <script>
@@ -265,7 +211,7 @@ export default {
       devicearr: null,
       newStyle: {
         width: '100%',
-        height: 'calc(100vh - 120px)',
+        height: '100%',
         margin: 0
       },
       type: ['cluster', 'tool'], // 显示地图类型
@@ -279,7 +225,6 @@ export default {
       pageSize: 10,
       searchlist: [], // 搜索的设备列表
       devtotal: 0 // 设备总数
-
     }
   },
   computed: {
@@ -299,7 +244,11 @@ export default {
       if (newval == '') {
         this.showres = true
       }
+    },
+    current(newval) {
+      this.searchdevicelist()
     }
+
   },
   mounted() {
     // 获取设备列表
@@ -310,7 +259,9 @@ export default {
   created() {
   },
   methods: {
-
+    showdevice(item) {
+      this.$refs.map.bounce(item)
+    },
     // 获取设备
     async getDeviceDataSet() {
       this.orgList = await listOrg({})
@@ -399,6 +350,8 @@ export default {
           } else {
             if (node.data.deviceNum > 0) {
               this.treeLoadDevice(node, resolve)
+            } else {
+              resolve([])
             }
           }
         }
@@ -505,7 +458,10 @@ export default {
 }
 </script>
 <style scoped lang="scss">
-
+.diamap{
+  height: calc(100vh - 120px);
+  margin: 0;
+}
 .diamap > div:nth-child(3){
   display: none;
 }
@@ -533,13 +489,13 @@ export default {
     display: flex;
     cursor: pointer;
 
-    .top {
+    .top1 {
       width: 40px;
       height: 30px;
       position: relative;
-      &:hover{
-
-      }
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       .top-top {
         width: 22px;
         height: 26px;
@@ -551,7 +507,7 @@ export default {
       }
       .top-bom {
         position: absolute;
-        top: 25px;
+        top: 20px;
         left: 16px;
         width: 0px;
         height: 0px;
@@ -570,7 +526,7 @@ export default {
     }
     &:hover {
       background: #ededed;
-      .devlist .top{
+      .searchresult .devlist .top{
         background-color: #ededed;
       }
     }

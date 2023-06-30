@@ -1,6 +1,6 @@
 <template>
   <div class="login-form">
-    <h3 class="title"></h3>
+    <img src="../assets/images/formIco.png" class="title" />
     <el-tabs v-model="activeName">
       <el-tab-pane label="密码登录" name="first">
         <el-form
@@ -37,16 +37,17 @@
               />
             </el-input>
           </el-form-item>
-          <el-form-item v-if="captchaOnOff" prop="code" style="border: ">
+          <el-form-item v-if="captchaOnOff" prop="code">
             <el-input
               v-model="passwdLoginForm.code"
               auto-complete="off"
               placeholder="请输入验证码"
-              style="width: 100%; margin-bottom: 24px"
+              style="width: 100%; position: relative"
               @keyup.enter.native="handlePasswdLogin"
             >
               <img
                 slot="prefix"
+                style="top: 10%; position: absolute"
                 src="../assets/images/code1.png"
                 class="el-input__icon input-icon"
               />
@@ -63,16 +64,16 @@
             style="margin: 0px 0px 25px 0px"
             >记住密码</el-checkbox
           >
-          <el-form-item style="width: 100%; height: 60px">
+          <el-form-item style="width: 100%">
             <el-button
               :loading="loading"
               size="medium"
               type="primary"
               style="
                 width: 100%;
-                font-size: 24px;
+                font-size: 18px;
                 border-radius: 100px;
-                height: 60px;
+                height: 40px;
               "
               @click.native.prevent="handlePasswdLogin"
             >
@@ -131,18 +132,13 @@
               />
               <template #suffix>
                 <el-button
-                  style="line-height: 50px"
                   v-show="loginSmsShow"
                   type="text"
                   class="code"
                   @click.prevent="getSmsCodeMethod()"
                   >获取短信验证码</el-button
                 >
-                <el-button
-                  v-show="!loginSmsShow"
-                  type="text"
-                  class="code"
-                  style="line-height: 50px"
+                <el-button v-show="!loginSmsShow" type="text" class="code"
                   >{{ smsCount }}秒后重试</el-button
                 >
               </template>
@@ -156,10 +152,10 @@
               type="primary"
               style="
                 width: 100%;
-                font-size: 24px;
-                margin-top: 20px;
+                font-size: 16px;
+
                 border-radius: 100px;
-                height: 60px;
+                height: 40px;
               "
               @click.native.prevent="handleSmsLogin"
             >
@@ -221,7 +217,7 @@ export default {
       },
       smsLoginForm: {
         smscode: "",
-        phone: "admin",
+        phone: "",
       },
 
       passwdLoginRules: {
@@ -419,29 +415,24 @@ export default {
 
 <style scoped lang="scss">
 .title {
-  background-image: url(../assets/images/formIco.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  height: 33px;
   margin-bottom: 20px;
 }
 
 .login-form {
+  min-width: 350px;
   border-radius: 12px;
   background: #ffffff;
   background-size: cover;
-  padding: 20px 47px 20px 43px;
-  width: 100%;
+  padding: 30px;
+  width: 110%;
   .el-input {
     height: 38px;
   }
 
   .input-icon {
     height: 24px;
-    width: 24px;
-    margin-left: 2px;
-    margin-top: 22px;
-    margin-right: 14px;
+
+    margin-top: 5px;
   }
 
   .el-checkbox__label {
@@ -461,12 +452,6 @@ export default {
 }
 
 .login-code {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 72px;
-  float: right;
-
   img {
     cursor: pointer;
     vertical-align: middle;
@@ -509,8 +494,8 @@ export default {
 ::v-deep .el-input__inner {
   border: none;
   box-shadow: inset 0px -1px 0px 0px #e1e1e1;
-  height: 72px;
-  font-size: 20px;
+  height: 100%;
+  font-size: 16px;
   padding-left: 40px;
 }
 </style>

@@ -738,7 +738,7 @@ export default {
         !/^1[3|4|5|7|8][0-9]\d{8}$/.test(this.changePasswordForm.phone)
       ) {
         this.$message({
-          message: "请输入正确是手机号",
+          message: "请输入正确的手机号",
           type: "error",
         });
       } else {

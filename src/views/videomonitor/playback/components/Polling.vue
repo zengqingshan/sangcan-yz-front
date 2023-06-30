@@ -68,6 +68,7 @@
       :visible.sync="showdialog"
       width="70%"
       center
+      top="2%"
     >
       <el-input v-model.trim="value" class="inputs" placeholder="请输入分组名称" />
       <div class="dialogdiv">
@@ -87,8 +88,8 @@
               >
                 <div :ref="'divs' + index">
 
-                  <img src="../assets/images/bgo.jpg">
-
+                  <img v-if="item.status" style="width: 203px;height: 115px;" :src="item.coverUrl">
+                  <img v-else style="width: 203px;height: 115px;" src="@/assets/images/device_offline.png">
                   <span class="listspan">{{ item.name }}</span>
                 </div>
                 <span class="spansvg">
@@ -122,10 +123,10 @@ import {
 import { listDeviceGroup, getDeviceGroupinfo, addDeviceGroup, deleteDeviceGroup, editDeviceGroup } from '@/api/system/devicegroup'
 import { listDevice } from '@/api/system/device'
 import pollleft from './pollleft.vue'
-import Pollmiddle from './pollmiddle.vue'
+// import Pollmiddle from './pollmiddle.vue'
 import Pollright from './pollright.vue'
 export default {
-  components: { pollleft, Pollmiddle, Pollright },
+  components: { pollleft, Pollright },
   props: {
     polling: {
       type: String,
@@ -209,6 +210,7 @@ export default {
       this.setCheckFlag()
     })
     this.$bus.$on('flushedlist', (id) => {
+      this.choosechecked = 'chooselist'
       this.orgId = id
       this.deviceListPageNum = 1
       this.LoadDeviceByOrgId()
@@ -242,7 +244,6 @@ export default {
     },
     // 删除分组
     async deletelist(obj) {
-
       await deleteDeviceGroup({ id: obj.id })
       this.getdevlist()
       this.$message({
@@ -254,7 +255,6 @@ export default {
     getdevlist() {
       listDeviceGroup({}).then(res => {
         this.devarr = res
-
       })
     },
     // 获取全部信息列表
@@ -279,7 +279,7 @@ export default {
       const res = await getDeviceGroupinfo({ id })
 
       this.value = res.name
-      res.deviceList.forEach((item, index222) => {
+      res.deviceList.forEach((item, index2) => {
         this.DeviceImagelist.forEach((item1, index) => {
           if (item.id == item1.id) {
             this.$set(this.DeviceImagelist[index], 'activeborder', true)
@@ -333,9 +333,11 @@ export default {
         if (deviceList.length == 0 || ret.finish == true) {
           this.btninner = '没有更多'
           this.disbtn = true
+        } else {
+          this.btninner = '加载更多'
+          this.disbtn = false
         }
         deviceList.forEach(obj => {
-          obj.coverUrl = '../assets/images/bgo.jpg'
           if (this.checked == true) {
             obj.activeborder = true
             this.choosearr.push(obj)
@@ -344,10 +346,18 @@ export default {
             obj.activeborder = false
           }
         })
-
         this.DeviceImagelist = this.DeviceImagelist.concat(deviceList)
-        this.setCheckFlag()
+        // 与右侧数据做对比
+        this.$refs.pollright.deviceifarr.forEach(itemid => {
+          this.DeviceImagelist.forEach(item1 => {
+            if (item1.id == itemid) {
+              item1.activeborder = true
+            }
+          })
+        })
 
+        console.log(555, this.DeviceImagelist)
+        this.setCheckFlag()
       }).catch(() => {
       })
         .then(() => {
@@ -436,10 +446,8 @@ export default {
     allbigpolling() {
       this.activeicon = -1
       this.$bus.$emit('bigpollinfo', this.deviceallarr)
-    },
+    }
 
-   
-    
   }
 }
 </script>
@@ -569,7 +577,6 @@ export default {
   color: white;
 }
 
-
  ::v-deep .el-icon-plus{
     margin-right: 10px;
  }
@@ -588,11 +595,6 @@ export default {
         width: 50% !important;
         margin-left: 23%;
     }
-  //   .el-tree-node__content{
-  //     &:hover{
-  //   background-color: #ffffff;
-  // }
-  //   }
 
 }
 .activeborer{
@@ -626,14 +628,11 @@ export default {
 .list div {
   overflow: hidden;
   border: 3px solid black;
-//   &:focus{
-//     border: 3px solid #409eff;
-//   }
 }
 
 .list div img {
-  width: 100%;
-  height: 100%;
+  // width: 100%;
+  // height: 100%;
   cursor: pointer;
 
 }

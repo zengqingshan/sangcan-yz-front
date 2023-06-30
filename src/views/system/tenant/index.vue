@@ -145,16 +145,10 @@
                 </el-form-item>
               </el-col>
             </el-row>
+            
             <el-row>
               <el-col :span="24">
-                <el-form-item v-if="form.id === undefined" label="企业管理员账号密码" prop="adminPassword">
-                  <el-input v-model="form.adminPassword" type="password" placeholder="请输入企业管理员名称" maxlength="30" />
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="24">
-                <el-form-item v-if="form.id === undefined" label="所属区域" prop="adminaddress">
+                <el-form-item v-if="form.id === undefined" label="所属区域" prop="division">
                   <el-cascader
                     v-model="cascvalue"
                     style="width: 60%; marginright: 10px"
@@ -168,7 +162,7 @@
             </el-row>
             <el-row>
               <el-col :span="24">
-                <el-form-item v-if="form.id === undefined" label="位置信息:" prop="adminpos">
+                <el-form-item v-if="form.id === undefined" label="位置信息:" prop="address">
                   <div style="display: flex; align-items: center">
                     <el-input v-model="form.address" />
                     <el-button
@@ -202,11 +196,11 @@
     >
       <div class="dia">
         <div class="dia-left">
-          <span>详细地址</span>
+          <p style="text-align: left;margin: 0;width: 100%;">详细地址</p>
           <el-input v-model="valueleft" :disabled="true" />
         </div>
         <div class="dia-right">
-          <span>地点坐标</span>
+          <p style="text-align: left;margin: 0;width: 100%;">地点坐标</p>
           <el-input v-model="valueright" :disabled="true" />
         </div>
       </div>
@@ -222,6 +216,7 @@
         </el-select>
       </div> -->
       <Map
+        mapid="tenantmap"
         :new-style="newStyle"
         :type="type"
         @click-marker-coor="clickMarkerCoor"
@@ -359,27 +354,21 @@ export default {
             trigger: 'blur'
           }
         ],
-        adminPassword: [
+		division: [
           {
             required: true,
-            message: '企业管理员密码不能为空',
+            message: '所属区域不能为空',
             trigger: 'blur'
           }
-        ]
-        // adminaddress: [
-        //   {
-        //     required: true,
-        //     message: '所属区域不能为空',
-        //     trigger: 'blur'
-        //   }
-        // ],
-        // adminpos: [
-        //   {
-        //     required: true,
-        //     message: '位置信息不能为空',
-        //     trigger: 'blur'
-        //   }
-        // ]
+        ],
+		address: [
+          {
+            required: true,
+            message: '位置信息不能为空',
+            trigger: 'blur'
+          }
+        ],
+
       },
       qyobj: {}, // 企业信息
       mapDialog: false
@@ -448,7 +437,7 @@ export default {
     },
     // 取消按钮
     cancel() {
-      this.open = false
+      this.open1 = false
       this.reset()
     },
     // 表单重置

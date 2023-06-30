@@ -12,7 +12,7 @@
         >
         </el-input>
         <el-tree
-          style="max-width: 350px"
+          style="max-width: 350px; min-height: 645px"
           :load="treeLoad"
           lazy
           node-key="id"
@@ -28,6 +28,11 @@
             <img
               v-if="data.schoolFlag"
               src="../../assets/studentManagement/xuexiao.png"
+              style="vertical-align: middle; margin-right: 5px"
+            />
+            <img
+              v-if="data.isTenantRoot"
+              src="../../assets/studentManagement/jigou.png"
               style="vertical-align: middle; margin-right: 5px"
             />
 
@@ -82,52 +87,60 @@
             label-width="80px"
             label-position=""
           >
-            <el-form-item label="姓名">
-              <el-input
-                placeholder="请输入姓名"
-                v-model="searchForm.studentName"
-                :disabled="buttonIsDisabled"
-              ></el-input>
-            </el-form-item>
-            <el-form-item label="姓别">
-              <el-select
-                v-model="searchForm.sex"
-                placeholder="请选择性别"
-                :disabled="buttonIsDisabled"
-              >
-                <el-option
-                  v-for="item in sexOptions"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
+            <el-col :span="5">
+              <el-form-item label="姓名">
+                <el-input
+                  placeholder="请输入姓名"
+                  v-model="searchForm.studentName"
+                  :disabled="buttonIsDisabled"
+                ></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="5">
+              <el-form-item label="姓别">
+                <el-select
+                  v-model="searchForm.sex"
+                  placeholder="请选择性别"
+                  :disabled="buttonIsDisabled"
                 >
-                </el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item label="手机号码">
-              <el-input
-                :disabled="buttonIsDisabled"
-                placeholder="请输入联系人号码"
-                v-model="searchForm.liaisonPhone"
-              ></el-input>
-            </el-form-item>
-            <el-form-item>
-              <el-button
-                type="primary"
-                icon="el-icon-search"
-                size="mini"
-                @click="searchStudents"
-                :disabled="buttonIsDisabled"
-                >搜索</el-button
-              >
-              <el-button
-                icon="el-icon-refresh"
-                size="mini"
-                @click="resetQuery"
-                :disabled="buttonIsDisabled"
-                >重置</el-button
-              >
-            </el-form-item>
+                  <el-option
+                    v-for="item in sexOptions"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value"
+                  >
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="手机号码">
+                <el-input
+                  :disabled="buttonIsDisabled"
+                  placeholder="请输入联系人号码"
+                  v-model="searchForm.liaisonPhone"
+                ></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item>
+                <el-button
+                  type="primary"
+                  icon="el-icon-search"
+                  size="mini"
+                  @click="searchStudents"
+                  :disabled="buttonIsDisabled"
+                  >搜索</el-button
+                >
+                <el-button
+                  icon="el-icon-refresh"
+                  size="mini"
+                  @click="resetQuery"
+                  :disabled="buttonIsDisabled"
+                  >重置</el-button
+                >
+              </el-form-item>
+            </el-col>
           </el-form>
         </el-row>
         <!-- 按钮组 -->
@@ -392,7 +405,7 @@
                   >
                 </div>
                 <span style="font-size: 12px; color: #c0c4cc; font-size: 12px">
-                  请上传正面免冠照，露出眼睛和眉毛；图片文件支持JPG丶PNG格式;图片文件大小200K-2M
+                  请上传正面免冠照，露出眼睛和眉毛；图片文件支持JPG丶PNG格式;图片文件大小20KB-2M
                 </span>
               </div>
             </div>
@@ -484,7 +497,7 @@
             margin-top: 18px;
           "
         >
-          请上传正面免冠照，露出眼睛和眉毛；图片文件支持JPG丶PNG格式;图片文件大小200K-2M
+          请上传正面免冠照，露出眼睛和眉毛；图片文件支持JPG丶PNG格式;图片文件大小20KB-2M
         </div>
       </div>
       <div style="display: flex; justify-content: flex-end; margin-top: 30px">
@@ -540,6 +553,7 @@
         </el-button>
       </a>
       <el-upload
+        :before-upload="beforeUpload"
         :on-success="handleUploadSuccess"
         ref="upload"
         :file-list="fileList"
@@ -551,9 +565,12 @@
         multiple
         style="width: 100%"
       >
-        <i class="el-icon-upload"></i>
+        <img src="../../assets/studentManagement/JPG备份 2.png" alt="" />
+        <el-button style="margin-top: 18px; margin-bottom: 8px"
+          >选择文件</el-button
+        >
         <div class="el-upload__text">
-          下载模板并完善信息后,可将文件拖拽到此处进行上传,支持格式:XSLS,XLSX
+          下载模板并完善信息后,可将文件拖拽到此处进行上传,支持格式:XLS,XLSX
         </div>
       </el-upload>
       <div style="text-align: right">
@@ -1080,19 +1097,21 @@ export default {
 
       this.photoDialogData = obj;
     },
-    //限制图片类型
     beforeAvatarUpload(file) {
       const isJPG = file.type === "image/jpeg";
       const isPNG = file.type === "image/png";
       const isLt2M = file.size / 1024 / 1024 < 2;
-
+      const isGt20KB = file.size / 1024 > 20;
       if (!isJPG && !isPNG) {
-        this.$message.error("上传图片只能是 JPG或PNG 格式!");
+        this.$message.error("上传图片只能是 JPG 或 PNG 格式!");
       }
       if (!isLt2M) {
         this.$message.error("上传图片大小不能超过 2MB!");
       }
-      return (isJPG && isLt2M) || (isPNG && isLt2M);
+      if (!isGt20KB) {
+        this.$message.error("上传图片大小必须大于 20KB!");
+      }
+      return (isJPG || isPNG) && isLt2M && isGt20KB;
     },
     //上传成功的回调
     async handleAvatarSuccess(res) {
@@ -1201,6 +1220,17 @@ export default {
       // 清空文件列表
       this.$refs.upload.clearFiles();
     },
+    //上传表格的回调
+    beforeUpload(file) {
+      const isXls = file.type === "application/vnd.ms-excel";
+      const isXlsx =
+        file.type ===
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+      if (!isXls && !isXlsx) {
+        this.$message.error("只支持.xls,.xlsx文件");
+      }
+      return isXls || isXlsx;
+    },
   },
 };
 </script>
@@ -1242,6 +1272,10 @@ export default {
   background-color: #dddfe6;
   margin-top: 10px;
   margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 ::v-deep .el-dialog__body {
   padding: 19px 32px 24px;
@@ -1252,6 +1286,10 @@ export default {
   padding: 17px 32px;
   font-weight: 500;
   line-height: 20px;
+}
+::v-deep .el-dialog {
+  overflow: auto;
+  max-height: 90vh;
 }
 
 .prover {
@@ -1324,21 +1362,31 @@ export default {
 //   margin-right: 0.52vw;
 //   width: 0;
 // }
-// /* WebKit（Chrome、Safari）浏览器 */
+
 // ::-webkit-scrollbar {
-//   width: 3px; /* 设置滚动条宽度 */
+//   /*滚动条整体样式*/
+//   width: 2px; /*高宽分别对应横竖滚动条的尺寸*/
+//   height: 10px;
 // }
 
 // ::-webkit-scrollbar-thumb {
-//   background-color: #c1c1c1; /* 设置滚动条颜色 */
+//   /*滚动条里面小方块*/
+//   border-radius: 5px;
+//   /*滚动条滑块颜色*/
+//   background-color: #c1c1c1;
+// }
+// ::-webkit-scrollbar-thumb:hover {
+//   /*滚动条里面小方块*/
+//   border-radius: 5px;
+//   /*滚动条滑块颜色*/
+//   background-color: #a8a8a8;
 // }
 
-// /* Firefox（Gecko）浏览器 */
-// ::-moz-scrollbar {
-//   width: 3px; /* 设置滚动条宽度 */
+// ::-webkit-scrollbar-track {
+//   background-color: #f1f1f1;
 // }
-
-// ::-moz-scrollbar-thumb {
-//   background-color: #c1c1c1; /* 设置滚动条颜色 */
+// ::-webkit-scrollbar-thumb,
+// ::-webkit-scrollbar-track {
+//   border: 0;
 // }
 </style>

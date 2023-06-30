@@ -4,16 +4,23 @@
     <div class="infinite-list-wrapper">
       <!-- v-infinite-scroll="loadMoreDevice" -->
 
-      <div class="record-list scroll-list vedio-bottom" infinite-scroll-throttle-delay="500"
-        infinite-scroll-disabled="deviceListFinished" infinite-scroll-immediate="false" infinite-scroll-distance="10">
+      <div
+        class="record-list scroll-list vedio-bottom"
+        infinite-scroll-throttle-delay="500"
+        infinite-scroll-disabled="deviceListFinished"
+        infinite-scroll-immediate="false"
+        infinite-scroll-distance="10"
+      >
         <div v-for="(item, index) in DeviceImagelist" :key="index" class="list" @click="openvedio(item)">
           <div style=" position: relative;max-height: 150px;">
             <img :src="item.coverUrl" alt="" width="210px" height="116px">
             <!-- <img :key="item.coverUrl" width="210px" height="116px" :src="item.coverUrl"> -->
             <i class="el-icon-upload" />
             <i class="el-icon-star-on" />
-            <i :class="{ 'el-icon-star-off': !item.starFlag, 'el-icon-star-on': item.starFlag }"
-              @click="starDevice(item, index)" />
+            <i
+              :class="{ 'el-icon-star-off': !item.starFlag, 'el-icon-star-on': item.starFlag }"
+              @click="starDevice(item, index)"
+            />
 
             <span>{{ item.name || '' }}</span>
 
@@ -42,7 +49,7 @@ import {
   listPageDevice
 } from '@/api/system/device'
 import VideoPlayers from './videosAllVideos.vue'
-import deviceOfflinePng from "@/assets/images/device_offline.png"
+import deviceOfflinePng from '@/assets/images/device_offline.png'
 export default {
   components: {
     VideoPlayers
@@ -74,6 +81,13 @@ export default {
 
       orgId: undefined
 
+    }
+  },
+  watch: {
+    showveido(newval) {
+      if (!newval) {
+        this.$refs.hlsVideoPlayer.closePlayer(0)
+      }
     }
   },
   created() {
@@ -162,7 +176,10 @@ export default {
           if (!obj.status) {
             obj.coverUrl = deviceOfflinePng
           } else {
-            obj.coverUrl = '/assets/images/bgo.jpg'
+            
+			if(!obj.coverUrl){
+				obj.coverUrl = './assets/images/bgo.jpg'
+		   }
           }
 
         })
@@ -183,13 +200,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#videoPlayers{
+  height: 470px !important;
+}
 ::v-deep .el-button--medium {
   height: 35px;
   margin: 108px 0 0 30px;
 }
 
 ::v-deep .el-dialog--center .el-dialog__body {
-  height: 450px;
+  height: 500px;
   //   padding: 0;
 }
 

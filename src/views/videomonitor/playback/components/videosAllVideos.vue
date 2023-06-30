@@ -48,6 +48,7 @@
                 class="empty-player-tip-text"
               >拖拽或双击设备到这里观看</span>
             </div>
+      
             <!-- m3u8的视频播放方式 -->
             <div
               v-show="urlList[i - 1] && urlList[i - 1].isPlay"
@@ -63,7 +64,9 @@
                 frameborder="0"
                 width="100%"
                 height="100%"
+                v-if="!urlList[i - 1].playAddress"
               />
+              <videots  :ref="'videoPlayer' + i" :id="i" :playParam="urlList[i - 1].playAddress" v-else></videots>
 
               <!-- 视频名称图层，层级5 -->
               <div
@@ -111,7 +114,7 @@
         <div v-if="!hides" class="device-info">
           <div class="device-info-name">{{ currentDeviceName }}</div>
           <div class="device-info-content">
-            型号: CMCC-IPC-A410 ID: {{ currentServiceId }}
+            型号: {{currentModel}} ID: {{ currentServiceId }}
           </div>
         </div>
         <div v-if="!hides && layoutNum == 1" class="icon-group">
@@ -184,7 +187,7 @@
             设置
           </div>
         </div>
-        <div v-if="hides" class="pollbom">
+        <div v-if="hides && shows " class="pollbom">
           <span class="span">轮巡时长</span>
           <el-select v-model="value" placeholder="请选择">
             <el-option
@@ -227,19 +230,22 @@ import {
 } from '@/api/system/device'
 import { playrecordAdd, listPageDevicePlayRecord } from '@/api/system/device'
 
+import videots from "@component/videocomponent";
 /**
  * 分屏视频
  */
 
 export default {
   components: {
-    settingDialog
+    settingDialog,
+    videots
   },
   data() {
     return {
       currentDeviceName: '',
       displayCurrentDeviceInfo: false,
       currentServiceId: '',
+      currentModel:'',
       showedit: true, // 编辑设备
       chooseIndex: 0, // 选中值   从 0 开始
 
@@ -282,7 +288,8 @@ export default {
       btninner: '启动轮巡',
       drawer: false,
       activeName: 'first',
-      servid: null
+      servid: null,
+      shows: false // 控制组件显示隐藏
     }
   },
   computed: {
@@ -320,14 +327,15 @@ export default {
     layoutNum: {
       handler(val, oldval) {
         if (val < oldval) {
-          const hadDeviceIdList = this.urlList.slice(0, val)
-
           for (let i = val; i < 25; i++) {
             this.$set(this.urlList[i], 'isPlay', false)
             this.$set(this.urlList[i], 'isEdit', false)
             this.$set(this.urlList[i], 'isError', false)
             this.$set(this.urlList[i], 'serviceId', '')
             this.$set(this.urlList[i], 'name', '')
+            this.$set(this.urlList[i], 'sdkParamJSON', '')
+            this.$set(this.urlList[i], 'playAddress', '')
+            this.$set(this.urlList[i], 'model', '')
           }
           if (this.chooseIndex >= val) {
             this.clearPlayerInfo()
@@ -362,10 +370,14 @@ export default {
   mounted() {
     this.$bus.$on('hideicon', (hide) => {
       this.hides = hide
+      this.shows = hide
       this.$emit('activeclose', hide)
     })
     this.$bus.$on('changehide', (act) => {
       this.hides = act
+      this.shows = false
+    })
+    this.$bus.$on('showedit', (act) => {
     })
   },
   beforeDestroy() {},
@@ -380,7 +392,7 @@ export default {
     async showsettinginfo() {
       this.$refs.settingDialogRef.showDeviceInfo(this.servid)
     },
-    // 启动寻训
+    // 启动轮巡
     startpoll() {
       if (this.value == '') {
         this.$message({
@@ -394,6 +406,19 @@ export default {
           type: 'success',
           message: '已开始轮巡'
         })
+        setTimeout(() => {
+          const ele = document.querySelector('.cell-players')
+          if (ele.requestFullscreen) {
+            ele.requestFullscreen()
+   
+          } else if (ele.mozRequestFullScreen) {
+            ele.mozRequestFullScreen()
+          } else if (ele.webkitRequestFullscreen) {
+            ele.webkitRequestFullscreen()
+          } else if (ele.msRequestFullscreen) {
+            ele.msRequestFullscreen()
+          }
+        }, 3000)
       } else if (this.btninner == '停止轮巡') {
         clearInterval(window.timer)
         this.btninner = '启动轮巡'
@@ -425,46 +450,77 @@ export default {
         urlObj.isError = false
         urlObj.serviceId = ''
         urlObj.name = ''
+        urlObj.sdkParam = ''
+        urlObj.model = ''
         this.urlList.push(urlObj)
       }
     },
     clearPlayerInfo() {
       this.currentDeviceName = ''
       this.currentServiceId = ''
+      this.currentModel = ''
       this.displayCurrentDeviceInfo = false
     },
 
     setPlayerInfo(index) {
+      
       const indexNew = index % this.layoutNum
       if (this.urlList[indexNew].isPlay) {
+        
         this.currentDeviceName = this.urlList[indexNew].name
         this.currentServiceId = this.urlList[indexNew].serviceId
+        this.currentModel = this.urlList[indexNew].model
+        
 
         this.servid = this.urlList[indexNew].serviceId
-        console.log(this.servid, 111)
+   
         this.displayCurrentDeviceInfo = true
+        
+        
       } else {
         this.clearPlayerInfo()
       }
     },
 
     closePlayer(index) {
+
+      try{
+        const msgObj = {}
+        var playerName = 'videoPlayer' + (index + 1)
+        const _iframe = document.getElementById(playerName).contentWindow
+
+        msgObj.type = 'stopPlay'
+        if (index % this.layoutNum == this.chooseIndex % this.layoutNum) {
+          this.clearPlayerInfo()
+        }
+
+        _iframe.postMessage(JSON.stringify(msgObj), '*')
+            }catch(err){
+              
+            }
+
+            try{
+        const stopEvent = 'huiyanStop' + (index + 1)
+          this.$bus.$emit(stopEvent, '')
+      }catch(err){
+
+      }
+
+      if(index >= this.urlList.length){
+        return;
+      }
+
       this.$set(this.urlList[index], 'isPlay', false)
       this.$set(this.urlList[index], 'isEdit', false)
       this.$set(this.urlList[index], 'isError', false)
       this.$set(this.urlList[index], 'serviceId', '')
       this.$set(this.urlList[index], 'name', '')
+      this.$set(this.urlList[index], 'sdkParamJSON', '')
+      this.$set(this.urlList[index], 'playAddress', '')
+      this.$set(this.urlList[index], 'model', '')
 
-      const msgObj = {}
-      var playerName = 'videoPlayer' + (index + 1)
-      const _iframe = document.getElementById(playerName).contentWindow
 
-      msgObj.type = 'stopPlay'
-      if (index % this.layoutNum == this.chooseIndex % this.layoutNum) {
-        this.clearPlayerInfo()
-      }
 
-      _iframe.postMessage(JSON.stringify(msgObj), '*')
     },
     checkNeedShowTool(num) {
       if (num > 1) {
@@ -502,42 +558,98 @@ export default {
 
       this.chooseIndex = (curPlayIndex + 1) % this.layoutNum
 
-      this.$set(this.urlList[curPlayIndex], 'isPlay', true)
-      this.$set(this.urlList[curPlayIndex], 'isEdit', true)
-      this.$set(this.urlList[curPlayIndex], 'isError', false)
-      this.$set(this.urlList[curPlayIndex], 'serviceId', serviceId)
-      this.$set(this.urlList[curPlayIndex], 'name', name)
+      this.$nextTick(async () => {
 
-      this.$nextTick(() => {
-        this.setPlayerInfo(curPlayIndex)
-        this.play(curPlayIndex)
+        const playParam = await getPlayParameter(serviceId)
+
+        let sdkParam = {token: playParam.token, appid: playParam.appid }
+
+        this.closePlayer(curPlayIndex)
+          this.$set(this.urlList[curPlayIndex], 'isPlay', true)
+        this.$set(this.urlList[curPlayIndex], 'isEdit', true)
+        this.$set(this.urlList[curPlayIndex], 'isError', false)
+        this.$set(this.urlList[curPlayIndex], 'serviceId', serviceId)
+        this.$set(this.urlList[curPlayIndex], 'name', name)
+        this.$set(this.urlList[curPlayIndex], 'sdkParamJSON', JSON.stringify(sdkParam))
+        this.$set(this.urlList[curPlayIndex], 'playAddress', playParam.playAddress)
+        this.$set(this.urlList[curPlayIndex], 'model', playParam.model)
+        
+        this.$nextTick(() => {
+          
+          this.setPlayerInfo(curPlayIndex)
+          this.play(curPlayIndex)
+        })
       })
+
+
     },
 
     async play(index) {
-      const msgObj = {}
-      var playerName = 'videoPlayer' + (index + 1)
-      const _iframe = document.getElementById(playerName).contentWindow
 
-      msgObj.type = 'startPlay'
-      msgObj.deviceId = this.urlList[index].serviceId
+      let playAddress = this.urlList[index].playAddress
 
-      const playParam = await getPlayParameter(msgObj.deviceId)
-      msgObj.token = playParam.token
-      msgObj.appid = playParam.appid
-      if (this.layoutNum > 1) {
-        msgObj.showTools = '0'
-      } else {
-        msgObj.showTools = '1'
-      }
-      if (!msgObj.deviceId) {
-        return
-      }
+      try{
+        const msgObj = {}
+            msgObj.deviceId = this.urlList[index].serviceId
 
-      const param = { serviceId: msgObj.deviceId }
-      playrecordAdd(param).then((ret) => {})
+        if(playAddress){
+          try{
+              let player1 = this.$refs[`videoPlayer${index + 1}`]
+              let playEvent = 'huiyanPlay' + (index+1)
 
-      _iframe.postMessage(JSON.stringify(msgObj), '*')
+              
+              this.$nextTick(() => {
+
+                this.$bus.$emit(playEvent, playAddress)
+              })
+          }catch(err){
+              console.log('err=', err)
+          }
+          return;
+        }else{
+          let sdkParamJSON = this.urlList[index].sdkParamJSON;
+      
+          if(!sdkParamJSON){
+            return
+          }
+          let sdkParam = JSON.parse(sdkParamJSON)
+          
+          this.$nextTick(() => {
+            
+              var playerName = 'videoPlayer' + (index + 1)
+          
+           
+              msgObj.type = 'startPlay'
+
+            
+              msgObj.token = sdkParam.token
+              msgObj.appid = sdkParam.appid
+            
+              if (this.layoutNum > 1) {
+                msgObj.showTools = '0'
+              } else {
+                msgObj.showTools = '1'
+              }
+              if (!msgObj.deviceId) {
+                return
+              }
+
+              const param = { serviceId: msgObj.deviceId }
+              playrecordAdd(param).then((ret) => {})
+              const _iframe = document.getElementById(playerName).contentWindow
+
+              _iframe.postMessage(JSON.stringify(msgObj), '*')
+
+          })
+
+        }
+
+    }
+    catch(err){
+        console.log("play error=", err)
+    }
+
+
     },
     pause(i) {},
 

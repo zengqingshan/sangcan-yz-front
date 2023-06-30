@@ -1,6 +1,6 @@
 <template>
   <div class="login-form">
-    <h3 class="title"></h3>
+    <img src="../assets/images/formIco.png" class="title" />
     <el-form ref="registerForm" :model="registerForm" :rules="registerRules">
       <el-form-item prop="phone">
         <el-input
@@ -62,18 +62,13 @@
           />
           <template #suffix>
             <el-button
-              style="line-height: 50px"
               type="text"
               class="code"
               v-show="registerSmsShow"
               @click.prevent="getSmsCodeMethod()"
               >获取短信验证码</el-button
             >
-            <el-button
-              type="text"
-              class="code"
-              v-show="!registerSmsShow"
-              style="line-height: 50px"
+            <el-button type="text" class="code" v-show="!registerSmsShow"
               >{{ smsCount }}秒后重试</el-button
             >
           </template>
@@ -87,10 +82,9 @@
           type="primary"
           style="
             width: 100%;
-            font-size: 24px;
+            font-size: 16px;
             border-radius: 100px;
-            height: 60px;
-            margin-top: 20px;
+            height: 40px;
           "
           @click.native.prevent="handleRegister"
         >
@@ -131,7 +125,7 @@ export default {
       registerForm: {
         smscode: "",
         password: "",
-        phone: "15279153209",
+        phone: "",
         confirmPassword: "",
       },
 
@@ -208,7 +202,7 @@ export default {
         });
       } else if (!/^1\d{10}$/.test(this.registerForm.phone)) {
         this.$message({
-          message: "请输入正确是手机号",
+          message: "请输入正确的手机号",
           type: "error",
         });
       } else {
@@ -218,9 +212,8 @@ export default {
     },
     // 判断密码是否合法
     validatePassword() {
-      let pattern = new RegExp(
-        "^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,16}$"
-      );
+      let pattern =
+        /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,16}$/;
       if (!this.registerForm.confirmPassword || !this.registerForm.password) {
         this.$message({
           message: "密码和确认密码不能为空",
@@ -314,29 +307,24 @@ export default {
 
 <style scoped lang="scss">
 .title {
-  background-image: url(../assets/images/formIco.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  height: 33px;
   margin-bottom: 20px;
 }
 
 .login-form {
+  min-width: 350px;
   border-radius: 12px;
   background: #ffffff;
   background-size: cover;
-  padding: 20px 47px 20px 43px;
-  width: 100%;
+  padding: 30px;
+  width: 110%;
   .el-input {
     height: 38px;
   }
 
   .input-icon {
     height: 24px;
-    width: 24px;
-    margin-left: 2px;
-    margin-top: 22px;
-    margin-right: 14px;
+
+    margin-top: 5px;
   }
 
   .el-checkbox__label {
@@ -356,12 +344,6 @@ export default {
 }
 
 .login-code {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 72px;
-  float: right;
-
   img {
     cursor: pointer;
     vertical-align: middle;
@@ -404,8 +386,8 @@ export default {
 ::v-deep .el-input__inner {
   border: none;
   box-shadow: inset 0px -1px 0px 0px #e1e1e1;
-  height: 72px;
-  font-size: 20px;
+  height: 100%;
+  font-size: 16px;
   padding-left: 40px;
 }
 </style>

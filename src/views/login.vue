@@ -128,7 +128,7 @@ export default {
 }
 
 .right-container {
-  padding-right: 185px;
+  padding-right: 10%;
   z-index: 99;
 
   .login-title {

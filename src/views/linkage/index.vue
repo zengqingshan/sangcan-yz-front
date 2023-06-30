@@ -10,7 +10,7 @@
       >
         <el-submenu index="1">
           <template slot="title">
-            <i class="el-icon-warning" />
+            <i class="el-icon-sunrise-1" />
             <span style="font-weight: 600">告警事件</span>
           </template>
           <el-menu-item-group>
@@ -21,14 +21,14 @@
         </el-submenu>
         <el-menu-item index="2">
           <template slot="title">
-            <i class="el-icon-message" />
+            <i class="el-icon-chat-dot-square" />
             <span style="font-weight: 600">MAS短信</span>
           </template>
         </el-menu-item>
 
         <el-menu-item index="3" @click="showAlarmSetting = true">
           <template slot="title">
-            <i class="el-icon-message" />
+            <i class="el-icon-setting" />
             <span style="font-weight: 600">告警设置</span>
           </template>
         </el-menu-item>
@@ -157,5 +157,8 @@ export default {
     background-color: #f1f3fd;
     color: #1790ff;
   }
+}
+::v-deep .el-menu {
+  overflow: hidden;
 }
 </style>

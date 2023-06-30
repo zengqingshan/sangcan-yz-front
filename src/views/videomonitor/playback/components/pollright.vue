@@ -5,7 +5,7 @@
       <div v-for="(item,index) in itemarr" :key="index" class="pollchild">
         <div class="left">
           <span class="leftspan">{{ ++index }}</span>
-          <img src="../assets/images/bgo.jpg" alt="">
+          <img :src="item.coverUrl" alt="">
           <div>
             <span style="white-space: nowrap;">{{ item.name }}</span>
             <span>{{ item.orgName }}</span>
@@ -98,6 +98,7 @@ export default {
             }
             img{
                 height: 100%;
+                width: 40%;
             }
             div{
                 margin-left: 5%;

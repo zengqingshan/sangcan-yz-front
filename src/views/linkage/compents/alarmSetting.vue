@@ -15,8 +15,8 @@
     </el-tabs>
     <!-- 搜索栏 -->
     <el-row style="margin-top: 36px">
-      <el-form label-width="80px">
-        <el-col :span="4">
+      <el-form label-width="80px" style="display: flex; flex-wrap: wrap">
+        <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="4">
           <el-form-item label="设备名称:">
             <el-input
               placeholder="请输入设备名称"
@@ -24,7 +24,7 @@
             ></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="5">
+        <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="4">
           <el-form-item label="监控节点:">
             <treeselect
               v-model="searchForm.orgId"
@@ -40,7 +40,7 @@
             />
           </el-form-item>
         </el-col>
-        <el-col :span="4">
+        <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="4">
           <el-form-item label="设备型号:">
             <el-select
               v-model="searchForm.connetType"
@@ -58,7 +58,7 @@
             </el-select>
           </el-form-item>
         </el-col>
-        <el-col :span="4" style="margin-right: 100px">
+        <el-col ::xs="24" :sm="24" :md="8" :lg="8" :xl="4">
           <el-form-item label="设备ID:">
             <el-input
               placeholder="请输入设备ID"
@@ -66,17 +66,26 @@
             ></el-input>
           </el-form-item>
         </el-col>
-        <el-col :span="4">
-          <el-button
-            type="primary"
-            icon="el-icon-search"
-            size="mini"
-            @click="search"
-            >搜索</el-button
-          >
-          <el-button icon="el-icon-refresh" size="mini" @click="resetQuery"
-            >重置</el-button
-          >
+        <el-col
+          :xs="24"
+          :sm="24"
+          :md="8"
+          :lg="8"
+          :xl="4"
+          style="text-align: right"
+        >
+          <el-form-item>
+            <el-button
+              type="primary"
+              icon="el-icon-search"
+              size="mini"
+              @click="search"
+              >搜索</el-button
+            >
+            <el-button icon="el-icon-refresh" size="mini" @click="resetQuery"
+              >重置</el-button
+            >
+          </el-form-item>
         </el-col>
       </el-form>
     </el-row>
@@ -86,11 +95,11 @@
       style="display: flex; justify-content: space-between; align-items: center"
     >
       <p style="color: #606266; font-size: 12px">
-        当前可配置 <span>人脸</span> 告警设备共<span style="color: #1790ff"
-          >108</span
-        >
-        台，已开启<span>人脸</span>告警设备共
-        <span style="color: #1790ff">100</span> 台
+        当前可配置
+        <span>{{ searchForm.soundLightAlarmAbility ? "声光" : "人脸" }}</span>
+        告警设备共<span style="color: #1790ff">{{ total }}</span> 台，已开启
+        <span>{{ searchForm.soundLightAlarmAbility ? "声光" : "人脸" }}</span
+        >告警设备共 <span style="color: #1790ff">{{ openTotal }}</span> 台
       </p>
       <div>
         <el-button
@@ -102,7 +111,7 @@
           >批量开启</el-button
         >
         <el-button
-          icon="el-icon-switch-button"
+          icon="el-icon-remove-outline"
           plain
           size="mini"
           type="danger"
@@ -118,7 +127,7 @@
       v-loading="loading"
       :data="tableData"
       style="width: 100%"
-      height="550"
+      height="500"
       @selection-change="handleSelectionChange"
     >
       <div slot="empty">
@@ -189,6 +198,7 @@ import { treeselect } from "@/api/system/org";
 import { dealTree } from "@/utils/deal-tree";
 import "@riophae/vue-treeselect/dist/vue-treeselect.css";
 import { warnSettingList, editSettingSwitch } from "@/api/linkage/index.js";
+import LogoVue from "../../../layout/components/Sidebar/Logo.vue";
 export default {
   name: "AlarmSetting",
   components: {
@@ -196,6 +206,7 @@ export default {
   },
   data() {
     return {
+      openTotal: 0, //以开启开关的数量
       orgOptions: undefined,
       activeName: "first", //tabs 绑定的值
       total: 0, //分页绑定的值
@@ -214,6 +225,8 @@ export default {
         connetType: null, //设备型号
         soundLightAlarmAbility: null, //声光
         aiCaptureFaceAbility: null, //人脸
+        soundLightAlarm: null,
+        aiAbilityFace: null,
       },
       switchList: [], //开关数组
     };
@@ -245,6 +258,7 @@ export default {
     },
     //tabs 点击
     handleClick(tab, event) {
+      this.searchForm.current = 1;
       if (tab.index == 0) {
         this.searchForm.soundLightAlarmAbility = true;
         this.searchForm.aiCaptureFaceAbility = null;
@@ -255,17 +269,29 @@ export default {
       this.getList();
     },
     //获取列表数据
-    getList() {
-      this.loading = true;
-      warnSettingList(this.searchForm)
-        .then((response) => {
-          this.total = response.total;
-          this.tableData = response.records;
-          this.loading = false;
-        })
-        .catch(() => {
-          this.loading = false;
-        });
+    async getList() {
+      this.searchForm.soundLightAlarm = null;
+      this.searchForm.aiAbilityFace = null;
+      try {
+        this.loading = true;
+        const response = await warnSettingList(this.searchForm);
+        this.total = response.total;
+        this.tableData = response.records;
+
+        if (this.searchForm.soundLightAlarmAbility) {
+          this.searchForm.soundLightAlarm = "ON";
+          const response = await warnSettingList(this.searchForm);
+          this.openTotal = response.total;
+        } else {
+          this.searchForm.aiAbilityFace = "ON";
+          const response = await warnSettingList(this.searchForm);
+          this.openTotal = response.total;
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.loading = false;
+      }
     },
     //搜素
     search() {
@@ -319,18 +345,7 @@ export default {
       treeselect().then((response) => {
         dealTree(response);
         this.orgOptions = response;
-        this.disableNotLeaf(response);
         this.orgName = this.getOrgName(orgId, response);
-      });
-    },
-    disableNotLeaf(options) {
-      options.forEach((item) => {
-        if (item.children && item.children.length > 0) {
-          item.isDisabled = true;
-          this.disableNotLeaf(item.children);
-        } else {
-          item.isDisabled = false;
-        }
       });
     },
     getOrgName(orgId, orgList) {
