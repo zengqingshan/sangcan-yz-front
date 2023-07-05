@@ -1,16 +1,20 @@
 <template>
-  <div style="background-color: #2d2d2e; width: 100%;height: 42vw;" class="row">
-
-    <div class="view-list " style="padding-left: 15px; height:97%;">
-      <div class="row" style="width: 100%;display: flex;">
+  <div style="background-color: #00a99c; width: 100%; height: 42vw" class="row">
+    <div class="view-list" style="padding-left: 15px; height: 97%">
+      <div class="row" style="width: 100%; display: flex">
         <div v-show="showleft" class="left-side">
-
-          <LeftSide @deviceNodeClicked="leftSideDeviceNodeClicked" @orgNodeClicked="leftSideOrgNodeClicked" />
-
+          <LeftSide
+            @deviceNodeClicked="leftSideDeviceNodeClicked"
+            @orgNodeClicked="leftSideOrgNodeClicked"
+          />
         </div>
         <div class="middle-side" :style="{ width: calcWidthMiddle }">
           <i
-            :class="{ 'el-icon-d-arrow-left': showleft, 'el-icon-d-arrow-right': !showleft, 'icon-left': true }"
+            :class="{
+              'el-icon-d-arrow-left': showleft,
+              'el-icon-d-arrow-right': !showleft,
+              'icon-left': true,
+            }"
             @click="showvedio"
           />
           <MiddleSide
@@ -21,13 +25,23 @@
           />
           <i
             v-show="showRightBar"
-            :class="{ 'el-icon-d-arrow-right': showright, 'el-icon-d-arrow-left': !showright, 'icon-right': true }"
+            :class="{
+              'el-icon-d-arrow-right': showright,
+              'el-icon-d-arrow-left': !showright,
+              'icon-right': true,
+            }"
             @click="showvedior"
           />
         </div>
-        <div v-show="showright" class="right-side" :style="{ width: calcWidthRight }">
-          <RightDeviceImageList ref="rightDeviceList" @deviceClicked="rightDeviceItemClicked" />
-
+        <div
+          v-show="showright"
+          class="right-side"
+          :style="{ width: calcWidthRight }"
+        >
+          <RightDeviceImageList
+            ref="rightDeviceList"
+            @deviceClicked="rightDeviceItemClicked"
+          />
         </div>
       </div>
     </div>
@@ -35,37 +49,32 @@
 </template>
 
 <script>
-import {
-  parentOrgTreeList,
-  listPageStarOrg
-} from '@/api/system/org'
-import {
-  deviceParentOrgTreeList
-} from '@/api/system/device'
-import 'font-awesome/css/font-awesome.css'
-import 'admin-lte/dist/css/skins/_all-skins.css'
-import 'vue-resize/dist/vue-resize.css'
+import { parentOrgTreeList, listPageStarOrg } from "@/api/system/org";
+import { deviceParentOrgTreeList } from "@/api/system/device";
+import "font-awesome/css/font-awesome.css";
+import "admin-lte/dist/css/skins/_all-skins.css";
+import "vue-resize/dist/vue-resize.css";
 
-import 'leaflet/dist/leaflet.css'
-import '@penggy/leaflet.fullscreen/Control.FullScreen.css'
-import '@penggy/leaflet-contextmenu/dist/leaflet.contextmenu.css'
-import 'leaflet'
-import '@penggy/leaflet.fullscreen'
-import '@penggy/leaflet-contextmenu/dist/leaflet.contextmenu.js'
+import "leaflet/dist/leaflet.css";
+import "@penggy/leaflet.fullscreen/Control.FullScreen.css";
+import "@penggy/leaflet-contextmenu/dist/leaflet.contextmenu.css";
+import "leaflet";
+import "@penggy/leaflet.fullscreen";
+import "@penggy/leaflet-contextmenu/dist/leaflet.contextmenu.js";
 
-import $ from 'jquery'
-import VideoPlayers from './components/videosAllVideos.vue'
-import './assets/js/jquery-sticky.js'
-import 'jquery-ui/ui/widgets/draggable'
+import $ from "jquery";
+import VideoPlayers from "./components/videosAllVideos.vue";
+import "./assets/js/jquery-sticky.js";
+import "jquery-ui/ui/widgets/draggable";
 
-import { component as VueContextMenu } from '@penggy/vue-context-menu'
+import { component as VueContextMenu } from "@penggy/vue-context-menu";
 
-import Searchjigou from './components/searchjigou.vue'
-import Searchshebei from './components/searchshebei.vue'
-import Covervedio from './components/covervedio.vue'
-import RightDeviceImageList from './right.vue'
-import LeftSide from './left.vue'
-import MiddleSide from './middle.vue'
+import Searchjigou from "./components/searchjigou.vue";
+import Searchshebei from "./components/searchshebei.vue";
+import Covervedio from "./components/covervedio.vue";
+import RightDeviceImageList from "./right.vue";
+import LeftSide from "./left.vue";
+import MiddleSide from "./middle.vue";
 export default {
   components: {
     VueContextMenu,
@@ -75,24 +84,23 @@ export default {
     Covervedio,
     RightDeviceImageList,
     LeftSide,
-    MiddleSide
+    MiddleSide,
   },
   beforeRouteEnter(to, from, next) {
-    next(vm => {
+    next((vm) => {
       if (to.query.protocol) {
-        vm.protocol = to.query.protocol
+        vm.protocol = to.query.protocol;
       }
-    })
+    });
   },
   beforeRouteUpdate(to, from, next) {
-    next()
+    next();
   },
   beforeRouteLeave(to, from, next) {
-    next()
+    next();
   },
   data() {
     return {
-
       showleft: true,
       showright: true,
       showRightBar: true,
@@ -101,145 +109,142 @@ export default {
       currentOrgId: undefined,
       pnode: null,
 
-      level: 0
-
-    }
+      level: 0,
+    };
   },
   computed: {
     calcWidthMiddle(item) {
       if (this.showleft && this.showright) {
-        return 'calc(100% - 300px - 240px)'
+        return "calc(100% - 300px - 240px)";
       } else if (!this.showleft && this.showright) {
-        return 'calc(100% - 300px)'
+        return "calc(100% - 300px)";
       } else if (this.showleft && !this.showright) {
-        return 'calc(100% - 220px)'
+        return "calc(100% - 220px)";
       } else if (!this.showleft && !this.showright) {
-        return '100%'
+        return "100%";
       }
     },
     calcWidthLeft() {
       if (this.showleft) {
-        return '300px'
+        return "300px";
       }
     },
     calcWidthRight(item) {
       if (this.showright) {
-        return '240px'
+        return "240px";
       }
-    }
+    },
   },
 
-  watch: {
-
-  },
+  watch: {},
   mounted() {
-    $(document).on('expanded.pushMenu collapsed.pushMenu', this.updateSticky)
+    $(document).on("expanded.pushMenu collapsed.pushMenu", this.updateSticky);
     // $('#screen-sticky').sticky({ bottomSpacing: 40 })
 
-    this.$dragging.$on('dragend', (res) => {
-
-    })
+    this.$dragging.$on("dragend", (res) => {});
 
     // 此事件总线沿用右侧组件菜单逻辑
-    this.$bus.$on('playhistoryvedio', (serviceId, deviceName) => {
-      this.$refs.middleSide.requestPlay(serviceId, deviceName)
-    })
+    this.$bus.$on("playhistoryvedio", (serviceId, deviceName) => {
+      this.$refs.middleSide.requestPlay(serviceId, deviceName);
+    });
   },
 
   created() {
-    this.currentOrgId = this.rootOrgId
+    this.currentOrgId = this.rootOrgId;
   },
   beforeDestroy() {
-    $('a[href="#group-tree-wrapper"').off('shown.bs.tab').off('hidden.bs.tab')
+    $('a[href="#group-tree-wrapper"').off("shown.bs.tab").off("hidden.bs.tab");
 
-    $(document).off('expanded.pushMenu collapsed.pushMenu', this.updateSticky)
-    $('#screen-sticky').unstick()
+    $(document).off("expanded.pushMenu collapsed.pushMenu", this.updateSticky);
+    $("#screen-sticky").unstick();
   }, // -- methods
   methods: {
     showRightSide() {
-      this.showright = true
-      this.showRightBar = true
-      this.showcovers = true
+      this.showright = true;
+      this.showRightBar = true;
+      this.showcovers = true;
     },
     switchDeviceListLayout() {
-      this.showright = false
-      this.showRightBar = false
-      this.showcovers = false
+      this.showright = false;
+      this.showRightBar = false;
+      this.showcovers = false;
     },
     leftSideDeviceNodeClicked(seviceId, deviceName) {
-      const param = { serviceId: seviceId }
+      const param = { serviceId: seviceId };
       deviceParentOrgTreeList(param).then((ret) => {
-        let fullParentOrgPath = ''
+        let fullParentOrgPath = "";
 
         if (ret.length > 0) {
           for (let i = 0; i < ret.length; i++) {
             if (i != 0) {
-              fullParentOrgPath += '>'
+              fullParentOrgPath += ">";
             }
-            const org = ret[i]
+            const org = ret[i];
 
-            fullParentOrgPath += org.name
+            fullParentOrgPath += org.name;
           }
 
-          this.$refs.middleSide.switchOrg(ret[ret.length - 1].id, ret[ret.length - 1].starFlag, fullParentOrgPath)
+          this.$refs.middleSide.switchOrg(
+            ret[ret.length - 1].id,
+            ret[ret.length - 1].starFlag,
+            fullParentOrgPath
+          );
         }
-      })
+      });
 
-      this.$refs.middleSide.requestPlay(seviceId, deviceName)
+      this.$refs.middleSide.requestPlay(seviceId, deviceName);
     },
     leftSideOrgNodeClicked(orgId, onlineNum, deviceNum) {
-      const param = { orgId: orgId }
+      const param = { orgId: orgId };
       parentOrgTreeList(param).then((ret) => {
-        let fullParentOrgPath = ''
-        let onlineNum = 0
-        let deviceNum = 0
-        let starFlag = false
+        let fullParentOrgPath = "";
+        let onlineNum = 0;
+        let deviceNum = 0;
+        let starFlag = false;
         if (ret.length > 0) {
           for (let i = 0; i < ret.length; i++) {
             if (i != 0) {
-              fullParentOrgPath += '>'
+              fullParentOrgPath += ">";
             }
-            const org = ret[i]
+            const org = ret[i];
             if (org.id == orgId) {
-              onlineNum = org.onelineNum
-              deviceNum = org.deviceNum
-              starFlag = org.starFlag
+              onlineNum = org.onelineNum;
+              deviceNum = org.deviceNum;
+              starFlag = org.starFlag;
             }
 
-            fullParentOrgPath += org.name
+            fullParentOrgPath += org.name;
           }
 
-          this.$refs.middleSide.switchOrg(orgId, starFlag, fullParentOrgPath)
-          this.$refs.rightDeviceList.init(orgId, onlineNum, deviceNum)
+          this.$refs.middleSide.switchOrg(orgId, starFlag, fullParentOrgPath);
+          this.$refs.rightDeviceList.init(orgId, onlineNum, deviceNum);
         }
-      })
+      });
     },
 
     showvedio() {
       if (this.showleft == true) {
-        this.showleft = false
+        this.showleft = false;
       } else {
-        this.showleft = true
+        this.showleft = true;
       }
     },
     showvedior() {
       if (this.showright == true) {
-        this.showright = false
+        this.showright = false;
       } else {
-        this.showright = true
+        this.showright = true;
       }
     },
 
     rightDeviceItemClicked(serviceId, deviceName) {
-      this.$refs.middleSide.requestPlay(serviceId, deviceName)
-    }
-
-  }
-}
+      this.$refs.middleSide.requestPlay(serviceId, deviceName);
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
-
 .icon-left {
   margin: auto;
   z-index: 99;
@@ -252,7 +257,6 @@ export default {
   background-color: #414549;
   border-top-left-radius: 7px;
   border-bottom-left-radius: 7px;
-
 }
 
 .icon-right {
@@ -290,7 +294,6 @@ export default {
 }
 
 .left-side {
-
   position: relative;
   height: 100%;
   margin-right: 20px;
@@ -343,7 +346,6 @@ export default {
       }
     }
   }
-
 }
 
 #app .main-container {
@@ -358,8 +360,8 @@ export default {
 ::v-deep .text-center .player-btn-group .el-button--primary {
   color: #feffff;
   /* background: #ffffff; */
-  border: 1px solid #2d2d2e !important;
-  background-color: #2d2d2e;
+  border: 1px solid #00a99c !important;
+  background-color: #00a99c;
 }
 
 .text-center {
@@ -427,7 +429,6 @@ export default {
   left: 63vw;
   width: 15vw;
   margin-top: -24px;
-
 }
 
 .showvedio .vedio-top {
@@ -441,7 +442,7 @@ export default {
   border: 1px solid gray;
   position: relative;
   margin-bottom: 10px;
-  background: url('./assets/images/bgo.jpg');
+  background: url("./assets/images/bgo.jpg");
   background-size: cover;
 }
 
@@ -477,7 +478,7 @@ export default {
 .right-menu {
   position: fixed;
   background: #fff;
-  border: solid 1px rgba(0, 0, 0, .2);
+  border: solid 1px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
   z-index: 999;
   display: none;
@@ -499,7 +500,7 @@ export default {
 
 .right-menu {
   border: 1px solid #eee;
-  box-shadow: 0 0.5em 1em 0 rgba(0, 0, 0, .1);
+  box-shadow: 0 0.5em 1em 0 rgba(0, 0, 0, 0.1);
   border-radius: 1px;
 }
 
@@ -524,7 +525,7 @@ a {
     margin-right: 0;
   }
 
-  .nav.nav-tabs>li {
+  .nav.nav-tabs > li {
     a {
       background-color: transparent;
     }
@@ -535,7 +536,5 @@ a {
       }
     }
   }
-
 }
 </style>
-

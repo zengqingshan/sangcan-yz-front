@@ -1,5 +1,5 @@
 <template>
-  <div class="cont" style="height: 103%;">
+  <div class="cont" style="height: 103%">
     <div class="video-fens">
       <div class="cell-players">
         <div
@@ -25,28 +25,27 @@
             <div
               v-if="
                 urlList[i - 1] &&
-                  !urlList[i - 1]['name'] &&
-                  !urlList[i - 1].isPlay
+                !urlList[i - 1]['name'] &&
+                !urlList[i - 1].isPlay
               "
               class="video-empty-tip"
             >
-              <span
-                class="anticon empty-player-tip-icon"
-              ><svg viewBox="0 0 1024 1024" width="1em" height="1em">
-                <path
-                  d="M520.896 815.296c197.952 0 358.976-166.08 358.976-370.112S718.784 75.072 520.896 75.072 162.048 241.088 162.048 445.184s160.96 370.112 358.848 370.112z m0-676.224c162.688 0 294.976 137.344 294.976 306.112 0 168.832-132.288 306.112-294.976 306.112-162.624 0-294.848-137.344-294.848-306.112-0.064-168.768 132.224-306.112 294.848-306.112z"
-                  fill="rgb(93, 93, 93)"
-                />
-                <path
-                  d="M824.256 746.112a32.128 32.128 0 0 0-29.888 56.64c21.888 11.584 27.264 20.736 27.52 22.528-1.92 20.864-106.688 69.824-300.992 69.824-191.488 0-299.072-49.536-300.864-69.824 0.128-1.664 5.056-10.432 26.176-21.888a32 32 0 0 0-30.464-56.256c-49.344 26.688-59.712 57.216-59.712 78.144 0 91.968 189.12 133.824 364.864 133.824 175.808 0 364.992-41.856 364.992-133.824 0-21.248-10.688-52.224-61.632-79.168zM520.96 618.816a173.632 173.632 0 1 0 0.128-347.264 173.632 173.632 0 0 0-0.128 347.264z m-59.968-315.648a70.976 70.976 0 1 1 0 141.952 70.976 70.976 0 0 1 0-141.952z"
-                  fill="rgb(93, 93, 93)"
-                />
-              </svg>
+              <span class="anticon empty-player-tip-icon"
+                ><svg viewBox="0 0 1024 1024" width="1em" height="1em">
+                  <path
+                    d="M520.896 815.296c197.952 0 358.976-166.08 358.976-370.112S718.784 75.072 520.896 75.072 162.048 241.088 162.048 445.184s160.96 370.112 358.848 370.112z m0-676.224c162.688 0 294.976 137.344 294.976 306.112 0 168.832-132.288 306.112-294.976 306.112-162.624 0-294.848-137.344-294.848-306.112-0.064-168.768 132.224-306.112 294.848-306.112z"
+                    fill="rgb(93, 93, 93)"
+                  />
+                  <path
+                    d="M824.256 746.112a32.128 32.128 0 0 0-29.888 56.64c21.888 11.584 27.264 20.736 27.52 22.528-1.92 20.864-106.688 69.824-300.992 69.824-191.488 0-299.072-49.536-300.864-69.824 0.128-1.664 5.056-10.432 26.176-21.888a32 32 0 0 0-30.464-56.256c-49.344 26.688-59.712 57.216-59.712 78.144 0 91.968 189.12 133.824 364.864 133.824 175.808 0 364.992-41.856 364.992-133.824 0-21.248-10.688-52.224-61.632-79.168zM520.96 618.816a173.632 173.632 0 1 0 0.128-347.264 173.632 173.632 0 0 0-0.128 347.264z m-59.968-315.648a70.976 70.976 0 1 1 0 141.952 70.976 70.976 0 0 1 0-141.952z"
+                    fill="rgb(93, 93, 93)"
+                  />
+                </svg>
               </span>
 
-              <span
-                class="empty-player-tip-text"
-              >拖拽或双击设备到这里观看</span>
+              <span class="empty-player-tip-text"
+                >拖拽或双击设备到这里观看</span
+              >
             </div>
 
             <!-- m3u8的视频播放方式 -->
@@ -66,7 +65,12 @@
                 width="100%"
                 height="100%"
               />
-              <videots v-else :id="i" :ref="'videoPlayer' + i" :play-param="urlList[i - 1].playAddress" />
+              <videots
+                v-else
+                :id="i"
+                :ref="'videoPlayer' + i"
+                :play-param="urlList[i - 1].playAddress"
+              />
 
               <!-- 视频名称图层，层级5 -->
               <div
@@ -165,7 +169,7 @@
             设置
           </div>
         </div>
-        <div v-if="hides && shows " class="pollbom">
+        <div v-if="hides && shows" class="pollbom">
           <span class="span">轮巡时长</span>
           <el-select v-model="value" placeholder="请选择">
             <el-option
@@ -195,20 +199,16 @@
       </div>
     </el-drawer>
     <!-- 位置+设置的弹窗 -->
-    <settingDialog
-      ref="settingDialogRef"
-    />
+    <settingDialog ref="settingDialogRef" />
   </div>
 </template>
 
 <script>
-import settingDialog from '@/views/videomonitor/playback/components/settingDialog'
-import {
-  getPlayParameter
-} from '@/api/system/device'
-import { playrecordAdd, listPageDevicePlayRecord } from '@/api/system/device'
+import settingDialog from "@/views/videomonitor/playback/components/settingDialog";
+import { getPlayParameter } from "@/api/system/device";
+import { playrecordAdd, listPageDevicePlayRecord } from "@/api/system/device";
 
-import videots from '@component/videocomponent'
+import videots from "@component/videocomponent";
 /**
  * 分屏视频
  */
@@ -216,369 +216,365 @@ import videots from '@component/videocomponent'
 export default {
   components: {
     settingDialog,
-    videots
+    videots,
   },
   data() {
     return {
-      currentDeviceName: '',
+      currentDeviceName: "",
       displayCurrentDeviceInfo: false,
-      currentServiceId: '',
+      currentServiceId: "",
       showedit: true, // 编辑设备
       chooseIndex: 0, // 选中值   从 0 开始
 
       urlList: [], // 视频的serviceId
       layoutNum: 1, // 小窗口数量
-      playerPath: process.env.BASE_URL + 'VnPlayer.html',
+      playerPath: process.env.BASE_URL + "VnPlayer.html",
       hides: false,
       options: [
         {
           value: 15,
-          label: '15秒'
+          label: "15秒",
         },
         {
           value: 30,
-          label: '30秒'
+          label: "30秒",
         },
         {
           value: 45,
-          label: '45秒'
+          label: "45秒",
         },
         {
           value: 60,
-          label: '1分'
+          label: "1分",
         },
         {
           value: 300,
-          label: '5分'
+          label: "5分",
         },
         {
           value: 600,
-          label: '10分'
+          label: "10分",
         },
         {
           value: 1800,
-          label: '30分'
-        }
+          label: "30分",
+        },
       ],
-      value: '', // 定时切换的值
+      value: "", // 定时切换的值
       value1: false, // 是否只轮巡有画面的设备
-      btninner: '启动轮巡',
+      btninner: "启动轮巡",
       drawer: false,
-      activeName: 'first',
+      activeName: "first",
       servid: null,
-      shows: false // 控制组件显示隐藏
-    }
+      shows: false, // 控制组件显示隐藏
+    };
   },
   computed: {
     cellClass() {
-      return function(index) {
+      return function (index) {
         switch (Number(this.layoutNum)) {
           case 1:
-            return ['cell-player-1']
+            return ["cell-player-1"];
           case 4:
-            return ['cell-player-4']
+            return ["cell-player-4"];
           case 6:
-            if (index == 1) return ['cell-player-6-1']
-            if (index == 2) return ['cell-player-6-2']
-            if (index == 3) return ['cell-player-6-3']
-            return ['cell-player-6']
+            if (index == 1) return ["cell-player-6-1"];
+            if (index == 2) return ["cell-player-6-2"];
+            if (index == 3) return ["cell-player-6-3"];
+            return ["cell-player-6"];
           case 8:
-            if (index == 1) return ['cell-player-8-1']
-            if (index == 2) return ['cell-player-8-2']
-            if (index == 3) return ['cell-player-shu cell-player-8-3']
-            if (index == 4) return ['cell-player-shu cell-player-8-4']
-            return ['cell-player-8']
+            if (index == 1) return ["cell-player-8-1"];
+            if (index == 2) return ["cell-player-8-2"];
+            if (index == 3) return ["cell-player-shu cell-player-8-3"];
+            if (index == 4) return ["cell-player-shu cell-player-8-4"];
+            return ["cell-player-8"];
           case 9:
-            return ['cell-player-9']
+            return ["cell-player-9"];
           case 16:
-            return ['cell-player-16']
+            return ["cell-player-16"];
           case 25:
-            return ['cell-player-25']
+            return ["cell-player-25"];
           default:
-            break
+            break;
         }
-      }
-    }
+      };
+    },
   },
   watch: {
     layoutNum: {
       handler(val, oldval) {
         if (val < oldval) {
           for (let i = val; i < 25; i++) {
-            this.$set(this.urlList[i], 'isPlay', false)
-            this.$set(this.urlList[i], 'isEdit', false)
-            this.$set(this.urlList[i], 'isError', false)
-            this.$set(this.urlList[i], 'serviceId', '')
-            this.$set(this.urlList[i], 'name', '')
+            this.$set(this.urlList[i], "isPlay", false);
+            this.$set(this.urlList[i], "isEdit", false);
+            this.$set(this.urlList[i], "isError", false);
+            this.$set(this.urlList[i], "serviceId", "");
+            this.$set(this.urlList[i], "name", "");
           }
           if (this.chooseIndex >= val) {
-            this.clearPlayerInfo()
+            this.clearPlayerInfo();
           }
         }
 
         if (this.checkNeedShowTool(val) != this.checkNeedShowTool(oldval)) {
           for (let i = 0; i < oldval; i++) {
-            this.displayTools(this.checkNeedShowTool(val), i)
+            this.displayTools(this.checkNeedShowTool(val), i);
           }
         }
         for (val; val < 25; val++) {
-          this.closePlayer(val)
+          this.closePlayer(val);
         }
       },
       // 深度观察监听
-      immediate: true
+      immediate: true,
     },
     value1(newval) {
       if (newval) {
         // 通知右侧组件筛选有画面监控
-        this.$bus.$emit('switchlist')
+        this.$bus.$emit("switchlist");
       } else {
         // 通知右侧组件复原数据
-        this.$bus.$emit('reback')
+        this.$bus.$emit("reback");
       }
-    }
+    },
   },
   created() {
-    this.initUrlList()
+    this.initUrlList();
   },
   mounted() {
-    this.$bus.$on('hideicon', (hide) => {
-      this.hides = hide
-      this.shows = hide
-      this.$emit('activeclose', hide)
-    })
-    this.$bus.$on('changehide', (act) => {
-      this.hides = act
-      console.log(222, this.hides)
-      this.shows = false
-    })
-    this.$bus.$on('showedit', (act) => {
-    })
+    this.$bus.$on("hideicon", (hide) => {
+      this.hides = hide;
+      this.shows = hide;
+      this.$emit("activeclose", hide);
+    });
+    this.$bus.$on("changehide", (act) => {
+      this.hides = act;
+      console.log(222, this.hides);
+      this.shows = false;
+    });
+    this.$bus.$on("showedit", (act) => {});
   },
   beforeDestroy() {},
   destroyed() {},
   methods: {
     // 展示位置弹框
     async showaddress() {
-      this.$refs.settingDialogRef.showaddress(this.servid)
+      this.$refs.settingDialogRef.showaddress(this.servid);
     },
 
     // 点击设置展示设置信息
     async showsettinginfo() {
-      this.$refs.settingDialogRef.showDeviceInfo(this.servid)
+      this.$refs.settingDialogRef.showDeviceInfo(this.servid);
     },
     // 启动寻训
     startpoll() {
-      if (this.value == '') {
+      if (this.value == "") {
         this.$message({
-          type: 'warning',
-          message: '请选择轮巡间隔时长'
-        })
-      } else if (this.btninner == '启动轮巡') {
-        this.btninner = '停止轮巡'
-        this.$emit('starpoill', this.value)
+          type: "warning",
+          message: "请选择轮巡间隔时长",
+        });
+      } else if (this.btninner == "启动轮巡") {
+        this.btninner = "停止轮巡";
+        this.$emit("starpoill", this.value);
         this.$message({
-          type: 'success',
-          message: '已开始轮巡'
-        })
-      } else if (this.btninner == '停止轮巡') {
-        clearInterval(window.timer)
-        this.btninner = '启动轮巡'
+          type: "success",
+          message: "已开始轮巡",
+        });
+      } else if (this.btninner == "停止轮巡") {
+        clearInterval(window.timer);
+        this.btninner = "启动轮巡";
         this.$message({
-          type: 'warning',
-          message: '已停止轮巡'
-        })
+          type: "warning",
+          message: "已停止轮巡",
+        });
       }
     },
     // 允许放下拖拽
     allowDrop(ev) {
-      ev.preventDefault()
+      ev.preventDefault();
     },
     // 放下事件
     drop(ev, i) {
-      const data = ev.dataTransfer.getData('item')
-      const item2 = JSON.parse(data)
-      this.chooseIndex = i - 1
-      this.requestPlay(
-        item2.serviceId,
-        item2.name
-      )
+      const data = ev.dataTransfer.getData("item");
+      const item2 = JSON.parse(data);
+      this.chooseIndex = i - 1;
+      this.requestPlay(item2.serviceId, item2.name);
     },
     initUrlList() {
       for (let i = 0; i < 25; i++) {
-        const urlObj = {}
-        urlObj.isPlay = false
-        urlObj.isEdit = false
-        urlObj.isError = false
-        urlObj.serviceId = ''
-        urlObj.name = ''
-        this.urlList.push(urlObj)
+        const urlObj = {};
+        urlObj.isPlay = false;
+        urlObj.isEdit = false;
+        urlObj.isError = false;
+        urlObj.serviceId = "";
+        urlObj.name = "";
+        this.urlList.push(urlObj);
       }
     },
     clearPlayerInfo() {
-      this.currentDeviceName = ''
-      this.currentServiceId = ''
-      this.displayCurrentDeviceInfo = false
+      this.currentDeviceName = "";
+      this.currentServiceId = "";
+      this.displayCurrentDeviceInfo = false;
     },
 
     setPlayerInfo(index) {
-      const indexNew = index % this.layoutNum
+      const indexNew = index % this.layoutNum;
       if (this.urlList[indexNew].isPlay) {
-        this.currentDeviceName = this.urlList[indexNew].name
-        this.currentServiceId = this.urlList[indexNew].serviceId
+        this.currentDeviceName = this.urlList[indexNew].name;
+        this.currentServiceId = this.urlList[indexNew].serviceId;
 
-        this.servid = this.urlList[indexNew].serviceId
+        this.servid = this.urlList[indexNew].serviceId;
 
-        this.displayCurrentDeviceInfo = true
+        this.displayCurrentDeviceInfo = true;
       } else {
-        this.clearPlayerInfo()
+        this.clearPlayerInfo();
       }
     },
 
     closePlayer(index) {
       try {
-        const msgObj = {}
-        var playerName = 'videoPlayer' + (index + 1)
-        const _iframe = document.getElementById(playerName).contentWindow
+        const msgObj = {};
+        var playerName = "videoPlayer" + (index + 1);
+        const _iframe = document.getElementById(playerName).contentWindow;
 
-        msgObj.type = 'stopPlay'
+        msgObj.type = "stopPlay";
         if (index % this.layoutNum == this.chooseIndex % this.layoutNum) {
-          this.clearPlayerInfo()
+          this.clearPlayerInfo();
         }
 
-        _iframe.postMessage(JSON.stringify(msgObj), '*')
-      } catch (err) {
-
-      }
+        _iframe.postMessage(JSON.stringify(msgObj), "*");
+      } catch (err) {}
 
       try {
-        const stopEvent = 'huiyanStop' + (index + 1)
-        this.$bus.$emit(stopEvent, '')
-      } catch (err) {
-
-      }
+        const stopEvent = "huiyanStop" + (index + 1);
+        this.$bus.$emit(stopEvent, "");
+      } catch (err) {}
 
       if (index >= this.urlList.length) {
-        return
+        return;
       }
 
-      this.$set(this.urlList[index], 'isPlay', false)
-      this.$set(this.urlList[index], 'isEdit', false)
-      this.$set(this.urlList[index], 'isError', false)
-      this.$set(this.urlList[index], 'serviceId', '')
-      this.$set(this.urlList[index], 'name', '')
-      this.$set(this.urlList[index], 'playAddress', '')
+      this.$set(this.urlList[index], "isPlay", false);
+      this.$set(this.urlList[index], "isEdit", false);
+      this.$set(this.urlList[index], "isError", false);
+      this.$set(this.urlList[index], "serviceId", "");
+      this.$set(this.urlList[index], "name", "");
+      this.$set(this.urlList[index], "playAddress", "");
     },
     checkNeedShowTool(num) {
       if (num > 1) {
-        return false
+        return false;
       } else {
-        return true
+        return true;
       }
     },
     displayTools(flag, index) {
-      const msgObj = {}
-      var playerName = 'videoPlayer' + (index + 1)
-      const _iframe = document.getElementById(playerName).contentWindow
+      const msgObj = {};
+      var playerName = "videoPlayer" + (index + 1);
+      const _iframe = document.getElementById(playerName).contentWindow;
 
-      msgObj.type = 'hideTools'
+      msgObj.type = "hideTools";
       if (flag) {
-        msgObj.flag = '1'
+        msgObj.flag = "1";
       } else {
-        msgObj.flag = '0'
+        msgObj.flag = "0";
       }
 
-      _iframe.postMessage(JSON.stringify(msgObj), '*')
+      _iframe.postMessage(JSON.stringify(msgObj), "*");
     },
     requestPlay(serviceId, name) {
       if (this.urlList.length > 0) {
-        let found = false
+        let found = false;
         this.urlList.forEach((element) => {
           if (element.serviceId == serviceId) {
             // 需要加上是否以前播放失败
-            found = true
+            found = true;
           }
-        })
+        });
       }
 
-      const curPlayIndex = this.chooseIndex % this.layoutNum
+      const curPlayIndex = this.chooseIndex % this.layoutNum;
 
-      this.chooseIndex = (curPlayIndex + 1) % this.layoutNum
+      this.chooseIndex = (curPlayIndex + 1) % this.layoutNum;
 
-      this.closePlayer(curPlayIndex)
+      this.closePlayer(curPlayIndex);
       this.$nextTick(() => {
-        this.$set(this.urlList[curPlayIndex], 'isPlay', true)
-        this.$set(this.urlList[curPlayIndex], 'isEdit', true)
-        this.$set(this.urlList[curPlayIndex], 'isError', false)
-        this.$set(this.urlList[curPlayIndex], 'serviceId', serviceId)
-        this.$set(this.urlList[curPlayIndex], 'name', name)
-        this.$set(this.urlList[curPlayIndex], 'playAddress', '')
+        this.$set(this.urlList[curPlayIndex], "isPlay", true);
+        this.$set(this.urlList[curPlayIndex], "isEdit", true);
+        this.$set(this.urlList[curPlayIndex], "isError", false);
+        this.$set(this.urlList[curPlayIndex], "serviceId", serviceId);
+        this.$set(this.urlList[curPlayIndex], "name", name);
+        this.$set(this.urlList[curPlayIndex], "playAddress", "");
         this.$nextTick(() => {
-          this.setPlayerInfo(curPlayIndex)
-          this.play(curPlayIndex)
-        })
-      })
+          this.setPlayerInfo(curPlayIndex);
+          this.play(curPlayIndex);
+        });
+      });
     },
 
     async play(index) {
       try {
-        const msgObj = {}
-        msgObj.deviceId = this.urlList[index].serviceId
+        const msgObj = {};
+        msgObj.deviceId = this.urlList[index].serviceId;
 
-        const playParam = await getPlayParameter(msgObj.deviceId)
+        const playParam = await getPlayParameter(msgObj.deviceId);
 
         if (playParam.playAddress) {
           try {
-            const player1 = this.$refs[`videoPlayer${index + 1}`]
-            const playEvent = 'huiyanPlay' + (index + 1)
+            const player1 = this.$refs[`videoPlayer${index + 1}`];
+            const playEvent = "huiyanPlay" + (index + 1);
 
-            this.$set(this.urlList[index], 'playAddress', playParam.playAddress)
+            this.$set(
+              this.urlList[index],
+              "playAddress",
+              playParam.playAddress
+            );
             this.$nextTick(() => {
-              this.$bus.$emit(playEvent, playParam.playAddress)
-            })
+              this.$bus.$emit(playEvent, playParam.playAddress);
+            });
           } catch (err) {
-            console.log('err=', err)
+            console.log("err=", err);
           }
-          return
+          return;
         } else {
-          this.$set(this.urlList[index], 'playAddress', '')
+          this.$set(this.urlList[index], "playAddress", "");
           this.$nextTick(() => {
-            var playerName = 'videoPlayer' + (index + 1)
+            var playerName = "videoPlayer" + (index + 1);
 
-            msgObj.type = 'startPlay'
+            msgObj.type = "startPlay";
 
-            msgObj.token = playParam.token
-            msgObj.appid = playParam.appid
+            msgObj.token = playParam.token;
+            msgObj.appid = playParam.appid;
 
             if (this.layoutNum > 1) {
-              msgObj.showTools = '0'
+              msgObj.showTools = "0";
             } else {
-              msgObj.showTools = '1'
+              msgObj.showTools = "1";
             }
             if (!msgObj.deviceId) {
-              return
+              return;
             }
 
-            const param = { serviceId: msgObj.deviceId }
-            playrecordAdd(param).then((ret) => {})
-            const _iframe = document.getElementById(playerName).contentWindow
+            const param = { serviceId: msgObj.deviceId };
+            playrecordAdd(param).then((ret) => {});
+            const _iframe = document.getElementById(playerName).contentWindow;
 
-            _iframe.postMessage(JSON.stringify(msgObj), '*')
-          })
+            _iframe.postMessage(JSON.stringify(msgObj), "*");
+          });
         }
       } catch (err) {
-        console.log('play error=', err)
+        console.log("play error=", err);
       }
     },
     pause(i) {},
 
     videoTap(index) {
       // 赋值点击选中框
-      this.chooseIndex = index % this.layoutNum
-      this.setPlayerInfo(this.chooseIndex)
-    }
-  }
-}
+      this.chooseIndex = index % this.layoutNum;
+      this.setPlayerInfo(this.chooseIndex);
+    },
+  },
+};
 </script>
 
 <style lang="scss">
@@ -878,8 +874,8 @@ export default {
     width: 50%;
     height: 50% !important;
     box-sizing: border-box;
-    border-bottom: 2px solid #2d2d2e;
-    border-left: 2px solid #2d2d2e;
+    border-bottom: 2px solid #00a99c;
+    border-left: 2px solid #00a99c;
   }
 
   .cell-player-1 {
@@ -892,8 +888,8 @@ export default {
     width: 66.66%;
     height: 66.66% !important;
     box-sizing: border-box;
-    border-bottom: 2px solid #2d2d2e;
-    border-left: 2px solid #2d2d2e;
+    border-bottom: 2px solid #00a99c;
+    border-left: 2px solid #00a99c;
   }
 
   .cell-player-6-2 {
@@ -902,8 +898,8 @@ export default {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    border-bottom: 2px solid #2d2d2e;
-    border-left: 2px solid #2d2d2e;
+    border-bottom: 2px solid #00a99c;
+    border-left: 2px solid #00a99c;
 
     .error-word {
       font-size: 0.17rem;
@@ -919,8 +915,8 @@ export default {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    border-bottom: 2px solid #2d2d2e;
-    border-left: 2px solid #2d2d2e;
+    border-bottom: 2px solid #00a99c;
+    border-left: 2px solid #00a99c;
 
     .error-word {
       font-size: 0.17rem;
@@ -935,15 +931,15 @@ export default {
     width: 100%;
     height: 50% !important;
     box-sizing: border-box;
-    border-bottom: 2px solid #2d2d2e;
-    border-left: 2px solid #2d2d2e;
+    border-bottom: 2px solid #00a99c;
+    border-left: 2px solid #00a99c;
   }
 
   .cell-player-6 {
     width: 33.33%;
     height: 33.33% !important;
     box-sizing: border-box;
-    border-left: 2px solid #2d2d2e;
+    border-left: 2px solid #00a99c;
 
     .error-word {
       font-size: 0.17rem;
@@ -954,8 +950,8 @@ export default {
     width: 75%;
     height: 75% !important;
     box-sizing: border-box;
-    border-bottom: 2px solid #2d2d2e;
-    border-left: 2px solid #2d2d2e;
+    border-bottom: 2px solid #00a99c;
+    border-left: 2px solid #00a99c;
   }
 
   .cell-player-shu {
@@ -983,8 +979,8 @@ export default {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    border-bottom: 2px solid #2d2d2e;
-    border-left: 2px solid #2d2d2e;
+    border-bottom: 2px solid #00a99c;
+    border-left: 2px solid #00a99c;
 
     .img_noplay {
       width: 0.63rem !important;
@@ -998,14 +994,14 @@ export default {
 
   .cell-player-8-3 {
     top: 25%;
-    border-bottom: 2px solid #2d2d2e;
-    border-left: 2px solid #2d2d2e;
+    border-bottom: 2px solid #00a99c;
+    border-left: 2px solid #00a99c;
   }
 
   .cell-player-8-4 {
     top: 50%;
-    border-bottom: 2px solid #2d2d2e;
-    border-left: 2px solid #2d2d2e;
+    border-bottom: 2px solid #00a99c;
+    border-left: 2px solid #00a99c;
   }
 
   .cell-player-8-none {
@@ -1016,15 +1012,15 @@ export default {
     width: 100%;
     height: 33.3% !important;
     box-sizing: border-box;
-    border-bottom: 2px solid #2d2d2e;
-    border-left: 2px solid #2d2d2e;
+    border-bottom: 2px solid #00a99c;
+    border-left: 2px solid #00a99c;
   }
 
   .cell-player-8 {
     width: 25%;
     height: 25% !important;
     box-sizing: border-box;
-    border-left: 1px solid #2d2d2e;
+    border-left: 1px solid #00a99c;
 
     .img_noplay {
       width: 0.63rem !important;
@@ -1041,21 +1037,21 @@ export default {
     height: 33.33% !important;
     box-sizing: border-box;
 
-    border: 2px solid #2d2d2e;
+    border: 2px solid #00a99c;
   }
 
   .cell-player-16 {
     width: 25%;
     height: 25% !important;
     box-sizing: border-box;
-    border: 2px solid #2d2d2e;
+    border: 2px solid #00a99c;
   }
 
   .cell-player-25 {
     width: 20%;
     height: 20% !important;
     box-sizing: border-box;
-    border: 2px solid #2d2d2e;
+    border: 2px solid #00a99c;
   }
 
   .cell {

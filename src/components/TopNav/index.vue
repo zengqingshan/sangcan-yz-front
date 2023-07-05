@@ -1130,7 +1130,7 @@ body {
 
 el-menu--horizontal {
   color: rgba(0, 0, 0, 0.85);
-  background-color: rgb(55, 55, 55);
+  background-color: rgb(0, 169, 156);
 }
 
 .el-menu--horizontal > .el-submenu .el-submenu__title {
@@ -1142,7 +1142,7 @@ el-menu--horizontal {
 .el-menu--horizontal .el-menu .el-menu-item,
 .el-menu--horizontal .el-menu .el-submenu__title {
   color: #ffffff;
-  background-color: rgb(55, 55, 55);
+  background-color: rgb(0, 169, 156);
 }
 
 // .el-menu--horizontal .el-menu .el-submenu__title:hover

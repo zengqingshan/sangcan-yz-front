@@ -10,16 +10,16 @@
 
 <script>
 export default {
-  name: 'AppMain',
+  name: "AppMain",
   computed: {
     cachedViews() {
-      return this.$store.state.tagsView.cachedViews
+      return this.$store.state.tagsView.cachedViews;
     },
     key() {
-      return this.$route.path
-    }
-  }
-}
+      return this.$route.path;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -30,17 +30,17 @@ export default {
   padding: 1%;
   position: relative;
   overflow: hidden;
-  background-color: #343438;
+  background-color: #fff;
   color: white;
   margin-top: -20px;
-  // background-color: #2d2d2e;
+  // background-color: #00a99c;
 }
-.app-main>.row{
+.app-main > .row {
   margin-left: 0;
   margin-right: 0;
 }
 
-.fixed-header+.app-main {
+.fixed-header + .app-main {
   padding-top: 50px;
 }
 
@@ -50,7 +50,7 @@ export default {
     min-height: calc(100vh - 84px);
   }
 
-  .fixed-header+.app-main {
+  .fixed-header + .app-main {
     padding-top: 84px;
   }
 }

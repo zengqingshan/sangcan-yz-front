@@ -750,7 +750,7 @@ export default {
   height: 35px;
   width: 235px;
   background-color: #373737;
-    border: 1px solid #2b2a2a;
+  border: 1px solid #2b2a2a;
 }
 }
 

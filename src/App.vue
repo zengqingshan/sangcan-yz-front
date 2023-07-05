@@ -30,7 +30,7 @@ body {
   background-color: #363637;
 }
 .el-menu {
-  background-color: #2d2d2e !important;
+  background-color: #00a99c !important;
 }
 .navbar .topmenu-container {
   display: -webkit-box;
